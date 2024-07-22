@@ -1,0 +1,22 @@
+.header {
+    background-color: blue;
+    color: white;
+    padding: 10px;
+  }
+  
+  .header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .logo {
+    width: 50px;
+  }
+  
+  .switch-button {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+  }
