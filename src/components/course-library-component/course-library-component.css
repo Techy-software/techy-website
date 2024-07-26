@@ -1,0 +1,114 @@
+.course-library-title{
+    padding-left: 30px;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    font-weight: 700;
+    font-size: 24px;
+    color: #121212;
+}
+
+.data-container{
+    display: flex;
+    margin-left: 25px;
+    margin-top: 20px;
+}
+
+.categories-container{
+    border: 2px solid #E6E6E6;
+    /* padding: 15px; */
+    border-radius: 15px;
+    width: 25%;
+    margin-right: 20px;
+}
+
+.categories-container-header{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 30px;
+    align-items: center;
+}
+
+.categories-text{
+    font-weight: 500;
+    font-size: 18px;
+    color: #121212;
+
+}
+
+.icon-styling{
+    border: 2px solid #E6E6E6;
+    border-radius: 15px;    
+    padding: 10px;
+}
+
+.left-container{
+    border: 2px solid #E6E6E6;
+    /* padding: 15px; */
+    border-radius: 15px;
+    width: 75%;
+    margin-right: 20px;
+}
+
+.left-container-header{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 30px;
+    align-items: center;
+}
+
+/* .image-container{
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    align-self: center;
+} */
+
+.courses-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* Adjust the height as needed */
+    text-align: center;
+}
+
+.courses-container img {
+    max-width: 100%; /* Ensures the image is responsive */
+    height: auto;
+}
+
+.courses-container h2 {
+    margin-top: 20px; /* Adjust the spacing as needed */
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.courses-container h3 {
+    margin-top: 10px; /* Adjust the spacing as needed */
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.add-course-button {
+    margin-top: 20px; /* Adjust the spacing as needed */
+    padding: 10px 20px;
+    font-size: 16px; /* Adjust the font size as needed */
+    background-color: #007bff; /* Adjust the button color as needed */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.add-course-button .button-icon {
+    margin-right: 10px; /* Adjust the spacing between the icon and text */
+    width: 20px; /* Adjust the icon size */
+    height: 20px; /* Adjust the icon size */
+    color: white;
+}
+
+.add-course-button:hover {
+    background-color: #0056b3; /* Adjust the hover color as needed */
+}
