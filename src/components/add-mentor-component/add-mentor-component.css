@@ -1,0 +1,290 @@
+.header-component{
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 30px;
+}
+
+.header-component h2{
+    font-size: 24px;
+    font-weight: 700;
+    color: #121212;
+}
+
+.header-component button{
+    background-color: #016BDD;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 10px;
+}
+
+.main-container{
+    display: flex;
+    /* width: 100%; */
+}
+
+.menu {
+    padding-top: 30px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.menu button {
+    margin-right: 10px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.menu button:hover {
+    background-color: #0056b3;
+}
+
+.menu-container{
+    padding: 10px 20px;
+    width: 20%;
+}
+
+.menu-container h2{
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.menu-container button{
+
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    border: none;
+    background-color: transparent;
+    font-size: 16px;
+    cursor: pointer;
+    position: relative;
+    text-align: left;
+    color: #121212;
+}
+
+.menu-container button::before {
+    content: '';
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: transparent;
+    border: 2px solid black;
+    margin-right: 10px;
+}
+button.selected {
+    background-color: #e0e0e0; /* Change this to your desired selected color */
+}
+
+button.selected::before {
+    border-color: blue;
+}
+
+button.selected::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background-color: blue; /* Change this to your desired vertical line color */
+}
+
+.avatar {
+    width: 120px;
+    height: 120px;
+    border: 2px dashed #ccc;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.avatar-icon {
+    width: 50px;
+    height: 50px;
+}
+
+.info-container{
+    display: flex;
+    align-items: center;
+    /* border: 1px solid #E6E6E6; */
+    border-radius: 10px;
+    width: 100%; 
+    padding: 10px; 
+    background-color: #fff;
+}
+
+.info-title{
+    font-size: 18px;
+    font-weight: 500;
+}
+.parent-container{
+    width: 80%;
+    margin: 0 auto;
+}
+
+.upload-button{
+    color: #016BDD;
+    border: 1px solid #E6E6E6;
+    border-radius: 10px;
+    padding: 10px 20px;
+    margin-left: 20px;
+}
+.info-parent-container{
+    width: 100%; 
+    max-width: 1200px; 
+    /* margin: 0 auto;  */
+    padding: 20px;
+    box-sizing: border-box;
+    border: 1px solid #E6E6E6;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+.info-parent-container h2{
+    font-weight: 500;
+    font-size: 18px;
+}
+
+.info-parent-container-spacing{
+    width: 100%; 
+    max-width: 1200px; 
+    /* margin: 0 auto;  */
+    padding: 20px;
+    box-sizing: border-box;
+    border: 1px solid #E6E6E6;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+.info-parent-container-spacing h2{
+    font-weight: 500;
+    font-size: 18px;
+}
+
+.content-parent{
+    width: 100%;
+    
+}
+
+/* FormComponent.css */
+.form-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .form-group {
+    flex: 1 1 calc(50% - 20px);
+    display: flex;
+    flex-direction: column;
+  }
+  
+  label {
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  input, select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  input[type="date"] {
+    display: flex;
+    align-items: center;
+    height: 35px;
+    padding-left: 10px;
+  }
+
+  input[type="text"] {
+    height: 35px;
+    padding-left: 10px;
+  }
+
+  select {
+    height: 35px; 
+  }
+  
+  input::placeholder {
+    color: #ccc;
+  }
+  
+  .required {
+    color: red;
+  }
+  /* user name and password css */
+
+  .form-container-creddentials {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .form-group-creddentials {
+    flex: 1 1 calc(50% - 20px);
+    display: flex;
+    flex-direction: column;
+  }
+  
+  label {
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    height: 35px;
+  }
+  
+  input::placeholder {
+    color: #ccc;
+  }
+  
+  .password-container {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    height: 37px;
+  }
+  
+  .password-container input {
+    border: none;
+    flex: 1;
+    height: 35px; 
+  }
+  
+  .toggle-password {
+    background: none;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  .required {
+    color: red;
+  }
+
+  /* Location container css */
+
+  .form-group textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    height: 100px;
+    padding-top: 20px;
+  }
