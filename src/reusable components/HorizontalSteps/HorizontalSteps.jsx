@@ -1,31 +1,42 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircle } from "@fortawesome/free-regular-svg-icons";
+import { faCircle as empty } from "@fortawesome/free-regular-svg-icons";
+import { faCircleCheck as full } from "@fortawesome/free-solid-svg-icons";
 import "./HorizontalSteps.css";
+
+// inputs: steps, currentStep
+// steps: array of strings
+// currentStep: Current step number
+
+// output: horizontal steps with active step
+
 const HorizontalSteps = (props) => {
   return (
     <div className="horizontal-steps">
-      <h3>Publish your course</h3>
+      <h3 className="title-horizontal-steps">Publish your course</h3>
       <ul>
         {props.steps.map((step, index) => (
           <div
-            className={`flex h-12 items-center text-slate-400${
-              props.currentStep === index
-                ? "active-container-horizontal-steps"
-                : ""
+            className={`flex h-12 items-center text-slate-400 w-full ${
+              props.currentStep === index ? "bg-white" : ""
             }`}
           >
             <div
-              className={
-                props.currentStep === index
-                  ? "active-item-horizontal-steps px-0.5 h-12"
-                  : ""
-              }
+              className={`me-3 px-0.5 h-12
+                ${
+                  props.currentStep === index
+                    ? "active-item-horizontal-steps "
+                    : "bg-white"
+                }`}
             ></div>
-            <FontAwesomeIcon icon={faCircle} />
+            {props.currentStep > index ? (
+              <FontAwesomeIcon icon={full} className="me-3 text-green-400" />
+            ) : (
+              <FontAwesomeIcon icon={empty} className="me-3" />
+            )}
             <li
               key={index}
-              //   className={props.currentStep === index ? "active" : ""}
+              className={props.currentStep === index ? "text-black" : ""}
             >
               {step}
             </li>

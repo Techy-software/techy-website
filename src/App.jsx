@@ -4,7 +4,7 @@ import CourseDetilasComponent from "./components/course-details-component/course
 import AddMentorComponent from "./components/add-mentor-component/add-mentor-component";
 import HorizontalSteps from "./reusable components/HorizontalSteps/HorizontalSteps";
 const App = () => {
-  const [currentStep, setCurrentStep] = useState(0);
+  const [currentStep, setCurrentStep] = useState(1);
   const steps = ["Content", "Setup", "Assign"];
 
   return (

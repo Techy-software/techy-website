@@ -1,11 +1,15 @@
+.title-horizontal-steps {
+  font-size: 17px;
+  font-weight: 700;
+  margin-bottom: 7px;
+}
 .horizontal-steps {
   background-color: #fafbfc;
-}
-.active-container-horizontal-steps {
-  background-color: white;
-  /* padding: 5px; */
 }
 .active-item-horizontal-steps {
   background-color: #007bff;
   /* padding: 5px; */
+}
+.active-word-horizontal-steps {
+  color: black;
 }
