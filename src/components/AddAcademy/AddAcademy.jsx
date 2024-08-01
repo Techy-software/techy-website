@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-regular-svg-icons";
 import Topbar from "../Topbar";
 import InputField from "../../reusable components/InputField/InputField";
+import WhiteCard from "../../reusable components/WhiteCard/WhiteCard";
 
 const AddAcademy = () => {
   return (
@@ -14,13 +15,11 @@ const AddAcademy = () => {
         <div className="col-span-3 me-10">
           <HorizontalSteps
             steps={["Academy Details", "Courses", "Mentors"]}
-            currentStep={1}
+            currentStep={0}
           />
         </div>
         <div className="col-span-9">
-          <div className="bg-white rounded-lg p-5 border-2">
-            <h2 className="mb-3">Academy Logo</h2>
-            <hr />
+          <WhiteCard title="Academy Logo">
             <div className="flex items-center mt-7">
               <div className="border-2 border-dashed rounded-full me-5">
                 <FontAwesomeIcon icon={faUser} className="p-7 w-6 h-6" />
@@ -29,10 +28,8 @@ const AddAcademy = () => {
                 Upload Picture
               </button>
             </div>
-          </div>
-          <div className="mt-12 bg-white rounded-lg p-5 border-2">
-            <h2 className="mb-3">Academy Details</h2>
-            <hr />
+          </WhiteCard>
+          <WhiteCard title="Academy Details" style="mt-12">
             <div className="grid grid-cols-12 gap-4 mt-7">
               {["Academy Name", "Owner Name", "Established at"].map(
                 (label, index) => (
@@ -40,12 +37,13 @@ const AddAcademy = () => {
                     <InputField
                       label={label}
                       type="text"
+                      placeholder="Enter value"
                     />
                   </div>
                 )
               )}
             </div>
-          </div>
+          </WhiteCard>
         </div>
       </div>
     </>
