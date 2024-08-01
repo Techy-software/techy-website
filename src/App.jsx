@@ -11,7 +11,7 @@ const App = () => {
   return (
     // <CourseDetilasComponent steps={steps} currentStep={currentStep} />
     // <AddMentorComponent/>
-    <AddAcademy />
+    <AddAcademy currentStep={1} />
   );
 };
 
