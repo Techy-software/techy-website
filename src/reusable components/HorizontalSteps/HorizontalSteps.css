@@ -3,12 +3,11 @@
   font-weight: 700;
   margin-bottom: 7px;
 }
-.horizontal-steps {
+.default-background-horizontal-steps {
   background-color: #fafbfc;
 }
 .active-item-horizontal-steps {
   background-color: #007bff;
-  /* padding: 5px; */
 }
 .active-word-horizontal-steps {
   color: black;

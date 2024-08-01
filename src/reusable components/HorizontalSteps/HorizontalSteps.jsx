@@ -12,7 +12,7 @@ import "./HorizontalSteps.css";
 
 const HorizontalSteps = (props) => {
   return (
-    <div className="horizontal-steps">
+    <div className="default-background-horizontal-steps">
       <h3 className="title-horizontal-steps">Publish your course</h3>
       <ul>
         {props.steps.map((step, index) => (
@@ -26,7 +26,7 @@ const HorizontalSteps = (props) => {
                 ${
                   props.currentStep === index
                     ? "active-item-horizontal-steps "
-                    : "bg-white"
+                    : "default-background-horizontal-steps"
                 }`}
             ></div>
             {props.currentStep > index ? (
