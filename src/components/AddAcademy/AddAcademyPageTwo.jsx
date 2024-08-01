@@ -91,11 +91,15 @@ const AddAcademyPageTwo = ({ currentStep }) => {
                 <InputField label="Postal Code" type="text" />
               </div>
               <div className="col-span-12">
-                <InputField label="Address" type="text" />
+                <InputField
+                  label="Address"
+                  type="text"
+                  style={{ height: "80px" }}
+                />
               </div>
             </div>
           </WhiteCard>
-          <WhiteCard title="Courses" style="mt-12">
+          <WhiteCard title="Courses" style="mt-5">
             <div className="grid grid-cols-12 gap-4 mt-7">
               {["Course Name", "Course Description", "Course Duration"].map(
                 (label, index) => (

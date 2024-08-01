@@ -10,6 +10,7 @@ export default function InputField(props) {
         value={props.value}
         // onChange={props.setValue}  // Uncomment when onChange is Ready
         required
+        style={props.style}
       />
     </div>
   );
