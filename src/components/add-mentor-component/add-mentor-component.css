@@ -1,3 +1,10 @@
+.hr{
+  width: 100%;
+  border : 1px solid #E6E6E6;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
 .header-component{
     display: flex;
     justify-content: space-between;
@@ -288,3 +295,105 @@ button.selected::after {
     height: 100px;
     padding-top: 20px;
   }
+
+  .phone-input-container {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .phone-input-field {
+    flex: 1;
+    margin-right: 20px;
+  }
+  
+  .phone-input-field label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #555;
+  }
+  
+  .phone-input-field .required {
+    color: red;
+  }
+  
+  .phone-input-field .react-tel-input .form-control {
+    width: 100%;
+    height: 40px;
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  .phone-input-field .react-tel-input .flag-dropdown {
+    border: none;
+  }
+  
+
+  .email-input-field {
+    width: 100%;
+    margin: 20px 0;
+  }
+  
+  .email-input-field label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #555;
+  }
+  
+  .email-input-field .required {
+    color: red;
+  }
+  
+  .email-input-field input {
+    width: 98%;
+    height: 40px;
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+  }
+  
+  .email-input-field input::placeholder {
+    color: #999;
+    font-style: italic;
+  }
+  
+  .select-input-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+  
+  .select-input-field {
+    flex: 1;
+    margin-right: 20px;
+  }
+  
+  .select-input-field:last-child {
+    margin-right: 0;
+  }
+  
+  .select-input-field label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #555;
+  }
+  
+  .select-input-field .required {
+    color: red;
+  }
+  
+  .select-input-field .react-select__control {
+    width: 100%;
+    height: 40px;
+    padding: 0;
+    font-size: 14px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
