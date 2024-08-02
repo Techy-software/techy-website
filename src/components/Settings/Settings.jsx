@@ -13,6 +13,7 @@ import "../../reusable components/InputField/InputField.css";
 import calendarIcon from "../../assets/calendar.png";
 import SettingsPageOne from "./SettingsPageOne";
 import SettingsPageTwo from "./SettingsPageTwo";
+import SettingsPageThree from "./SettingsPageThree";
 
 const Settings = ({ currentStep }) => {
   const [nationality, setNationality] = useState("");
@@ -34,11 +35,11 @@ const Settings = ({ currentStep }) => {
   };
   switch (currentStep) {
     case 0:
-      return <SettingsPageOne />;
+      return <SettingsPageOne currentStep={currentStep} />;
     case 1:
-      return <SettingsPageTwo />;
+      return <SettingsPageTwo currentStep={currentStep} />;
     case 2:
-    // return <SettingsPageThree />;
+      return <SettingsPageThree currentStep={currentStep} />;
   }
 };
 

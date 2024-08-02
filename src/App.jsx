@@ -14,7 +14,7 @@ const App = () => {
     // <CourseDetilasComponent steps={steps} currentStep={currentStep} />
     // <AddMentorComponent/>
     // <AddAcademy currentStep={2} />
-    <Settings currentStep={1} />
+    <Settings currentStep={0} />
   );
 };
 
