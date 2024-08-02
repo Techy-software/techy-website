@@ -45,7 +45,7 @@ const AddAcademyPageTwo = ({ currentStep }) => {
           />
         </div>
         <div className="col-span-9">
-          <WhiteCard title="Academy Logo">
+          <WhiteCard title="Location">
             <div className="grid grid-cols-12 gap-4 mt-3">
               <div className="col-span-6">
                 <label className="font-normal text-xs">Country</label>

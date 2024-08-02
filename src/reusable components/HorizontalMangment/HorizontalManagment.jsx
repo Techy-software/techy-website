@@ -12,7 +12,7 @@ const HorizontalManagment = (props) => {
           {props.steps.map((step, index) => (
             <>
               <div
-                key={step}
+                key={index}
                 className={`flex h-14 items-center text-slate-400 w-full cursor-pointer justify-between ${
                   props.currentStep === index ? "bg-white" : ""
                 }`}
