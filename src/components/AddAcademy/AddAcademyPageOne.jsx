@@ -10,7 +10,7 @@ const AddAcademyPageOne = ({ currentStep }) => {
   return (
     <>
       <Topbar className="fixed" />
-      <div className="grid grid-cols-12 gap-4 add-academy px-10 pt-5">
+      <div className="grid grid-cols-12 gap-4 add-academy px-10 pt-10">
         <div className="col-span-3 me-10">
           <HorizontalSteps
             steps={["Academy Details", "Courses", "Mentors"]}
