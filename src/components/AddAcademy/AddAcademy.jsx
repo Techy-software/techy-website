@@ -4,7 +4,7 @@ import AddAcademyPageOne from "./AddAcademyPageOne";
 import AddAcademyPageTwo from "./AddAcademyPageTwo";
 import AddAcademyPageThree from "./AddAcademyPageThree";
 const AddAcademy = ({ currentStep }) => {
-  switch (8) {
+  switch (currentStep) {
     case 0:
       return <AddAcademyPageOne currentStep={currentStep} />;
     case 1:
@@ -12,9 +12,7 @@ const AddAcademy = ({ currentStep }) => {
     case 2:
       return <AddAcademyPageThree currentStep={currentStep} />;
     default:
-      return (
-        <p className="h-100 w-100 text-center">Invalid Page</p>
-      );
+      return <p className="h-100 w-100 text-center">Invalid Page</p>;
   }
 };
 
