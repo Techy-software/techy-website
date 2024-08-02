@@ -5,6 +5,7 @@ import { faUser } from "@fortawesome/free-regular-svg-icons";
 import InputField from "../../reusable components/InputField/InputField";
 import WhiteCard from "../../reusable components/WhiteCard/WhiteCard";
 import Topbar from "../Topbar";
+import ProfilePicture from "../../reusable components/ProfilePicture/ProfilePicture";
 
 const AddAcademyPageOne = ({ currentStep }) => {
   return (
@@ -18,16 +19,7 @@ const AddAcademyPageOne = ({ currentStep }) => {
           />
         </div>
         <div className="col-span-9">
-          <WhiteCard title="Academy Logo">
-            <div className="flex items-center mt-7">
-              <div className="border-2 border-dashed rounded-full me-5">
-                <FontAwesomeIcon icon={faUser} className="p-7 w-6 h-6" />
-              </div>
-              <button className="border-2 text-blue-500 p-3 rounded-lg">
-                Upload Picture
-              </button>
-            </div>
-          </WhiteCard>
+          <ProfilePicture />
           <WhiteCard title="Academy Details" style="mt-12">
             <div className="grid grid-cols-12 gap-4 mt-7">
               {["Academy Name", "Owner Name", "Established at"].map(
