@@ -12,7 +12,9 @@ const AddAcademy = ({ currentStep }) => {
     case 2:
       return <AddAcademyPageThree currentStep={currentStep} />;
     default:
-      return <p className="h-100 w-100 text-center">Invalid Page</p>;
+      return (
+        <p className="h-100 w-100 text-center">Invalid Page</p>
+      );
   }
 };
 
