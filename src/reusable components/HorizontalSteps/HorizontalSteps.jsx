@@ -17,6 +17,7 @@ const HorizontalSteps = (props) => {
       <ul>
         {props.steps.map((step, index) => (
           <div
+            key={step}
             className={`flex h-12 items-center text-slate-400 w-full ${
               props.currentStep === index ? "bg-white" : ""
             }`}
