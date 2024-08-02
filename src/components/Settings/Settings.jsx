@@ -6,6 +6,11 @@ import ProfilePicture from "../../reusable components/ProfilePicture/ProfilePict
 import WhiteCard from "../../reusable components/WhiteCard/WhiteCard";
 import Topbar from "../Topbar";
 import { useState } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import "./Settings.css";
+import "../../reusable components/InputField/InputField.css";
+import calendarIcon from "../../assets/calendar.png";
 
 const Settings = () => {
   const [nationality, setNationality] = useState("");
@@ -105,7 +110,20 @@ const Settings = () => {
                   ))}
                 </Select>
               </FormControl>
-
+              <div className="col-span-6 date-picker-container">
+                <label className="formLabel">Date of birth</label>
+                <DatePicker
+                  // selected={startDate}
+                  // onChange={(date) => setStartDate(date)}
+                  className="w-full mt-1"
+                  placeholderText="Select Date"
+                />
+                <img
+                  src={calendarIcon}
+                  alt="calendar"
+                  className="calendar-icon"
+                />
+              </div>
               <FormControl className="col-span-6">
                 <label className="formLabel">Gender</label>
                 <Select
@@ -126,6 +144,14 @@ const Settings = () => {
                   ))}
                 </Select>
               </FormControl>
+            </div>
+            <div className="w-100 justify-end flex mt-5">
+              <BlueButton
+                text="Cancel"
+                buttonStyle={"bg-white me-5"}
+                textStyle={"text-blue-600"}
+              />
+              <BlueButton />
             </div>
           </WhiteCard>
         </div>
