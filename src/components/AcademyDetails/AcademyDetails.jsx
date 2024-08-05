@@ -4,7 +4,36 @@ import Academy from "../../assets/Academy.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot, faPhone } from "@fortawesome/free-solid-svg-icons";
 import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
+import { useState } from "react";
+import Feed from "./Feed";
+
+const Box = ({ label, onClick, isActive }) => (
+  <div
+    className={`cursor-pointer p-2 px-4 rounded-3xl m-1.5 border-slate-300 border ${
+      isActive ? "bg-[#FE9B01] text-white" : "bg-white text-black"
+    }`}
+    onClick={onClick}
+  >
+    {label}
+  </div>
+);
+
 const AcademyDetails = ({}) => {
+  const AcademyItems = [
+    "Feeds",
+    "Overview",
+    "Courses (10)",
+    "Orders (2)",
+    "Mentors (7)",
+    "Students (100)",
+    "Feedback",
+  ];
+  const [activeComponent, setActiveComponent] = useState("Feeds");
+
+  const handleClick = (label) => {
+    setActiveComponent(label);
+  };
+
   return (
     <div>
       <Topbar />
@@ -63,11 +92,35 @@ const AcademyDetails = ({}) => {
               <FontAwesomeIcon icon={faPhone} className="mr-2" />
               <span>+20 114 6432 345</span>
             </div>
-            <div> 
-                <FontAwesomeIcon icon={faEnvelope} className="mr-2" />
-                <span>Techy.School@gmail.com</span>
+            <div>
+              <FontAwesomeIcon icon={faEnvelope} className="mr-2" />
+              <span>Techy.School@gmail.com</span>
             </div>
           </WhiteCard>
+        </div>
+        <div className="col-span-8">
+          <div className="">
+            <div className="flex overflow-x-auto py-2 touch-pan-x">
+              {AcademyItems.map((label) => (
+                <Box
+                  key={label}
+                  label={label}
+                  onClick={() => handleClick(label)}
+                  isActive={activeComponent === label}
+                />
+              ))}
+            </div>
+            <div className="">
+              {activeComponent === "Feeds" && <Feed />}
+              {activeComponent === "Component 2" && (
+                <div>Content for Component 2</div>
+              )}
+              {activeComponent === "Component 3" && (
+                <div>Content for Component 3</div>
+              )}
+            </div>
+          </div>
+          <WhiteCard></WhiteCard>
         </div>
       </div>
     </div>
