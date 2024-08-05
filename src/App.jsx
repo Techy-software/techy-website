@@ -3,7 +3,8 @@ import React, { useState } from "react";
 import CourseDetilasComponent from "./components/course-details-component/course-details-component";
 import AddMentorComponent from "./components/add-mentor-component/add-mentor-component";
 import AddAcademy from "./components/AddAcademy/AddAcademy";
-
+import JobDetails from "./components/jobs-component/JobDetails";
+import AcademyDetails from "./components/AcademyDetails/AcademyDetails";
 const App = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const steps = ["Content", "Setup", "Assign"];
@@ -11,7 +12,8 @@ const App = () => {
   return (
     // <CourseDetilasComponent steps={steps} currentStep={currentStep} />
     // <AddMentorComponent/>
-    <AddAcademy currentStep={2} />
+    // <AddAcademy currentStep={2} />
+    <AcademyDetails />
   );
 };
 
