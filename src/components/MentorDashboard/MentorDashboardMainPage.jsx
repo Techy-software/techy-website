@@ -1,33 +1,26 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import WhiteCard from "../../reusable components/WhiteCard/WhiteCard";
 import Topbar from "../Topbar";
-import Academy from "../../assets/Academy.png";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLocationDot, faPhone } from "@fortawesome/free-solid-svg-icons";
-import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
+import {
+  faLocation,
+  faPerson,
+  faPhone,
+} from "@fortawesome/free-solid-svg-icons";
+import {
+  faCalendarDays,
+  faEnvelope,
+  faEye,
+} from "@fortawesome/free-regular-svg-icons";
+import { Box } from "../AcademyDetails/AcademyDetails";
+import PersonalPicture from "../../assets/PersonalPicture.png";
 import { useState } from "react";
-import Feed from "./Feed";
-import Overview from "./Overview";
-import Feedbacks from "./Feedbacks";
+import postImage from "../../assets/postImage.jpeg";
 
-const Box = ({ label, onClick, isActive }) => (
-  <div
-    className={`cursor-pointer p-2 px-4 rounded-3xl m-1.5 border-slate-300 border ${
-      isActive ? "bg-[#FE9B01] text-white" : "bg-white text-black"
-    }`}
-    onClick={onClick}
-  >
-    {label}
-  </div>
-);
-
-const AcademyDetails = ({}) => {
+const MentorDashboardMainPage = () => {
   const AcademyItems = [
-    "Feeds",
     "Overview",
-    "Courses (10)",
-    "Orders (2)",
-    "Mentors (7)",
-    "Students (100)",
+    "Courses (4)",
+    "Students (120)",
     "Feedbacks",
   ];
   const [activeComponent, setActiveComponent] = useState("Feeds");
@@ -35,7 +28,6 @@ const AcademyDetails = ({}) => {
   const handleClick = (label) => {
     setActiveComponent(label);
   };
-
   return (
     <div>
       <Topbar />
@@ -73,19 +65,27 @@ const AcademyDetails = ({}) => {
         <div className="col-span-4">
           <WhiteCard>
             <div className="flex items-center flex-col">
-              <img src={Academy} alt="Academy Photo" className="w-24" />
-              <h2 className="text-xl font-bold mt-4">Techy School</h2>
+              <img
+                src={PersonalPicture}
+                alt="Academy Photo"
+                className="w-24 rounded-full"
+              />
+              <h2 className="text-xl font-bold mt-4">Ahmed Mealy</h2>
               <hr className="my-3" />
               <div className="flex justify-between mx-2 w-full my-3">
-                <span className="text-gray-500">Academy Details</span>
+                <span className="text-gray-500">PERSONAL INFO</span>
                 <span className="text-blue-500 font-bold ml-2">
                   More Details
                 </span>
               </div>
             </div>
             <div className="flex">
-              <FontAwesomeIcon icon={faLocationDot} className="mr-2 w-5 h-5" />
-              <span>El Dokki, Al Qahirah, Egypt</span>
+              <FontAwesomeIcon icon={faPerson} className="mr-2 w-5 h-5 mb-4" />
+              <span>Male</span>
+            </div>
+            <div className="flex">
+              <FontAwesomeIcon icon={faCalendarDays} className="mr-2 w-5 h-5" />
+              <span>Joined at 11 Apr. 2023</span>
             </div>
             <div className="my-4">
               <span className="text-slate-600 my-4">CONTACT INFO</span>
@@ -97,6 +97,30 @@ const AcademyDetails = ({}) => {
             <div>
               <FontAwesomeIcon icon={faEnvelope} className="mr-2" />
               <span>Techy.School@gmail.com</span>
+            </div>
+            <hr className="my-4" />
+            <div>
+              <span className="text-slate-600 my-4">CERTIFICATES</span>
+              <div className="flex items-center">
+                <img
+                  src={postImage}
+                  alt="Certificate 1"
+                  className="h-14 rounded-lg object-cover"
+                />
+                <div className="ms-4">
+                  <p className="font-bold">The Designed to STEM Online...</p>
+                  <span className="text-slate-400">Techy</span>
+                  <div className="cursor-pointer">
+                    <FontAwesomeIcon
+                      icon={faEye}
+                      style={{ color: "#0011FF" }}
+                    />
+                    <span className="ms-2 text-blue-700 font-bold">
+                      View credentials
+                    </span>
+                  </div>
+                </div>
+              </div>
             </div>
           </WhiteCard>
         </div>
@@ -113,12 +137,12 @@ const AcademyDetails = ({}) => {
               ))}
             </div>
             <div className="">
-              {activeComponent === "Feeds" && <Feed />}
-              {activeComponent === "Overview" && <Overview />}
+              {activeComponent === "Feeds" && <p>1</p>}
+              {activeComponent === "Overview" && <p>Test</p>}
               {activeComponent === "Component 3" && (
                 <div>Content for Component 3</div>
               )}
-              {activeComponent === "Feedbacks" && <Feedbacks />}
+              {activeComponent === "Feedbacks" && <div>Test</div>}
             </div>
           </div>
         </div>
@@ -127,5 +151,4 @@ const AcademyDetails = ({}) => {
   );
 };
 
-export default AcademyDetails;
-export { Box };
+export default MentorDashboardMainPage;
