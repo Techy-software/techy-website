@@ -7,6 +7,7 @@ import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
 import { useState } from "react";
 import Feed from "./Feed";
 import Overview from "./Overview";
+import Feedbacks from "./Feedbacks";
 
 const Box = ({ label, onClick, isActive }) => (
   <div
@@ -27,7 +28,7 @@ const AcademyDetails = ({}) => {
     "Orders (2)",
     "Mentors (7)",
     "Students (100)",
-    "Feedback",
+    "Feedbacks",
   ];
   const [activeComponent, setActiveComponent] = useState("Feeds");
 
@@ -117,6 +118,7 @@ const AcademyDetails = ({}) => {
               {activeComponent === "Component 3" && (
                 <div>Content for Component 3</div>
               )}
+              {activeComponent === "Feedbacks" && <Feedbacks />}
             </div>
           </div>
         </div>
