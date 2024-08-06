@@ -15,6 +15,7 @@ import { Box } from "../AcademyDetails/AcademyDetails";
 import PersonalPicture from "../../assets/PersonalPicture.png";
 import { useState } from "react";
 import postImage from "../../assets/postImage.jpeg";
+import OverviewMentor from "./OverviewMentor";
 
 const MentorDashboardMainPage = () => {
   const AcademyItems = [
@@ -23,7 +24,7 @@ const MentorDashboardMainPage = () => {
     "Students (120)",
     "Feedbacks",
   ];
-  const [activeComponent, setActiveComponent] = useState("Feeds");
+  const [activeComponent, setActiveComponent] = useState("Overview");
 
   const handleClick = (label) => {
     setActiveComponent(label);
@@ -137,8 +138,7 @@ const MentorDashboardMainPage = () => {
               ))}
             </div>
             <div className="">
-              {activeComponent === "Feeds" && <p>1</p>}
-              {activeComponent === "Overview" && <p>Test</p>}
+              {activeComponent === "Overview" && <OverviewMentor />}
               {activeComponent === "Component 3" && (
                 <div>Content for Component 3</div>
               )}
