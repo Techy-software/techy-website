@@ -6,6 +6,7 @@ import { faLocationDot, faPhone } from "@fortawesome/free-solid-svg-icons";
 import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
 import { useState } from "react";
 import Feed from "./Feed";
+import Overview from "./Overview";
 
 const Box = ({ label, onClick, isActive }) => (
   <div
@@ -112,15 +113,12 @@ const AcademyDetails = ({}) => {
             </div>
             <div className="">
               {activeComponent === "Feeds" && <Feed />}
-              {activeComponent === "Component 2" && (
-                <div>Content for Component 2</div>
-              )}
+              {activeComponent === "Overview" && <Overview />}
               {activeComponent === "Component 3" && (
                 <div>Content for Component 3</div>
               )}
             </div>
           </div>
-          <WhiteCard></WhiteCard>
         </div>
       </div>
     </div>
