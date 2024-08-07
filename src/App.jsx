@@ -6,6 +6,7 @@ import AddAcademy from "./components/AddAcademy/AddAcademy";
 import JobDetails from "./components/jobs-component/JobDetails";
 import AcademyDetails from "./components/AcademyDetails/AcademyDetails";
 import MentorDashboardMainPage from "./components/MentorDashboard/MentorDashboardMainPage";
+import Rewards from "./components/Reward/Rewards";
 const App = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const steps = ["Content", "Setup", "Assign"];
@@ -14,7 +15,8 @@ const App = () => {
     // <CourseDetilasComponent steps={steps} currentStep={currentStep} />
     // <AddMentorComponent/>
     // <AddAcademy currentStep={2} />
-    <MentorDashboardMainPage />
+    // <MentorDashboardMainPage />
+    <Rewards />
   );
 };
 
