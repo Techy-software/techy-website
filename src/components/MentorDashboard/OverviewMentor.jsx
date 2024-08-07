@@ -4,7 +4,7 @@ import PersonalPicture from "../../assets/PersonalPicture.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocation, faPhone } from "@fortawesome/free-solid-svg-icons";
 import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
-
+import GaugeChart from "react-gauge-chart";
 // Install recharts or apexcharts to find a suitable bar chart options
 // install gauge chart or React speedometer for the circular chart
 import {
@@ -17,6 +17,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
+import ReactSpeedometer from "react-d3-speedometer";
 
 const data = [
   { name: "Jan", Study: 20, Exams: 30 },
@@ -65,6 +66,7 @@ const OverviewMentor = () => {
 
     return null;
   };
+  const percentValue = 0.75 / 10;
   return (
     <WhiteCard title="Overview">
       <div className="grid grid-cols-12 gap-4">
@@ -105,13 +107,47 @@ const OverviewMentor = () => {
                 />
               </BarChart>
             </ResponsiveContainer>
-            <div className="col-span-7 flex justify-center items-center"></div>
-            <div className="col-span-5 flex flex-col justify-center items-start ml-5">
-              <div className="flex items-center mb-2"></div>
+          </WhiteCard>
+        </div>
+        <div className="col-span-6">
+          <h2 className="text-lg font-bold mt-4 mb-2.5">Performance</h2>
+          <WhiteCard>
+            <div className="flex justify-between">
+              <div className="flex items-center">
+                <div
+                  className="w-4 h-4 mr-2 rounded-sm"
+                  style={{ backgroundColor: "#3BAFA8" }}
+                ></div>
+                <span className="text-black">Performance</span>
+              </div>
+              <span className="bg-slate-300 p-2 px-3 rounded-md">Monthly</span>
+            </div>
+            <div
+              className="flex flex-col justify-center items-center mt-5"
+              style={{ height: "375px" }}
+            >
+              <ReactSpeedometer
+                maxSegmentLabels={0}
+                width={300}
+                maxValue={10}
+                value={7}
+                needleColor="#FF9053"
+                startColor="#3BAFA8"
+                segments={10}
+                endColor="#5AC7C1"
+                segmentwidth={10}
+                currentValueText=""
+                needleHeightRatio={0.7}
+              />
+              <div className="" style={{ marginTop: "-120px" }}>
+                <span className="text-slate-500 text-2xl font-semibold">
+                  Point:{" "}
+                </span>
+                <span className="font-bold text-2xl">8.966</span>
+              </div>
             </div>
           </WhiteCard>
         </div>
-        <div className="col-span-6"></div>
       </div>
     </WhiteCard>
   );
