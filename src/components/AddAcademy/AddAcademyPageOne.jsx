@@ -14,6 +14,7 @@ const AddAcademyPageOne = ({ currentStep }) => {
       <div className="grid grid-cols-12 gap-4 add-academy px-10 pt-10">
         <div className="col-span-3 me-10">
           <HorizontalSteps
+            title="Add Academy"
             steps={["Academy Details", "Courses", "Mentors"]}
             currentStep={currentStep}
           />

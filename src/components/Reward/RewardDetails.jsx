@@ -25,35 +25,37 @@ const RewardDetails = () => {
         </div>
 
         <WhiteCard title="Overview" style={"col-span-9 p-5"}>
-          <span className="text-slate-400">Thumbnail</span>
-          <div className="flex justify-center">
-            <img
-              src={PostImage}
-              className="w-full h-96 object-cover rounded-xl"
-            />
-          </div>
-          <div className="flex">
-            <div>
-              {specs.map((spec) => {
-                return (
-                  <div className="flex my-4">
-                    <span className="text-slate-400">
-                      {Object.keys(spec)[0]}
-                    </span>
-                  </div>
-                );
-              })}
+          <div className="p-5">
+            <span className="text-slate-400">Thumbnail</span>
+            <div className="flex justify-center mt-5">
+              <img
+                src={PostImage}
+                className="w-full h-96 object-cover rounded-xl"
+              />
             </div>
-            <div className="ms-9">
-              {specs.map((spec) => {
-                return (
-                  <div className="flex my-4">
-                    <div>
-                      <span>{Object.values(spec)[0]}</span>
+            <div className="flex">
+              <div>
+                {specs.map((spec) => {
+                  return (
+                    <div className="flex my-4">
+                      <span className="text-slate-400">
+                        {Object.keys(spec)[0]}
+                      </span>
                     </div>
-                  </div>
-                );
-              })}
+                  );
+                })}
+              </div>
+              <div className="ms-9">
+                {specs.map((spec) => {
+                  return (
+                    <div className="flex my-4">
+                      <div>
+                        <span>{Object.values(spec)[0]}</span>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           </div>
         </WhiteCard>

@@ -13,7 +13,7 @@ import "./HorizontalSteps.css";
 const HorizontalSteps = (props) => {
   return (
     <div className="default-background-horizontal-steps">
-      <h3 className="title-horizontal-steps">Publish your course</h3>
+      <h3 className="title-horizontal-steps">{props.title}</h3>
       <ul>
         {props.steps.map((step, index) => (
           <div

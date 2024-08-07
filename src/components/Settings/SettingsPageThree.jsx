@@ -1,4 +1,3 @@
-import HorizontalSteps from "../../reusable components/HorizontalSteps/HorizontalSteps";
 import WhiteCard from "../../reusable components/WhiteCard/WhiteCard";
 import Topbar from "../Topbar";
 import plusCircle from "../../assets/plus.png";
