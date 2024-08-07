@@ -142,7 +142,7 @@ const MentorDashboardMainPage = () => {
               {activeComponent === "Component 3" && (
                 <div>Content for Component 3</div>
               )}
-              {activeComponent === "Feedbacks" && <div>Test</div>}
+              {activeComponent === "Feedbacks" && <div></div>}
             </div>
           </div>
         </div>
