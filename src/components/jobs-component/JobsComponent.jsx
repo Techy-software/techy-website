@@ -15,7 +15,6 @@ const JobsComponent = () => {
       <div className="max-w-full mx-auto p-8">
         <div className="bg-white p-8 rounded-md shadow mx-2">
           {/* Search bar and filter icon */}
-          <div className="flex items-center mb-6">
             <div className="relative w-1/4">
               <span className="absolute inset-y-0 left-0 flex items-center pl-3">
                 <svg
