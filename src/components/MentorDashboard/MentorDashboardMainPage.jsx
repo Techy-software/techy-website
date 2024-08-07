@@ -63,7 +63,7 @@ const MentorDashboardMainPage = () => {
         </div>
       </div>
       <div className="grid grid-cols-12 gap-4 add-academy px-10 pt-10">
-        <div className="col-span-4">
+        <div className="col-span-3">
           <WhiteCard>
             <div className="flex items-center flex-col">
               <img
@@ -125,7 +125,7 @@ const MentorDashboardMainPage = () => {
             </div>
           </WhiteCard>
         </div>
-        <div className="col-span-8">
+        <div className="col-span-9">
           <div className="">
             <div className="flex overflow-x-auto py-2 touch-pan-x">
               {AcademyItems.map((label) => (
