@@ -31,8 +31,7 @@ const MentorDashboardMainPage = () => {
   };
   return (
     <div>
-      <Topbar />
-      <div className="sticky top-0 z-10 flex justify-between items-center bg-white p-6 shadow pb-6">
+      <div className="sticky top-0 flex justify-between items-center bg-white p-6 shadow pb-6">
         <div className="flex items-center">
           <button className="mr-2">
             <svg
