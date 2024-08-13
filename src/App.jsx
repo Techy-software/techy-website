@@ -13,6 +13,8 @@ import Topbar from "./components/Topbar";
 import Sidebar from "./components/Sidebar";
 import Layout from "./components/Layout";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import OpportunityMain from "./components/Opportunity/OpportunityMain";
+import OpportunityDetails from "./components/Opportunity/OpportunityDetails/OpportunityDetails";
 
 const App = () => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -24,6 +26,8 @@ const App = () => {
         <Route element={<Layout />}>
           <Route path="/" element={<AddAcademy currentStep={0} />} />
           <Route path="/mentor" element={<MentorDashboardMainPage />} />
+          <Route path="/opportunity" element={<OpportunityMain />} />
+          <Route path="/opportunity/details" element={<OpportunityDetails />} />
         </Route>
       </Routes>
     </Router>
