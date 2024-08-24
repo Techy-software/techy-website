@@ -12,6 +12,8 @@ import AddReward from "./components/Reward/AddReward";
 import Topbar from "./components/Topbar";
 import Sidebar from "./components/Sidebar";
 import Layout from "./components/Layout";
+import Role from "./components/role-component/role-component";
+import AddRole from "./components/role-component/add-new-role-component";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 const App = () => {
@@ -24,6 +26,9 @@ const App = () => {
         <Route element={<Layout />}>
           <Route path="/" element={<AddAcademy currentStep={0} />} />
           <Route path="/mentor" element={<MentorDashboardMainPage />} />
+          <Route path="/role" element={<Role />} />
+          <Route path="/addRole" element={<AddRole/>} />
+          <Route path="/addMentor" element={<AddMentorComponent/>} />
         </Route>
       </Routes>
     </Router>
