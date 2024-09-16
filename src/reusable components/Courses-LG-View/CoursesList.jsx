@@ -1,15 +1,17 @@
 import BlueButton from "../BlueButton/BlueButton";
 import GridListButton from "../GridListButton/GridListButton";
 import WhiteCard from "../WhiteCard/WhiteCard";
-
+import filter from "../../assets/filter.png";
 const CoursesList = () => {
   return (
     <>
       <WhiteCard>
-        <div>
+        <div className="flex justify-between items-center">
           <div>
             {/* <SearchBar /> */}
-            {/* <Icon /> */}
+            <div className="cursor-pointer">
+              <img src={filter} alt="Filter" />
+            </div>
           </div>
           <div className="flex items-center">
             <GridListButton />
