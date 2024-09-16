@@ -9,11 +9,14 @@ import MentorDashboardMainPage from "./components/MentorDashboard/MentorDashboar
 import Rewards from "./components/Reward/Rewards";
 import RewardDetails from "./components/Reward/RewardDetails";
 import AddReward from "./components/Reward/AddReward";
-import Topbar from "./components/Topbar";
 import Sidebar from "./components/Sidebar";
 import Layout from "./components/Layout";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-
+import Settings from "./components/Settings/Settings";
+import RoleCompoenent from "./components/role-component/role-component";
+import AddNewRoleComponent from "./components/role-component/add-new-role-component";
+import CourseLibraryComponent from "./components/course-library-component/course-library-component";
+import AddStudentComponent from "./components/add-student-component/AddStudentComponent";
 const App = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const steps = ["Content", "Setup", "Assign"];
@@ -22,7 +25,10 @@ const App = () => {
     <Router>
       <Routes>
         <Route element={<Layout />}>
-          <Route path="/" element={<AddAcademy currentStep={0} />} />
+          <Route
+            path="/"
+            element={<AcademyDetails steps={steps} currentStep={1} />}
+          />
           <Route path="/mentor" element={<MentorDashboardMainPage />} />
           <Route path="/job" element={<JobDetails />} />
         </Route>
