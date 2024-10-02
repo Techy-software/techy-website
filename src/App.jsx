@@ -30,7 +30,7 @@ const App = () => {
             element={<AcademyDetails steps={steps} currentStep={1} />}
           />
           <Route path="/mentor" element={<MentorDashboardMainPage />} />
-          <Route path="/job" element={<JobDetails />} />
+          <Route path="/Ac" element={<AddAcademy currentStep={1} />} />
         </Route>
       </Routes>
     </Router>
