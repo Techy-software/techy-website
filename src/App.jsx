@@ -9,7 +9,6 @@ import MentorDashboardMainPage from "./components/MentorDashboard/MentorDashboar
 import Rewards from "./components/Reward/Rewards";
 import RewardDetails from "./components/Reward/RewardDetails";
 import AddReward from "./components/Reward/AddReward";
-import Topbar from "./components/Topbar";
 import Sidebar from "./components/Sidebar";
 import Layout from "./components/Layout";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
@@ -24,7 +23,10 @@ const App = () => {
     <Router>
       <Routes>
         <Route element={<Layout />}>
-          <Route path="/" element={<AddAcademy currentStep={0} />} />
+          <Route
+            path="/"
+            element={<AcademyDetails steps={steps} currentStep={1} />}
+          />
           <Route path="/mentor" element={<MentorDashboardMainPage />} />
           <Route path="/opportunity" element={<OpportunityMain />} />
           <Route path="/opportunity/details" element={<OpportunityDetails />} />

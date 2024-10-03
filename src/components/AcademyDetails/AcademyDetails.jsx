@@ -8,6 +8,10 @@ import { useState } from "react";
 import Feed from "./Feed";
 import Overview from "./Overview";
 import Feedbacks from "./Feedbacks";
+import CoursesList from "../../reusable components/Courses-LG-View/CoursesList";
+import MentorView from "../../reusable components/Mentor-LG-View/MentorView";
+import Students from "./Students";
+import Orders from "./Orders";
 
 const Box = ({ label, onClick, isActive }) => (
   <div
@@ -30,7 +34,7 @@ const AcademyDetails = ({}) => {
     "Students (100)",
     "Feedbacks",
   ];
-  const [activeComponent, setActiveComponent] = useState("Feeds");
+  const [activeComponent, setActiveComponent] = useState("Courses (10)");
 
   const handleClick = (label) => {
     setActiveComponent(label);
@@ -38,7 +42,6 @@ const AcademyDetails = ({}) => {
 
   return (
     <div>
-      <Topbar />
       <div className="sticky top-0 z-10 flex justify-between items-center bg-white p-6 shadow pb-6">
         <div className="flex items-center">
           <button className="mr-2">
@@ -115,9 +118,10 @@ const AcademyDetails = ({}) => {
             <div className="">
               {activeComponent === "Feeds" && <Feed />}
               {activeComponent === "Overview" && <Overview />}
-              {activeComponent === "Component 3" && (
-                <div>Content for Component 3</div>
-              )}
+              {activeComponent === "Courses (10)" && <CoursesList />}
+              {activeComponent === "Orders (2)" && <Orders />}
+              {activeComponent === "Mentors (7)" && <MentorView />}
+              {activeComponent === "Students (100)" && <Students />}
               {activeComponent === "Feedbacks" && <Feedbacks />}
             </div>
           </div>

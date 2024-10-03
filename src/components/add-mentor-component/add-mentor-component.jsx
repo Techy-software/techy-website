@@ -22,14 +22,275 @@ const AddMentorComponent = () => {
     setShowPassword(!showPassword);
   };
 
-  const CustomModalContent = () => (
+  const WorkExperinceModalContent = () => (
     <form>
-      <label>
-        Data:
-        <input type="text" name="data" />
-      </label>
-      <button type="submit">Submit</button>
+       <div className="w-4/5 mx-auto bg-white p-6 rounded-lg shadow-lg">
+      <div className="flex justify-between items-center">
+        <h3 className="text-xl font-bold">Add experience</h3>
+        <button className="text-gray-500 hover:text-gray-800">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" className="w-6 h-6">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+      <form className="space-y-6 mt-4">
+        {/* Job Title */}
+        <div>
+          <label className="block text-sm font-medium mb-2" htmlFor="jobTitle">
+            Job Title <span className="text-red-500">*</span>
+          </label>
+          <input
+            type="text"
+            id="jobTitle"
+            name="jobTitle"
+            className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="Enter job title"
+            required
+          />
+        </div>
+
+        {/* Company/Organization Name */}
+        <div>
+          <label className="block text-sm font-medium mb-2" htmlFor="companyName">
+            Company/organization name <span className="text-red-500">*</span>
+          </label>
+          <input
+            type="text"
+            id="companyName"
+            name="companyName"
+            className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="Enter company/organization name"
+            required
+          />
+        </div>
+
+        {/* Starting and Ending Dates */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div>
+            <label className="block text-sm font-medium mb-2" htmlFor="startDate">
+              Starting from <span className="text-red-500">*</span>
+            </label>
+            <div className="relative">
+              <input
+                type="date"
+                id="startDate"
+                name="startDate"
+                className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required
+              />
+              <span className="absolute right-3 top-1/2 transform -translate-y-1/2">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" className="w-5 h-5 text-gray-400">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M8 7h8M7 12h10m-9 5h8m-4 0h-1m-5 0H6v-4h12v4h-1m-9 0v-4H5v-4h14v4h-1m-5 0H9v-4H8v4h1m-1-4V9h6v3H8v-3h1m-1 3V9m0 9v-5m-1 1v5m-2 0v-5m2 0h8v5H8v-5m2 0h4v5h-4v-5z" />
+                </svg>
+              </span>
+            </div>
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium mb-2" htmlFor="endDate">
+              Ending in <span className="text-red-500">*</span>
+            </label>
+            <div className="relative">
+              <input
+                type="date"
+                id="endDate"
+                name="endDate"
+                className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required
+              />
+              <span className="absolute right-3 top-1/2 transform -translate-y-1/2">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" className="w-5 h-5 text-gray-400">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M8 7h8M7 12h10m-9 5h8m-4 0h-1m-5 0H6v-4h12v4h-1m-9 0v-4H5v-4h14v4h-1m-5 0H9v-4H8v4h1m-1-4V9h6v3H8v-3h1m-1 3V9m0 9v-5m-1 1v5m-2 0v-5m2 0h8v5H8v-5m2 0h4v5h-4v-5z" />
+                </svg>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        {/* Description */}
+        <div>
+          <label className="block text-sm font-medium mb-2" htmlFor="description">
+            Description <span className="text-red-500">*</span>
+          </label>
+          <textarea
+            id="description"
+            name="description"
+            className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="Enter description"
+            required
+          />
+        </div>
+
+        {/* Buttons */}
+        <div className="flex justify-end space-x-4">
+          <button
+            type="button"
+            className="px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200"
+          >
+            Cancel
+          </button>
+          <button
+            type="submit"
+            className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+          >
+            Submit
+          </button>
+        </div>
+      </form>
+    </div>
     </form>
+  );
+  
+  const AddCertificateModalContent = () => (
+    <div className="w-4/5 mx-auto bg-white p-6 rounded-lg shadow-lg">
+      <div className="flex justify-between items-center border-b pb-4 mb-4">
+        <h3 className="text-xl font-bold">Add Certificate</h3>
+        <button className="text-gray-500 hover:text-gray-800">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" className="w-6 h-6">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+      <form className="space-y-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          {/* Name */}
+          <div>
+            <label className="block text-sm font-medium mb-2" htmlFor="name">
+              Name <span className="text-red-500">*</span>
+            </label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Enter certificate name"
+              required
+            />
+          </div>
+
+          {/* Issuing Organization */}
+          <div>
+            <label className="block text-sm font-medium mb-2" htmlFor="organization">
+              Issuing organization <span className="text-red-500">*</span>
+            </label>
+            <input
+              type="text"
+              id="organization"
+              name="organization"
+              className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Enter issuing organization"
+              required
+            />
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          {/* Issue Date */}
+          <div>
+            <label className="block text-sm font-medium mb-2" htmlFor="issueDate">
+              Issue date <span className="text-red-500">*</span>
+            </label>
+            <div className="relative">
+              <input
+                type="date"
+                id="issueDate"
+                name="issueDate"
+                className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required
+              />
+              <span className="absolute right-3 top-1/2 transform -translate-y-1/2">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" className="w-5 h-5 text-gray-400">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M8 7h8M7 12h10m-9 5h8m-4 0h-1m-5 0H6v-4h12v4h-1m-9 0v-4H5v-4h14v4h-1m-5 0H9v-4H8v4h1m-1-4V9h6v3H8v-3h1m-1 3V9m0 9v-5m-1 1v5m-2 0v-5m2 0h8v5H8v-5m2 0h4v5h-4v-5z" />
+                </svg>
+              </span>
+            </div>
+          </div>
+
+          {/* Expiration Date */}
+          <div>
+            <label className="block text-sm font-medium mb-2" htmlFor="expirationDate">
+              Expiration date <span className="text-red-500">*</span>
+            </label>
+            <div className="relative">
+              <input
+                type="date"
+                id="expirationDate"
+                name="expirationDate"
+                className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required
+              />
+              <span className="absolute right-3 top-1/2 transform -translate-y-1/2">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" className="w-5 h-5 text-gray-400">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M8 7h8M7 12h10m-9 5h8m-4 0h-1m-5 0H6v-4h12v4h-1m-9 0v-4H5v-4h14v4h-1m-5 0H9v-4H8v4h1m-1-4V9h6v3H8v-3h1m-1 3V9m0 9v-5m-1 1v5m-2 0v-5m2 0h8v5H8v-5m2 0h4v5h-4v-5z" />
+                </svg>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          {/* Credential ID */}
+          <div>
+            <label className="block text-sm font-medium mb-2" htmlFor="credentialId">
+              Credential ID <span className="text-red-500">*</span>
+            </label>
+            <input
+              type="text"
+              id="credentialId"
+              name="credentialId"
+              className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Enter credential ID"
+              required
+            />
+          </div>
+
+          {/* Credential URL */}
+          <div>
+            <label className="block text-sm font-medium mb-2" htmlFor="credentialUrl">
+              Credential URL <span className="text-red-500">*</span>
+            </label>
+            <input
+              type="url"
+              id="credentialUrl"
+              name="credentialUrl"
+              className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Enter credential URL"
+              required
+            />
+          </div>
+        </div>
+
+        {/* Certificates Upload */}
+        <div>
+          <label className="block text-sm font-medium mb-2" htmlFor="certificates">
+            Certificates
+          </label>
+          <div className="w-full p-4 border-2 border-dashed border-gray-300 rounded-md text-center">
+            <svg xmlns="http://www.w3.org/2000/svg" className="mx-auto h-12 w-12 text-blue-500" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
+            </svg>
+            <p className="text-gray-500">Drag & Drop file here</p>
+            <p className="text-sm text-gray-400">or click to browse (4mb max)</p>
+          </div>
+        </div>
+
+        {/* Buttons */}
+        <div className="flex justify-end space-x-4 mt-6">
+          <button
+            type="button"
+            className="px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200"
+          >
+            Cancel
+          </button>
+          <button
+            type="submit"
+            className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+          >
+            Submit
+          </button>
+        </div>
+      </form>
+    </div>
   );
 
   const handleFileUpload = (file) => {
@@ -55,7 +316,8 @@ const AddMentorComponent = () => {
         setSpecialization,
         experience,
         setExperience,
-        CustomModalContent,
+        WorkExperinceModalContent,
+        AddCertificateModalContent,
         handleFileUpload
       )
     );
@@ -110,7 +372,8 @@ const getContent = (
   setSpecialization,
   experience,
   setExperience,
-  CustomModalContent,
+  WorkExperinceModalContent,
+  AddCertificateModalContent,
   handleFileUpload
 ) => {
   const optionsSpecialization = [
@@ -394,7 +657,7 @@ const getContent = (
               <IconTextModal
                 text="Add Experince"
                 icon={faPlusCircle}
-                modalContent={<CustomModalContent />}
+                modalContent={<WorkExperinceModalContent />}
                 iconColor="#016BDD"
                 textColor="#016BDD"
               />
@@ -407,7 +670,7 @@ const getContent = (
               <IconTextModal
                 text="Add Certificates"
                 icon={faPlusCircle}
-                modalContent={<CustomModalContent />}
+                modalContent={<AddCertificateModalContent />}
                 iconColor="#016BDD"
                 textColor="#016BDD"
               />

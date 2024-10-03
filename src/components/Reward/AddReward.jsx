@@ -13,7 +13,6 @@ const AddReward = () => {
   const file = null;
   return (
     <div className="bg-slate-50">
-      <Topbar />
       <PostTopBar title="Create Ads" buttonText="Submit" />
       <div className="grid grid-cols-12 gap-4 p-4">
         <div className="col-span-3">

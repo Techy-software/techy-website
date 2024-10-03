@@ -49,7 +49,7 @@ const MentorDashboardMainPage = () => {
               />
             </svg>
           </button>
-          <h1 className="text-2xl font-bold mr-4">Academy #123</h1>
+          <h1 className="text-2xl font-bold mr-4">Mentor #123</h1>
           <span className="ml-2 px-2 py-1 text-sm text-gray-500 bg-green-200 rounded">
             Active
           </span>

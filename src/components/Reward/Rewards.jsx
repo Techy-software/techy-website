@@ -5,7 +5,6 @@ import Topbar from "../Topbar";
 const Rewards = () => {
   return (
     <div className="bg-slate-50">
-      <Topbar />
       <PostTopBar title="Rewards" buttonText="Create Reward" />
       <div className="m-6">
         <div className="mb-5 grid grid-cols-12 gap-6">

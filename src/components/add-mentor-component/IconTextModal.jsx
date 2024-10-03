@@ -62,7 +62,7 @@ const modalStyles = {
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
     padding: '20px',
-    width: '300px',
+    width: '50%',
   },
 };
 

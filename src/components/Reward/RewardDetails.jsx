@@ -17,7 +17,6 @@ const RewardDetails = () => {
   ];
   return (
     <div>
-      <Topbar />
       <PostTopBar title="Reward Details" status="Active" buttonText="Edit" />
       <div className="grid grid-cols-12 gap-4 p-5">
         <div className="col-span-3">
