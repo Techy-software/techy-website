@@ -2,6 +2,7 @@ import BlueButton from "../BlueButton/BlueButton";
 import GridListButton from "../GridListButton/GridListButton";
 import WhiteCard from "../WhiteCard/WhiteCard";
 import filter from "../../assets/filter.png";
+import GridCard from "./GridCard";
 const CoursesList = () => {
   return (
     <>
@@ -18,6 +19,7 @@ const CoursesList = () => {
             <BlueButton text="Create new course" buttonStyle={"w-auto"} />
           </div>
         </div>
+        <GridCard />
       </WhiteCard>
     </>
   );
