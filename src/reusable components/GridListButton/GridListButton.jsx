@@ -2,16 +2,14 @@ import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTableCellsLarge, faList } from "@fortawesome/free-solid-svg-icons";
 
-const GridListButton = () => {
-  const [selected, setSelected] = useState(null);
-
+const GridListButton = ({ selected, setSelected }) => {
   const handleClick = (icon) => {
     setSelected(icon);
   };
 
   return (
     <>
-      <div className="flex gap-2 border-2 rounded-lg p-1">
+      <div className="flex gap-2 border-2 rounded-lg p-0.5">
         <div
           className="cursor-pointer p-1.5"
           style={{
@@ -21,7 +19,7 @@ const GridListButton = () => {
         >
           <FontAwesomeIcon
             icon={faTableCellsLarge}
-            size="lg"
+            size="md"
             style={{ color: selected === "grid" ? "#016BDD" : "#7e7e7e" }} // Change the icon color on click
           />
         </div>
@@ -34,7 +32,7 @@ const GridListButton = () => {
         >
           <FontAwesomeIcon
             icon={faList}
-            size="lg"
+            size="md"
             style={{ color: selected === "list" ? "#016BDD" : "#7e7e7e" }} // Change the icon color on click
           />
         </div>
