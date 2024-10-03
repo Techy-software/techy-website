@@ -4,7 +4,7 @@ import { faEllipsis } from "@fortawesome/free-solid-svg-icons";
 
 const MentorGrid = () => {
   return (
-    <div className="bg-slate-50 p-3 rounded-md">
+    <div className="bg-slate-50 p-3 rounded-xl">
       <div className="flex justify-end">
         <span className="bg-green-100 text-green-600 rounded-md p-1">
           Active
