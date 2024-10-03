@@ -11,7 +11,7 @@ const GridListButton = ({ selected, setSelected }) => {
     <>
       <div className="flex gap-2 border-2 rounded-lg p-0.5">
         <div
-          className="cursor-pointer p-1.5"
+          className="cursor-pointer p-1.5 rounded-md"
           style={{
             backgroundColor: selected === "grid" ? "#F2F8FF" : "",
           }}
@@ -24,7 +24,7 @@ const GridListButton = ({ selected, setSelected }) => {
           />
         </div>
         <div
-          className="cursor-pointer p-1.5"
+          className="cursor-pointer p-1.5 rounded-md"
           style={{
             backgroundColor: selected === "list" ? "#F2F8FF" : "",
           }}

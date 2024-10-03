@@ -9,6 +9,7 @@ import Feed from "./Feed";
 import Overview from "./Overview";
 import Feedbacks from "./Feedbacks";
 import CoursesList from "../../reusable components/Courses-LG-View/CoursesList";
+import MentorView from "../../reusable components/Mentor-LG-View/MentorView";
 
 const Box = ({ label, onClick, isActive }) => (
   <div
@@ -116,6 +117,7 @@ const AcademyDetails = ({}) => {
               {activeComponent === "Feeds" && <Feed />}
               {activeComponent === "Overview" && <Overview />}
               {activeComponent === "Courses (10)" && <CoursesList />}
+              {activeComponent === "Mentors (7)" && <MentorView />}
               {activeComponent === "Feedbacks" && <Feedbacks />}
             </div>
           </div>

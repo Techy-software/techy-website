@@ -2,24 +2,22 @@ import BlueButton from "../BlueButton/BlueButton";
 import GridListButton from "../GridListButton/GridListButton";
 import WhiteCard from "../WhiteCard/WhiteCard";
 import filter from "../../assets/filter.png";
-import CourseGrid from "./CourseGrid";
 import { TextField } from "@mui/material";
 import SearchBar from "../SearchBar/SearchBar";
-import CourseTable from "./CourseTable";
 import { useState } from "react";
+import MentorTable from "./MentorTable";
+import MentorGrid from "./MentorGrid";
 
-const CoursesList = () => {
+const MentorView = () => {
   const [selectedView, setSelectedView] = useState("grid");
-
-  const courses = [
-    { id: 1, title: "The Designed to STEAM Online Class", lessons: 2 },
-    { id: 2, title: "Introduction to Programming", lessons: 5 },
-    { id: 3, title: "Advanced Math for Engineers", lessons: 8 },
-    { id: 4, title: "React Native Basics", lessons: 3 },
-    { id: 5, title: "Front-end Development with React", lessons: 6 },
-    { id: 6, title: "Data Structures and Algorithms", lessons: 10 },
+  const Mentors = [
+    { id: 1, name: "Abdelahrahman Elshaer", email: "ahmed@gmail.com" },
+    { id: 1, name: "Abdelahrahman Elshaer", email: "ahmed@gmail.com" },
+    { id: 1, name: "Abdelahrahman Elshaer", email: "ahmed@gmail.com" },
+    { id: 1, name: "Abdelahrahman Elshaer", email: "ahmed@gmail.com" },
+    { id: 1, name: "Abdelahrahman Elshaer", email: "ahmed@gmail.com" },
+    { id: 1, name: "Abdelahrahman Elshaer", email: "ahmed@gmail.com" },
   ];
-
   return (
     <>
       <WhiteCard>
@@ -35,22 +33,22 @@ const CoursesList = () => {
               selected={selectedView}
               setSelected={setSelectedView}
             />
-            <BlueButton text="Create new course" buttonStyle={"w-auto"} />
+            <BlueButton text="New Mentors" buttonStyle={"w-auto"} />
           </div>
         </div>
 
         {selectedView === "grid" ? (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {courses.map((course) => (
-              <CourseGrid key={course.id} course={course} />
+            {Mentors.map((course) => (
+              <MentorGrid key={course.id} />
             ))}
           </div>
         ) : (
-          <CourseTable courses={courses} />
+          <MentorTable />
         )}
       </WhiteCard>
     </>
   );
 };
 
-export default CoursesList;
+export default MentorView;

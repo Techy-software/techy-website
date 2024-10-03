@@ -1,5 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsis } from "@fortawesome/free-solid-svg-icons";
+
 const CourseRow = ({ course }) => {
   return (
     <tr className="border-b border-gray-200 hover:bg-gray-50">

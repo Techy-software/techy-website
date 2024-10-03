@@ -44,14 +44,36 @@ const CoursesTable = () => {
       uploadedBy: "Techy Acader",
       lastUpdated: "12 Dec, 2023",
       lastUpdatedTime: "10:00 AM",
+      status: "Disabled",
+    },
+    {
+      id: 5,
+      name: "The Designed to STEAM Online Class",
+      lessons: 5,
+      level: "Beginner",
+      rate: "4 Stars",
+      uploadedBy: "Techy Acader",
+      lastUpdated: "12 Dec, 2023",
+      lastUpdatedTime: "10:00 AM",
       status: "Draft",
+    },
+    {
+      id: 6,
+      name: "The Designed to STEAM Online Class",
+      lessons: 21,
+      level: "Beginner",
+      rate: "4 Stars",
+      uploadedBy: "Techy Acader",
+      lastUpdated: "12 Dec, 2023",
+      lastUpdatedTime: "10:00 AM",
+      status: "Active",
     },
   ];
 
   return (
     <div className="overflow-x-auto">
       <table className="min-w-full bg-white border border-gray-200">
-        <thead className="bg-blue-100">
+        <thead className="bg-blue-50">
           <tr>
             <th className="py-3 px-1 text-left font-normal text-gray-600 text-xs">
               Course name

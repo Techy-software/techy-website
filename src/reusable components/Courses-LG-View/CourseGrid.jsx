@@ -1,7 +1,7 @@
 import postImage from "../../assets/postImage.jpeg";
 import { AiFillStar } from "react-icons/ai"; // Importing a star icon
 
-const GridCard = ({ course }) => {
+const CourseGrid = ({ course }) => {
   return (
     <div className="max-w-s rounded overflow-hidden shadow-lg border border-gray-200">
       <img
@@ -29,4 +29,4 @@ const GridCard = ({ course }) => {
   );
 };
 
-export default GridCard;
+export default CourseGrid;
