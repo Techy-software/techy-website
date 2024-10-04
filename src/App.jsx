@@ -17,6 +17,10 @@ import RoleCompoenent from "./components/role-component/role-component";
 import AddNewRoleComponent from "./components/role-component/add-new-role-component";
 import CourseLibraryComponent from "./components/course-library-component/course-library-component";
 import AddStudentComponent from "./components/add-student-component/AddStudentComponent";
+import MentorsListComponent from "./components/mentors-list-component/mentors-list-component";
+import StudentList from "./components/students/StudentList";
+
+
 const App = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const steps = ["Content", "Setup", "Assign"];
@@ -31,6 +35,8 @@ const App = () => {
           />
           <Route path="/mentor" element={<MentorDashboardMainPage />} />
           <Route path="/Ac" element={<AddAcademy currentStep={1} />} />
+          <Route path="/mentor-list" element={<MentorsListComponent/>} />
+          <Route path="/student-list" element={<StudentList/>} />
         </Route>
       </Routes>
     </Router>

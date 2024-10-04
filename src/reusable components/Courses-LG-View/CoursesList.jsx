@@ -3,12 +3,12 @@ import GridListButton from "../GridListButton/GridListButton";
 import WhiteCard from "../WhiteCard/WhiteCard";
 import filter from "../../assets/filter.png";
 import CourseGrid from "./CourseGrid";
-import { TextField } from "@mui/material";
-import SearchBar from "../SearchBar/SearchBar";
-import CourseTable from "./CourseTable";
 import { useState } from "react";
+import CourseTable from "./CourseTable";
+import SearchBar from "../SearchBar/SearchBar";
+import PropTypes from "prop-types"; // Import PropTypes for prop validation
 
-const CoursesList = () => {
+const CoursesList = ({ buttonText = "Default Button", showButton = false }) => { // Default values
   const [selectedView, setSelectedView] = useState("grid");
 
   const courses = [
@@ -35,7 +35,8 @@ const CoursesList = () => {
               selected={selectedView}
               setSelected={setSelectedView}
             />
-            <BlueButton text="Create new course" buttonStyle={"w-auto"} />
+            {/* Conditionally render the BlueButton based on showButton */}
+            {showButton && <BlueButton text={buttonText} buttonStyle={"w-auto"} />}
           </div>
         </div>
 
@@ -51,6 +52,12 @@ const CoursesList = () => {
       </WhiteCard>
     </>
   );
+};
+
+// PropTypes for validation
+CoursesList.propTypes = {
+  buttonText: PropTypes.string,
+  showButton: PropTypes.bool,
 };
 
 export default CoursesList;
