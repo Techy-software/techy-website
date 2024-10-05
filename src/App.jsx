@@ -36,7 +36,7 @@ const App = () => {
             element={<AcademyDetails steps={steps} currentStep={1} />}
           />
           <Route path="/mentor" element={<MentorDashboardMainPage />} />
-          <Route path="/Ac" element={<AddAcademy currentStep={0} />} />
+          <Route path="/Ac" element={<AcademyDetails currentStep={0} />} />
           <Route path="/mentor-list" element={<MentorsListComponent />} />
           <Route path="/student-list" element={<StudentList />} />
           <Route path="/opportunity" element={<OpportunityMain />} />
