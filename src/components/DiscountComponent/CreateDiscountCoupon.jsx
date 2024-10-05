@@ -451,7 +451,7 @@ const CreateDiscountCoupon = () => {
   return (
     <div>
       <div className="header-component">
-        <h2>Add New Student</h2>
+        <h2>Create Discount Coupon</h2>
         <button>submit</button>
       </div>
       <hr className="hr" />
