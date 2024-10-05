@@ -19,6 +19,8 @@ import CourseLibraryComponent from "./components/course-library-component/course
 import AddStudentComponent from "./components/add-student-component/AddStudentComponent";
 import MentorsListComponent from "./components/mentors-list-component/mentors-list-component";
 import StudentList from "./components/students/StudentList";
+import DiscountDetailsList from "./components/DiscountComponent/DiscountDetails";
+import CreateDiscountCoupon from "./components/DiscountComponent/CreateDiscountCoupon";
 
 
 const App = () => {
@@ -37,6 +39,8 @@ const App = () => {
           <Route path="/Ac" element={<AddAcademy currentStep={1} />} />
           <Route path="/mentor-list" element={<MentorsListComponent/>} />
           <Route path="/student-list" element={<StudentList/>} />
+          <Route path="/discount-details-list" element={<DiscountDetailsList/>} />
+          <Route path="/create-discount-coupon" element={<CreateDiscountCoupon/>} />
         </Route>
       </Routes>
     </Router>
