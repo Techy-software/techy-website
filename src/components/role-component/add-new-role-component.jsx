@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import CoursesTable from "../../reusable components/Courses-LG-View/CourseTable";
 
 const AddNewRoleComponent = () => {
   const [content, setContent] = useState(() => getContent("option1"));
@@ -210,66 +211,7 @@ const getContent = (choice, currentPage, setCurrentPage, totalPages) => {
       );
     case "option3":
       return (
-        <div className="container mx-auto p-6">
-          <div className="flex justify-between items-center mb-4">
-            <h2 className="text-lg font-semibold">Users</h2>
-            <button className="bg-blue-500 text-white px-4 py-2 rounded">Invite users</button>
-          </div>
-          <div className="overflow-x-auto">
-            <table className="min-w-full border-collapse">
-              <thead className="bg-gray-100">
-                <tr>
-                  <th className="py-2 text-gray-600 text-center">Name</th>
-                  <th className="py-2 text-gray-600 text-center">Email</th>
-                  <th className="py-2 text-gray-600 text-center">Mobile</th>
-                  <th className="py-2 text-gray-600 text-center">Gender</th>
-                  <th className="py-2 text-gray-600 text-center">Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                {users.map((user, index) => (
-                  <tr key={index} className={`${index % 2 === 0 ? "bg-gray-50" : ""}`}>
-                    <td className="py-2 text-gray-700 text-center">{user.name}</td>
-                    <td className="py-2 text-gray-700 text-center">{user.email}</td>
-                    <td className="py-2 text-gray-700 text-center">{user.mobile}</td>
-                    <td className="py-2 text-gray-700 text-center">{user.gender}</td>
-                    <td className="py-2 text-gray-700 text-center">
-                      <span
-                        className={`px-2 py-1 rounded text-xs font-medium ${
-                          user.status === "Active"
-                            ? "bg-green-100 text-green-600"
-                            : user.status === "Draft"
-                            ? "bg-yellow-100 text-yellow-600"
-                            : "bg-red-100 text-red-600"
-                        }`}
-                      >
-                        {user.status}
-                      </span>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-          {/* Pagination */}
-          <div className="flex justify-center mt-4">
-            <button
-              className="px-4 py-2 bg-blue-500 text-white rounded"
-              onClick={() => setCurrentPage(currentPage > 1 ? currentPage - 1 : currentPage)}
-            >
-              Previous
-            </button>
-            <span className="mx-2 text-gray-600">
-              Page {currentPage} of {totalPages}
-            </span>
-            <button
-              className="px-4 py-2 bg-blue-500 text-white rounded"
-              onClick={() => setCurrentPage(currentPage < totalPages ? currentPage + 1 : currentPage)}
-            >
-              Next
-            </button>
-          </div>
-        </div>
+        <CoursesTable></CoursesTable>
       );
     default:
       return null;
