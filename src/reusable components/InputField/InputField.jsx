@@ -1,16 +1,23 @@
 import "./InputField.css";
 
-export default function InputField(props) {
+export default function InputField({
+  label,
+  type,
+  placeholder,
+  value,
+  setValue,
+  style,
+}) {
   return (
     <div className="inputField">
-      {props.label && <label className="formLabel">{props.label}</label>}
+      {label && <label className="formLabel">{label}</label>}
       <input
-        type={props.type}
-        placeholder={props.placeholder}
-        value={props.value}
-        // onChange={props.setValue}  // Uncomment when onChange is Ready
+        type={type}
+        placeholder={placeholder}
+        value={value}
+        // onChange={setValue}  // Uncomment when onChange is Ready
         required
-        style={props.style}
+        style={style}
       />
     </div>
   );

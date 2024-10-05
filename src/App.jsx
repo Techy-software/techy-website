@@ -19,7 +19,9 @@ import CourseLibraryComponent from "./components/course-library-component/course
 import AddStudentComponent from "./components/add-student-component/AddStudentComponent";
 import MentorsListComponent from "./components/mentors-list-component/mentors-list-component";
 import StudentList from "./components/students/StudentList";
-
+import OpportunityMain from "./components/Opportunity/OpportunityMain";
+import OpportunityDetails from "./components/Opportunity/OpportunityDetails/OpportunityDetails";
+import Speakers from "./components/Opportunity/OpportunityDetails/Speakers";
 
 const App = () => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -34,9 +36,12 @@ const App = () => {
             element={<AcademyDetails steps={steps} currentStep={1} />}
           />
           <Route path="/mentor" element={<MentorDashboardMainPage />} />
-          <Route path="/Ac" element={<AddAcademy currentStep={1} />} />
-          <Route path="/mentor-list" element={<MentorsListComponent/>} />
-          <Route path="/student-list" element={<StudentList/>} />
+          <Route path="/Ac" element={<AddAcademy currentStep={0} />} />
+          <Route path="/mentor-list" element={<MentorsListComponent />} />
+          <Route path="/student-list" element={<StudentList />} />
+          <Route path="/opportunity" element={<OpportunityMain />} />
+          <Route path="/opportunity/details" element={<Speakers />} />
+          <Route path="/settings" element={<Settings currentStep={0} />} />
         </Route>
       </Routes>
     </Router>

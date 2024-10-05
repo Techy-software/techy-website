@@ -1,0 +1,30 @@
+.react-datepicker-wrapper {
+  width: 100%;
+}
+
+.react-datepicker__input-container {
+  width: 100%;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.date-picker-container2 {
+  position: relative;
+}
+
+.calendar-icon2 {
+  position: absolute;
+  right: 10px; /* Adjust as needed */
+  top: 60%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  width: 15px;
+  /* height: 20px; */
+}
+
+.react-datepicker__input-container {
+  width: 100%;
+  position: relative;
+}
