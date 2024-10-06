@@ -21,6 +21,9 @@ import MentorsListComponent from "./components/mentors-list-component/mentors-li
 import StudentList from "./components/students/StudentList";
 import DiscountDetailsList from "./components/DiscountComponent/DiscountDetails";
 import CreateDiscountCoupon from "./components/DiscountComponent/CreateDiscountCoupon";
+import OpportunityMain from "./components/Opportunity/OpportunityMain";
+import OpportunityView from "./components/Opportunity/OpportunityView/OpportunityView";
+import Publishing from "./components/Opportunity/OpportunityDetails/Publishing";
 
 
 const App = () => {
@@ -36,7 +39,11 @@ const App = () => {
             element={<AcademyDetails steps={steps} currentStep={1} />}
           />
           <Route path="/mentor" element={<MentorDashboardMainPage />} />
-          <Route path="/Ac" element={<AddAcademy currentStep={1} />} />
+          <Route path="/Ac" element={<AcademyDetails currentStep={0} />} />
+          <Route path="/opportunity" element={<OpportunityMain />} />
+          <Route path="/opportunity/view" element={<OpportunityView />} />
+          <Route path="/opportunity/details" element={<Publishing />} />
+          <Route path="/settings" element={<Settings currentStep={0} />} />
           <Route path="/mentor-list" element={<MentorsListComponent/>} />
           <Route path="/student-list" element={<StudentList/>} />
           <Route path="/discount-details-list" element={<DiscountDetailsList/>} />
