@@ -22,6 +22,9 @@ import StudentList from "./components/students/StudentList";
 import OpportunityMain from "./components/Opportunity/OpportunityMain";
 import OpportunityDetails from "./components/Opportunity/OpportunityDetails/OpportunityDetails";
 import Speakers from "./components/Opportunity/OpportunityDetails/Speakers";
+import Pricing from "./components/Opportunity/OpportunityDetails/Pricing";
+import Publishing from "./components/Opportunity/OpportunityDetails/Publishing";
+import OpportunityView from "./components/Opportunity/OpportunityView/OpportunityView";
 
 const App = () => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -40,7 +43,8 @@ const App = () => {
           <Route path="/mentor-list" element={<MentorsListComponent />} />
           <Route path="/student-list" element={<StudentList />} />
           <Route path="/opportunity" element={<OpportunityMain />} />
-          <Route path="/opportunity/details" element={<Speakers />} />
+          <Route path="/opportunity/view" element={<OpportunityView />} />
+          <Route path="/opportunity/details" element={<Publishing />} />
           <Route path="/settings" element={<Settings currentStep={0} />} />
         </Route>
       </Routes>

@@ -1,7 +1,22 @@
+import GridListButton from "../../reusable components/GridListButton/GridListButton";
 import HorizontalManagment from "../../reusable components/HorizontalMangment/HorizontalManagment";
+import SearchBar from "../../reusable components/SearchBar/SearchBar";
 import WhiteCard from "../../reusable components/WhiteCard/WhiteCard";
+import filter from "../../assets/filter.png";
+import { useState } from "react";
+import CourseGrid from "../../reusable components/Courses-LG-View/CourseGrid";
+import CoursesTable from "../../reusable components/Courses-LG-View/CourseTable";
+import MentorTable from "../../reusable components/Mentor-LG-View/MentorTable";
+import StudentTable from "../../reusable components/LG-View-Students/StudentTable";
+import OppGrid from "./OppGrid";
 
 const OpportunityMain = () => {
+  const [selectedView, setSelectedView] = useState("grid");
+  const courses = [
+    { id: 1, title: "The Designed to STEAM Online Class", lessons: 2 },
+    { id: 2, title: "Introduction to Programming", lessons: 5 },
+    { id: 3, title: "Advanced Math for Engineers", lessons: 8 },
+  ];
   return (
     <div>
       <div className="grid grid-cols-12 gap-4">
@@ -22,49 +37,29 @@ const OpportunityMain = () => {
           style={"col-span-9 m-3"}
           titleStyle={"font-bold"}
         >
-          <div className="flex items-center mb-6">
-            <div className="relative w-1/4">
-              <span className="absolute inset-y-0 left-0 flex items-center pl-3">
-                <svg
-                  className="w-5 h-5 text-gray-500"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M8 4a8 8 0 108 8 8 8 0 00-8-8zm2 10l4 4"
-                  />
-                </svg>
-              </span>
-              <div className="ps-5 bg-gray-100 rounded-xl border border-gray-300">
-                <input
-                  type="text"
-                  placeholder="Search"
-                  className="w-full p-3 rounded-xl border-0 border-gray-300 bg-gray-100"
-                />
+          <div className="flex justify-between items-center mb-4 p-3">
+            <div className="flex justify-between items-center gap-5">
+              <SearchBar />
+              <div className="cursor-pointer">
+                <img src={filter} alt="Filter" />
               </div>
             </div>
-            <button className="ml-2 p-2 bg-white border border-gray-300 rounded-r-md">
-              <svg
-                className="w-6 h-6 text-blue-500"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M3 3h18M3 8h18M5 12h14M7 16h10"
-                />
-              </svg>
-            </button>
+            <div className="flex items-center gap-8">
+              <GridListButton
+                selected={selectedView}
+                setSelected={setSelectedView}
+              />
+            </div>
           </div>
+          {selectedView === "grid" ? (
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {courses.map((course) => (
+                <OppGrid key={course.id} course={course} />
+              ))}
+            </div>
+          ) : (
+            <StudentTable courses={courses} />
+          )}
         </WhiteCard>
       </div>
     </div>
