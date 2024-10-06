@@ -19,12 +19,9 @@ import CourseLibraryComponent from "./components/course-library-component/course
 import AddStudentComponent from "./components/add-student-component/AddStudentComponent";
 import MentorsListComponent from "./components/mentors-list-component/mentors-list-component";
 import StudentList from "./components/students/StudentList";
-import OpportunityMain from "./components/Opportunity/OpportunityMain";
-import OpportunityDetails from "./components/Opportunity/OpportunityDetails/OpportunityDetails";
-import Speakers from "./components/Opportunity/OpportunityDetails/Speakers";
-import Pricing from "./components/Opportunity/OpportunityDetails/Pricing";
-import Publishing from "./components/Opportunity/OpportunityDetails/Publishing";
-import OpportunityView from "./components/Opportunity/OpportunityView/OpportunityView";
+import DiscountDetailsList from "./components/DiscountComponent/DiscountDetails";
+import CreateDiscountCoupon from "./components/DiscountComponent/CreateDiscountCoupon";
+
 
 const App = () => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -39,13 +36,15 @@ const App = () => {
             element={<AcademyDetails steps={steps} currentStep={1} />}
           />
           <Route path="/mentor" element={<MentorDashboardMainPage />} />
-          <Route path="/Ac" element={<AcademyDetails currentStep={0} />} />
-          <Route path="/mentor-list" element={<MentorsListComponent />} />
-          <Route path="/student-list" element={<StudentList />} />
-          <Route path="/opportunity" element={<OpportunityMain />} />
-          <Route path="/opportunity/view" element={<OpportunityView />} />
-          <Route path="/opportunity/details" element={<Publishing />} />
-          <Route path="/settings" element={<Settings currentStep={0} />} />
+          <Route path="/Ac" element={<AddAcademy currentStep={1} />} />
+          <Route path="/mentor-list" element={<MentorsListComponent/>} />
+          <Route path="/student-list" element={<StudentList/>} />
+          <Route path="/discount-details-list" element={<DiscountDetailsList/>} />
+          <Route path="/create-discount-coupon" element={<CreateDiscountCoupon/>} />
+          <Route path="/add-Student-component" element={<AddStudentComponent/>} />
+          <Route path="/add-mentor-component" element={<AddMentorComponent/>} />
+          <Route path="/role" element={<RoleCompoenent/>} />
+          <Route path="/add-role" element={<AddNewRoleComponent/>} />
         </Route>
       </Routes>
     </Router>

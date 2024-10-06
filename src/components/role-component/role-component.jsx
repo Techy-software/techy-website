@@ -19,7 +19,7 @@ const RoleCompoenent = () => {
                 className="relative text-blue-500 w-3 h-3"
               />
             </span>
-            Add Student
+            Add Role
           </button>
         </div>
         <hr />
