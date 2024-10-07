@@ -24,7 +24,8 @@ import CreateDiscountCoupon from "./components/DiscountComponent/CreateDiscountC
 import OpportunityMain from "./components/Opportunity/OpportunityMain";
 import OpportunityView from "./components/Opportunity/OpportunityView/OpportunityView";
 import Publishing from "./components/Opportunity/OpportunityDetails/Publishing";
-
+import LoginComponent from "./components/login-component/login-component";
+import ForgetPassword from "./components/login-component/ForgetPassword";
 
 const App = () => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -33,6 +34,7 @@ const App = () => {
   return (
     <Router>
       <Routes>
+        <Route path="/login" element={<ForgetPassword />} />
         <Route element={<Layout />}>
           <Route
             path="/"
@@ -44,14 +46,26 @@ const App = () => {
           <Route path="/opportunity/view" element={<OpportunityView />} />
           <Route path="/opportunity/details" element={<Publishing />} />
           <Route path="/settings" element={<Settings currentStep={0} />} />
-          <Route path="/mentor-list" element={<MentorsListComponent/>} />
-          <Route path="/student-list" element={<StudentList/>} />
-          <Route path="/discount-details-list" element={<DiscountDetailsList/>} />
-          <Route path="/create-discount-coupon" element={<CreateDiscountCoupon/>} />
-          <Route path="/add-Student-component" element={<AddStudentComponent/>} />
-          <Route path="/add-mentor-component" element={<AddMentorComponent/>} />
-          <Route path="/role" element={<RoleCompoenent/>} />
-          <Route path="/add-role" element={<AddNewRoleComponent/>} />
+          <Route path="/mentor-list" element={<MentorsListComponent />} />
+          <Route path="/student-list" element={<StudentList />} />
+          <Route
+            path="/discount-details-list"
+            element={<DiscountDetailsList />}
+          />
+          <Route
+            path="/create-discount-coupon"
+            element={<CreateDiscountCoupon />}
+          />
+          <Route
+            path="/add-Student-component"
+            element={<AddStudentComponent />}
+          />
+          <Route
+            path="/add-mentor-component"
+            element={<AddMentorComponent />}
+          />
+          <Route path="/role" element={<RoleCompoenent />} />
+          <Route path="/add-role" element={<AddNewRoleComponent />} />
         </Route>
       </Routes>
     </Router>
