@@ -1,10 +1,12 @@
-import "../login-component.css";
-import techyLogo from "../../../assets/techyLogo.svg";
+import "./login-component.css";
+import techyLogo from "../../assets/techyLogo.svg";
 import { useState } from "react";
 import WhiteCard from "../../reusable components/WhiteCard/WhiteCard";
 import InputField from "../../reusable components/InputField/InputField";
 import BlueButton from "../../reusable components/BlueButton/BlueButton";
-import { Padding } from "@mui/icons-material";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+
 const ForgetPassword = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -26,9 +28,15 @@ const ForgetPassword = () => {
       <div className="flex justify-center">
         <div className="flex flex-col items-center p-5 bg-white rounded-lg shadow-md absolute mt-[150px] w-[37%] z-10">
           <div className="">
-            <p className="cursor-pointer text-blue-500 text-lg my-3 font-semibold">
-              &lt; back
-            </p>
+            <div className="flex gap-2 items-center">
+              <FontAwesomeIcon
+                icon={faArrowLeft}
+                style={{ color: "#5c67ff" }}
+              />
+              <p className="cursor-pointer text-blue-500 text-lg my-3 font-semibold">
+                Back
+              </p>
+            </div>
             <h1 className="pr-[250px] text-2xl font-bold">Forget Password ?</h1>
             <p className="text-slate-400 text-sm mt-3">
               Please enter your email to send a code to reset your password

@@ -26,6 +26,7 @@ import OpportunityView from "./components/Opportunity/OpportunityView/Opportunit
 import Publishing from "./components/Opportunity/OpportunityDetails/Publishing";
 import LoginComponent from "./components/login-component/login-component";
 import ForgetPassword from "./components/login-component/ForgetPassword";
+import ResetPassword from "./components/login-component/ResetPassword";
 
 const App = () => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -34,7 +35,9 @@ const App = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/login" element={<ForgetPassword />} />
+        <Route path="/login" element={<LoginComponent />} />
+        <Route path="/flogin" element={<ForgetPassword />} />
+        <Route path="/rlogin" element={<ResetPassword />} />
         <Route element={<Layout />}>
           <Route
             path="/"
