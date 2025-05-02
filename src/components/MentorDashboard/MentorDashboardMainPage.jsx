@@ -16,6 +16,7 @@ import PersonalPicture from "../../assets/PersonalPicture.png";
 import { useState } from "react";
 import postImage from "../../assets/postImage.jpeg";
 import OverviewMentor from "./OverviewMentor";
+import { useMentor } from "../../hooks/useMentor";
 
 const MentorDashboardMainPage = () => {
   const AcademyItems = [
@@ -25,6 +26,10 @@ const MentorDashboardMainPage = () => {
     "Feedbacks",
   ];
   const [activeComponent, setActiveComponent] = useState("Overview");
+
+  const { data, isLoading } = useMentor({ url: "/mentors/37/info/" });
+
+  console.log("=======data", data);
 
   const handleClick = (label) => {
     setActiveComponent(label);
