@@ -10,13 +10,19 @@ const Sidebar = () => {
             <Link to="/">Dashboard</Link>
           </li>
           <li className="px-6 py-2 hover:bg-blue-500">
-            <Link to="/sales">Sales</Link>
-          </li>
-          <li className="px-6 py-2 hover:bg-blue-500">
             <Link to="/courses">Courses</Link>
           </li>
           <li className="px-6 py-2 hover:bg-blue-500">
-            <Link to="/analytics">Analytics</Link>
+            <Link to="/mentors">Mentors</Link>
+          </li>
+          <li className="px-6 py-2 hover:bg-blue-500">
+            <Link to="/students">Students</Link>
+          </li>
+          <li className="px-6 py-2 hover:bg-blue-500">
+            <Link to="/addAcademy">Academy</Link>
+          </li>
+          <li className="px-6 py-2 hover:bg-blue-500">
+            <Link to="/opportunities">Opp</Link>
           </li>
         </ul>
       </nav>

@@ -2,11 +2,12 @@ import HorizontalSteps from "../../reusable components/HorizontalSteps/Horizonta
 import WhiteCard from "../../reusable components/WhiteCard/WhiteCard";
 import Topbar from "../Topbar";
 import plusCircle from "../../assets/plus.png";
+import AcademyTopbar from "./AcademyTopbar";
 
 const AddAcademyPageThree = ({ currentStep }) => {
   return (
     <>
-      <Topbar className="fixed" />
+      <AcademyTopbar />
       <div className="grid grid-cols-12 gap-4 add-academy px-10 pt-10">
         <div className="col-span-3 me-10">
           <HorizontalSteps

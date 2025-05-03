@@ -9,8 +9,10 @@ import CoursesTable from "../../reusable components/Courses-LG-View/CourseTable"
 import MentorTable from "../../reusable components/Mentor-LG-View/MentorTable";
 import StudentTable from "../../reusable components/LG-View-Students/StudentTable";
 import OppGrid from "./OppGrid";
+import { useNavigate } from "react-router-dom";
 
 const OpportunityMain = () => {
+  const navigator = useNavigate();
   const [selectedView, setSelectedView] = useState("grid");
   const courses = [
     { id: 1, title: "The Designed to STEAM Online Class", lessons: 2 },
@@ -19,6 +21,21 @@ const OpportunityMain = () => {
   ];
   return (
     <div>
+      <div className="sticky top-0 flex justify-between items-center bg-white p-6 shadow pb-6">
+        <div className="flex items-center">
+          <h1 className="text-2xl font-bold mr-4">Opportunities</h1>
+        </div>
+        <div className="flex items-center">
+          <button
+            className="bg-blue-500 text-white px-10 py-2 rounded w-100 "
+            onClick={() => {
+              navigator("/opportunityDetails");
+            }}
+          >
+            Add Opportunity
+          </button>
+        </div>
+      </div>
       <div className="grid grid-cols-12 gap-4">
         <div className="col-span-3 m-3">
           <HorizontalManagment
@@ -52,13 +69,24 @@ const OpportunityMain = () => {
             </div>
           </div>
           {selectedView === "grid" ? (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div
+              className="grid grid-cols-1 md:grid-cols-3 gap-6"
+              onClick={() => {
+                navigator("/opportunityView");
+              }}
+            >
               {courses.map((course) => (
                 <OppGrid key={course.id} course={course} />
               ))}
             </div>
           ) : (
-            <StudentTable courses={courses} />
+            <div
+              onClick={() => {
+                navigator("/opportunityView");
+              }}
+            >
+              <StudentTable courses={courses} />
+            </div>
           )}
         </WhiteCard>
       </div>

@@ -27,6 +27,10 @@ import Publishing from "./components/Opportunity/OpportunityDetails/Publishing";
 import LoginComponent from "./components/login-component/login-component";
 import ForgetPassword from "./components/login-component/ForgetPassword";
 import ResetPassword from "./components/login-component/ResetPassword";
+import DashboardPage from "./pages/DashboardPage";
+import CourseDetailsComponent from "./components/course-details-component/course-details-component";
+import Students from "./components/AcademyDetails/Students";
+import OpportunityDetails from "./components/Opportunity/OpportunityDetails/OpportunityDetails";
 
 const App = () => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -38,19 +42,31 @@ const App = () => {
         <Route path="/login" element={<LoginComponent />} />
         <Route path="/flogin" element={<ForgetPassword />} />
         <Route path="/rlogin" element={<ResetPassword />} />
+        <Route path="/addNewMentor" element={<AddMentorComponent />} />
+        <Route path="/MentorDashBoard" element={<MentorDashboardMainPage />} />
+        <Route path="/addStudent" element={<AddStudentComponent />} />
+        <Route path="/Addacademy" element={<AddAcademy currentStep={0} />} />
+        <Route path="/academyDashboard" element={<AcademyDetails />} />
+        <Route path="/opportunityView" element={<OpportunityView />} />
+        <Route path="/opportunityDetails" element={<OpportunityDetails />} />
+        {/* <Route path="/studentDetails" element={<Students />} /> */}
+        {/* <Route path="/MentorDetails" element={<MentorDet} */}
         <Route element={<Layout />}>
-          <Route
+          <Route element={<DashboardPage />} index />
+          {/* <Route
             path="/"
             element={<AcademyDetails steps={steps} currentStep={1} />}
-          />
-          <Route path="/mentor" element={<MentorDashboardMainPage />} />
-          <Route path="/Ac" element={<AcademyDetails currentStep={0} />} />
+          /> */}
+          <Route path="/courses" element={<CourseLibraryComponent />} />
+          <Route path="/mentors" element={<MentorsListComponent />} />
+          <Route path="/students" element={<StudentList />} />
           <Route path="/opportunity" element={<OpportunityMain />} />
           <Route path="/opportunity/view" element={<OpportunityView />} />
           <Route path="/opportunity/details" element={<Publishing />} />
           <Route path="/settings" element={<Settings currentStep={0} />} />
           <Route path="/mentor-list" element={<MentorsListComponent />} />
           <Route path="/student-list" element={<StudentList />} />
+          <Route path="/opportunities" element={<OpportunityMain />} />
           <Route
             path="/discount-details-list"
             element={<DiscountDetailsList />}

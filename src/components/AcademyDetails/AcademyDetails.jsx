@@ -12,6 +12,7 @@ import CoursesList from "../../reusable components/Courses-LG-View/CoursesList";
 import MentorView from "../../reusable components/Mentor-LG-View/MentorView";
 import Students from "./Students";
 import Orders from "./Orders";
+import { useNavigate } from "react-router-dom";
 
 const Box = ({ label, onClick, isActive }) => (
   <div
@@ -25,6 +26,7 @@ const Box = ({ label, onClick, isActive }) => (
 );
 
 const AcademyDetails = ({}) => {
+  const navigator = useNavigate();
   const AcademyItems = [
     "Feeds",
     "Overview",
@@ -44,7 +46,12 @@ const AcademyDetails = ({}) => {
     <div>
       <div className="sticky top-0 z-10 flex justify-between items-center bg-white p-6 shadow pb-6">
         <div className="flex items-center">
-          <button className="mr-2">
+          <button
+            className="mr-2"
+            onClick={() => {
+              navigator(-1);
+            }}
+          >
             <svg
               className="w-6 h-6 text-gray-600"
               fill="none"
