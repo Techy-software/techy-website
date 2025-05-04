@@ -30,32 +30,43 @@ const MentorDashboardMainPage = () => {
   const navigator = useNavigate();
   const [activeComponent, setActiveComponent] = useState("Overview");
 
-  const { data, isLoading } = useMentor({ url: "mentors/37/info/" });
+  // const { data, isLoading } = useMentor({ url: "mentors/37/info/" });
   // console.log(data);
 
-  // axios
-  //   .get("http://144.126.200.46/api/mentors/37/info/", {
-  //     headers:
-  //       "Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJUZWNoeSIsImlhdCI6MTc0NjEyMjQyOCwiZXhwIjoxNzQ3NDE4NDI4fQ.48YGd7kj3V7t9sPNoPEoPp06c13n4Dpb6CxRSo0eFEZ3secYQn6nAt6Hr5FZkPyo",
-  //   })
-  //   .then((res) => {
-  //     console.log("my res", res);
-  //   })
-  //   .catch((err) => {
-  //     console.log("My Err", err);
-  //   });
+  axios
+    .get("http://144.126.200.46/api/auth/avatars/")
+    .then((result) => {
+      console.log("result", result);
+    })
+    .catch((error) => {
+      console.log("Errorrr", error);
+    });
 
-  // axios
-  //   .post("http://144.126.200.46/api/auth/login/", {
-  //     usernameOrPhoneNumber: "+201121147961",
-  //     password: "Amr",
-  //   })
-  //   .then((res) => {
-  //     console.log(res, "res");
-  //   })
-  //   .catch((err) => {
-  //     console.log("errrr", err);
-  //   });
+  axios
+    .get("http://144.126.200.46/api/mentors/37/info/", {
+      headers: {
+        Authorization:
+          "Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJUZWNoeSIsImlhdCI6MTc0NjEyMjQyOCwiZXhwIjoxNzQ3NDE4NDI4fQ.48YGd7kj3V7t9sPNoPEoPp06c13n4Dpb6CxRSo0eFEZ3secYQn6nAt6Hr5FZkPyo",
+      },
+    })
+    .then((res) => {
+      console.log("my res", res);
+    })
+    .catch((err) => {
+      console.log("My Err", err);
+    });
+
+  axios
+    .post("http://144.126.200.46/api/auth/login/", {
+      usernameOrPhoneNumber: "+201121147961",
+      password: "Amr",
+    })
+    .then((res) => {
+      console.log(res, "res");
+    })
+    .catch((err) => {
+      console.log("errrr", err);
+    });
 
   // console.log("=======data", data);
 
@@ -112,7 +123,12 @@ const MentorDashboardMainPage = () => {
               <hr className="my-3" />
               <div className="flex justify-between mx-2 w-full my-3">
                 <span className="text-gray-500">PERSONAL INFO</span>
-                <span className="text-blue-500 font-bold ml-2 cursor-pointer" onClick={()=>{navigator("/MentorDetails")}}>
+                <span
+                  className="text-blue-500 font-bold ml-2 cursor-pointer"
+                  onClick={() => {
+                    navigator("/MentorDetails");
+                  }}
+                >
                   More Details
                 </span>
               </div>

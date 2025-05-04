@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-// import CourseLibraryComponent from './components/course-library-component/course-library-component';
 import CourseDetilasComponent from "./components/course-details-component/course-details-component";
 import AddMentorComponent from "./components/add-mentor-component/add-mentor-component";
 import AddAcademy from "./components/AddAcademy/AddAcademy";
@@ -31,6 +30,7 @@ import DashboardPage from "./pages/DashboardPage";
 import CourseDetailsComponent from "./components/course-details-component/course-details-component";
 import Students from "./components/AcademyDetails/Students";
 import OpportunityDetails from "./components/Opportunity/OpportunityDetails/OpportunityDetails";
+import JobsComponent from "./components/jobs-component/JobsComponent";
 
 const App = () => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -49,6 +49,10 @@ const App = () => {
         <Route path="/academyDashboard" element={<AcademyDetails />} />
         <Route path="/opportunityView" element={<OpportunityView />} />
         <Route path="/opportunityDetails" element={<OpportunityDetails />} />
+        <Route path="/job-details" element={<JobDetails />} />
+        <Route path="/addReward" element={<AddReward />} />
+        <Route path="/rewardDetails" element={<RewardDetails />} />
+        <Route path="/addNewRole" element={<AddNewRoleComponent />} />
         {/* <Route path="/studentDetails" element={<Students />} /> */}
         {/* <Route path="/MentorDetails" element={<MentorDet} */}
         <Route element={<Layout />}>
@@ -57,7 +61,7 @@ const App = () => {
             path="/"
             element={<AcademyDetails steps={steps} currentStep={1} />}
           /> */}
-          <Route path="/courses" element={<CourseLibraryComponent />} />
+          <Route path="/courses" element={<CourseDetailsComponent />} />
           <Route path="/mentors" element={<MentorsListComponent />} />
           <Route path="/students" element={<StudentList />} />
           <Route path="/opportunity" element={<OpportunityMain />} />
@@ -67,6 +71,7 @@ const App = () => {
           <Route path="/mentor-list" element={<MentorsListComponent />} />
           <Route path="/student-list" element={<StudentList />} />
           <Route path="/opportunities" element={<OpportunityMain />} />
+          <Route path="/jobs" element={<JobsComponent />} />
           <Route
             path="/discount-details-list"
             element={<DiscountDetailsList />}
@@ -75,16 +80,10 @@ const App = () => {
             path="/create-discount-coupon"
             element={<CreateDiscountCoupon />}
           />
-          <Route
-            path="/add-Student-component"
-            element={<AddStudentComponent />}
-          />
-          <Route
-            path="/add-mentor-component"
-            element={<AddMentorComponent />}
-          />
+
+          <Route path="/rewards" element={<Rewards />} />
           <Route path="/role" element={<RoleCompoenent />} />
-          <Route path="/add-role" element={<AddNewRoleComponent />} />
+          <Route path="/settings" element={<Settings />} />
         </Route>
       </Routes>
     </Router>

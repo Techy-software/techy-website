@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { FaCheck } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const JobDetails = () => {
+  const navigator = useNavigate();
   const [jobDescription, setJobDescription] = useState("");
   const [jobRequirements, setJobRequirements] = useState("");
   const [selectedTab, setSelectedTab] = useState("jobDetails");
@@ -58,7 +60,7 @@ const JobDetails = () => {
       {/* Top bar */}
       <div className="sticky top-0 z-10 flex justify-between items-center bg-white p-6 shadow mb-6">
         <div className="flex items-center">
-          <button className="mr-2">
+          <button className="mr-2" onClick={() => navigator(-1)}>
             <svg
               className="w-6 h-6 text-gray-600"
               fill="none"
@@ -211,7 +213,9 @@ const JobDetails = () => {
           )}
           {selectedTab === "additionalInfo" && (
             <div>
-              <h2 className="text-xl font-bold mb-4 p-5">Additional Information</h2>
+              <h2 className="text-xl font-bold mb-4 p-5">
+                Additional Information
+              </h2>
               <hr className="border-gray-300 mb-6 mx-3" />
               <div className="space-y-6">
                 <div className="grid grid-cols-2 gap-6 mb-4">
@@ -342,7 +346,8 @@ const JobDetails = () => {
                   </div>
                   <div className="flex flex-col">
                     <label className="block text-sm font-bold mb-2">
-                      Number of Needed Candidates <span className="text-red-500">*</span>
+                      Number of Needed Candidates{" "}
+                      <span className="text-red-500">*</span>
                     </label>
                     <input
                       type="text"

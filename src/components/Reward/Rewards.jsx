@@ -1,11 +1,21 @@
+import { useNavigate } from "react-router-dom";
 import PostTopBar from "../../reusable components/PostTopBar/PostTopBar";
 import WhiteCard from "../../reusable components/WhiteCard/WhiteCard";
 import Topbar from "../Topbar";
+import { Button } from "@mui/material";
 
 const Rewards = () => {
+  const navigator = useNavigate();
   return (
     <div className="bg-slate-50">
-      <PostTopBar title="Rewards" buttonText="Create Reward" />
+      <PostTopBar
+        title="Rewards"
+        buttonText="Create Reward"
+        removeBack
+        onClick={() => {
+          navigator("/addReward");
+        }}
+      />
       <div className="m-6">
         <div className="mb-5 grid grid-cols-12 gap-6">
           <WhiteCard style={"col-span-3 flex flex-col"}>
@@ -69,6 +79,7 @@ const Rewards = () => {
               </svg>
             </button>
           </div>
+          <Button onClick={()=>{navigator("/rewardDetails")}}>Sample Reward</Button>
         </WhiteCard>
       </div>
     </div>

@@ -15,8 +15,10 @@ import {
   Star,
   Timer,
 } from "@mui/icons-material";
+import { useNavigate } from "react-router-dom";
 
 const OpportunityView = () => {
+  const navigator = useNavigate();
   const Box = ({ label, onClick, isActive }) => (
     <div
       className={`cursor-pointer p-2 px-4 rounded-3xl m-1.5 border-slate-300 border ${
@@ -37,7 +39,7 @@ const OpportunityView = () => {
     <div>
       <div className="sticky top-0 z-10 flex justify-between items-center bg-white p-6 shadow pb-6">
         <div className="flex items-center">
-          <button className="mr-2">
+          <button className="mr-2" onClick={() => navigator(-1)}>
             <svg
               className="w-6 h-6 text-gray-600"
               fill="none"

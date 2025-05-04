@@ -24,6 +24,21 @@ const Sidebar = () => {
           <li className="px-6 py-2 hover:bg-blue-500">
             <Link to="/opportunities">Opp</Link>
           </li>
+          <li className="px-6 py-2 hover:bg-blue-500">
+            <Link to="/jobs">Jobs</Link>
+          </li>
+          <li className="px-6 py-2 hover:bg-blue-500">
+            <Link to="/discount-details-list">Discount</Link>
+          </li>
+          <li className="px-6 py-2 hover:bg-blue-500">
+            <Link to="/rewards">Rewards</Link>
+          </li>
+          <li className="px-6 py-2 hover:bg-blue-500">
+            <Link to="/Role">Roles</Link>
+          </li>
+          <li className="px-6 py-2 hover:bg-blue-500">
+            <Link to="/Settings">Settings</Link>
+          </li>
         </ul>
       </nav>
     </div>
