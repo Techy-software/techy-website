@@ -2,9 +2,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsis } from "@fortawesome/free-solid-svg-icons";
 
 const CourseRow = ({ course }) => {
+  console.log("course", course);
   return (
     <tr className="border-b border-gray-200 hover:bg-gray-50">
-      <td className="py-3 px-2 text-sm">{course.name}</td>
+      <td className="py-3 px-2 text-sm">{course.fullName}</td>
       <td className="py-3 px-2 text-center text-sm">{course.lessons}</td>
       <td className="py-3 px-2 text-center text-sm">{course.level}</td>
       <td className="py-3 px-2 text-center text-sm">{course.rate}</td>

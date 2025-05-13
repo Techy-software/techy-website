@@ -11,6 +11,7 @@ import "./HorizontalSteps.css";
 // output: horizontal steps with active step
 
 const HorizontalSteps = (props) => {
+  console.log("Props: ", props);
   return (
     <div className="default-background-horizontal-steps">
       <h3 className="title-horizontal-steps">{props.title}</h3>
@@ -18,12 +19,16 @@ const HorizontalSteps = (props) => {
         {props.steps.map((step, index) => (
           <div
             key={step}
-            className={`flex h-12 items-center text-slate-400 w-full ${
+            className={`flex h-12 items-center text-slate-400 w-full cursor-pointer ${
               props.currentStep === index ? "bg-white" : ""
             }`}
+            onClick={() => {
+              props.setCurrentStep(index);
+              console.log("Current step: ", index);
+            }}
           >
             <div
-              className={`me-3 px-0.5 h-12
+              className={`me-3 px-0.5 h-12 
                 ${
                   props.currentStep === index
                     ? "active-item-horizontal-steps "

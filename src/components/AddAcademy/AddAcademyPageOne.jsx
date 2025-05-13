@@ -6,19 +6,13 @@ import InputField from "../../reusable components/InputField/InputField";
 import WhiteCard from "../../reusable components/WhiteCard/WhiteCard";
 import Topbar from "../Topbar";
 import ProfilePicture from "../../reusable components/ProfilePicture/ProfilePicture";
+import AcademyTopbar from "./AcademyTopbar";
 
-const AddAcademyPageOne = ({ currentStep }) => {
+const AddAcademyPageOne = ({ currentStep, setCurrentStep }) => {
   return (
     <>
-      <div className="grid grid-cols-12 gap-4 add-academy px-10 pt-10">
-        <div className="col-span-3 me-10">
-          <HorizontalSteps
-            title="Add Academy"
-            steps={["Academy Details", "Courses", "Mentors"]}
-            currentStep={currentStep}
-          />
-        </div>
-        <div className="col-span-9">
+      <div className="px-10 pt-10">
+        <div className="">
           <ProfilePicture />
           <WhiteCard title="Academy Details" style="mt-12">
             <div className="grid grid-cols-12 gap-4 mt-7">

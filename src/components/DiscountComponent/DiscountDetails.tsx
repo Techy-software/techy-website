@@ -5,11 +5,14 @@ import { faPlus, faUpload } from "@fortawesome/free-solid-svg-icons";
 import CoursesList from "../../reusable components/Courses-LG-View/CoursesList";
 import ActionButton from "../../reusable components/ActionButton/ActionButton";
 import DiscountCard from "../../reusable components/DiscountCard/DiscountCard";
+import { useNavigate } from "react-router-dom";
 
 const DiscountDetailsList = () => {
- 
+  const navigator = useNavigate();
+
   const handleAddClick = () => {
     console.log("Add Mentor clicked");
+    navigator("/create-discount-coupon");
   };
 
   const [activeComponent, setActiveComponent] = useState("Courses (10)");

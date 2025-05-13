@@ -16,6 +16,10 @@ import PersonalPicture from "../../assets/PersonalPicture.png";
 import { useState } from "react";
 import postImage from "../../assets/postImage.jpeg";
 import OverviewMentor from "./OverviewMentor";
+import { useMentor } from "../../hooks/useMentor";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { HttpClient } from "../../utils/HttpClient";
 
 const MentorDashboardMainPage = () => {
   const AcademyItems = [
@@ -24,8 +28,14 @@ const MentorDashboardMainPage = () => {
     "Students (120)",
     "Feedbacks",
   ];
+  const navigator = useNavigate();
   const [activeComponent, setActiveComponent] = useState("Overview");
 
+  // const { data, isLoading } = useMentor({ url: "mentors/37/contact/" });
+
+  const data = HttpClient.get("mentors/37/contact/");
+
+  console.log("data", data);
   const handleClick = (label) => {
     setActiveComponent(label);
   };
@@ -33,7 +43,12 @@ const MentorDashboardMainPage = () => {
     <div>
       <div className="sticky top-0 flex justify-between items-center bg-white p-6 shadow pb-6">
         <div className="flex items-center">
-          <button className="mr-2">
+          <button
+            className="mr-2"
+            onClick={() => {
+              navigator(-1);
+            }}
+          >
             <svg
               className="w-6 h-6 text-gray-600"
               fill="none"
@@ -74,7 +89,12 @@ const MentorDashboardMainPage = () => {
               <hr className="my-3" />
               <div className="flex justify-between mx-2 w-full my-3">
                 <span className="text-gray-500">PERSONAL INFO</span>
-                <span className="text-blue-500 font-bold ml-2">
+                <span
+                  className="text-blue-500 font-bold ml-2 cursor-pointer"
+                  onClick={() => {
+                    navigator("/MentorDetails");
+                  }}
+                >
                   More Details
                 </span>
               </div>

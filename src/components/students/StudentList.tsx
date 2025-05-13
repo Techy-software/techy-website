@@ -4,14 +4,17 @@ import InfoCard from "../../reusable components/InfoCard/InfoCard";
 import { faPlus, faUpload } from "@fortawesome/free-solid-svg-icons";
 import CoursesList from "../../reusable components/Courses-LG-View/CoursesList";
 import ActionButton from "../../reusable components/ActionButton/ActionButton";
+import { useNavigate } from "react-router-dom";
 
 const StudentList = () => {
+  const navigator = useNavigate();
   const handleUploadClick = () => {
     console.log("Upload CSV clicked");
   };
 
   const handleAddClick = () => {
     console.log("Add Mentor clicked");
+    navigator("/addStudent");
   };
 
   const [activeComponent, setActiveComponent] = useState("Courses (10)");
@@ -54,7 +57,12 @@ const StudentList = () => {
         </div>
       </div>
 
-      <div className="table-container">
+      <div
+        className="table-container"
+        onClick={() => {
+          navigator("/studentDetails");
+        }}
+      >
         {activeComponent === "Courses (10)" && (
           <CoursesList showButton={false} />
         )}

@@ -2,13 +2,18 @@ import React from "react";
 import Role from "../../reusable components/Role-table/role-component";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faCircle } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router-dom";
 const RoleCompoenent = () => {
+  const navigate = useNavigate();
   return (
     <div>
       <div>
         <div className="header-component">
           <h2>Manage roles</h2>
-          <button className="px-4 py-2 bg-blue-500 text-white border border-blue-500 rounded hover:bg-blue-600 flex items-center">
+          <button
+            className="px-4 py-2 bg-blue-500 text-white border border-blue-500 rounded hover:bg-blue-600 flex items-center"
+            onClick={() => navigate("/addNewRole")}
+          >
             <span className="relative flex items-center justify-center mr-3">
               <FontAwesomeIcon
                 icon={faCircle}

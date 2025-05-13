@@ -3,7 +3,7 @@ import Seminar from "../../../assets/Seminar.jpeg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot, faPhone } from "@fortawesome/free-solid-svg-icons";
 import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import OppOverview from "./OppOverview";
 import OppSpeakers from "./OppSpeakers";
 import {
@@ -15,8 +15,32 @@ import {
   Star,
   Timer,
 } from "@mui/icons-material";
+import { useNavigate, useParams } from "react-router-dom";
+import { get } from "../../../utils/HtppService";
 
 const OpportunityView = () => {
+  const navigator = useNavigate();
+
+  const { id } = useParams();
+  const [oppDetails, setOppDetails] = useState({});
+  const [loading, setLoading] = useState(true);
+  const fetchData = async () => {
+    console.log("Fetching data...");
+    try {
+      const data = await get(`/opportunities/${id}/`);
+      console.log("Opportunity Details Data:", data);
+      setOppDetails(data);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   const Box = ({ label, onClick, isActive }) => (
     <div
       className={`cursor-pointer p-2 px-4 rounded-3xl m-1.5 border-slate-300 border ${
@@ -33,11 +57,18 @@ const OpportunityView = () => {
   const handleClick = (label) => {
     setActiveComponent(label);
   };
+
+  if (loading) {
+    return (
+      <div className="p-10 text-center text-gray-600 text-lg">Loading...</div>
+    );
+  }
+
   return (
     <div>
       <div className="sticky top-0 z-10 flex justify-between items-center bg-white p-6 shadow pb-6">
         <div className="flex items-center">
-          <button className="mr-2">
+          <button className="mr-2" onClick={() => navigator(-1)}>
             <svg
               className="w-6 h-6 text-gray-600"
               fill="none"
@@ -53,7 +84,7 @@ const OpportunityView = () => {
               />
             </svg>
           </button>
-          <h1 className="text-2xl font-bold mr-4">Opportunity #123</h1>
+          <h1 className="text-2xl font-bold mr-4">{oppDetails.title}</h1>
           <span className="ml-2 px-2 py-1 text-sm text-gray-500 bg-green-200 rounded">
             Active
           </span>
@@ -75,48 +106,48 @@ const OpportunityView = () => {
             />
             <div>
               <div className="p-5">
-                <h2 className="text-xl font-bold mb-2">
-                  Oracle Public Sector Technology Day
-                </h2>
+                <h2 className="text-xl font-bold mb-2">{oppDetails.title}</h2>
                 <div className="flex items-center mb-3 text-yellow-600">
                   <Star />
-                  <span className="text-black">Rating . </span>
-                  <span className="ml-1 font-medium">5.0 (34 Reviews)</span>
+                  <span className="text-black">Rating . ???</span>
+                  <span className="ml-1 font-medium">5.0 (34 Reviews)???</span>
                 </div>
                 <div className="flex items-center mb-4">
                   <img
-                    src={Seminar}
+                    src={oppDetails.publisher.profilePicture}
                     alt="Organizer"
                     className="w-8 h-8 rounded-full mr-5"
                   />
-                  <span className="font-medium">Oracle Corporation</span>
+                  <span className="font-medium">
+                    {oppDetails.publisher.fullName}
+                  </span>
                 </div>
               </div>
               <div className="bg-blue-50 p-4 rounded-lg">
                 <div className="flex items-center mb-5">
                   <Language className="mr-2 text-gray-600" />
-                  <span>Web development</span>
+                  <span>{oppDetails.type}</span>
                 </div>
                 <div className="flex items-center mb-5">
                   <BarChart className="mr-2 text-gray-600" />
-                  <span>Beginner level</span>
+                  <span>{oppDetails.level}</span>
                 </div>
                 <div className="flex items-center mb-5">
                   <Timer className="mr-2 text-gray-600" />
-                  <span>3 hours</span>
+                  <span>{oppDetails.duration}</span>
                 </div>
                 <div className="flex items-center mb-5">
                   <Group className="mr-2 text-gray-600" />
-                  <span>From 8 to 12 years old</span>
+                  <span>From {oppDetails.ageRange} years old</span>
                 </div>
                 <div className="flex items-center mb-5">
                   <Laptop className="mr-2 text-gray-600" />
-                  <span>Online / Offline attendees</span>
+                  <span>Online / Offline attendees ???</span>
                 </div>
                 <div className="flex items-center my-5">
                   <LocationOn className="mr-2 text-gray-600" />
                   <span className="cursor-pointer text-blue-700">
-                    El-Gaish, Tanta Qism 2, Tanta, Gharbia
+                    {oppDetails.location}
                   </span>
                 </div>
               </div>
@@ -136,8 +167,12 @@ const OpportunityView = () => {
               ))}
             </div>
             <div className="">
-              {activeComponent === "Overview" && <OppOverview />}
-              {activeComponent === "Speakers" && <OppSpeakers />}
+              {activeComponent === "Overview" && (
+                <OppOverview details={oppDetails} />
+              )}
+              {activeComponent === "Speakers" && (
+                <OppSpeakers speakers={oppDetails.speakers} />
+              )}
             </div>
           </div>
         </div>
