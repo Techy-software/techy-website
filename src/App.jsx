@@ -10,7 +10,13 @@ import RewardDetails from "./components/Reward/RewardDetails";
 import AddReward from "./components/Reward/AddReward";
 import Sidebar from "./components/Sidebar";
 import Layout from "./components/Layout";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
 import Settings from "./components/Settings/Settings";
 import RoleCompoenent from "./components/role-component/role-component";
 import AddNewRoleComponent from "./components/role-component/add-new-role-component";
@@ -31,63 +37,112 @@ import CourseDetailsComponent from "./components/course-details-component/course
 import Students from "./components/AcademyDetails/Students";
 import OpportunityDetails from "./components/Opportunity/OpportunityDetails/OpportunityDetails";
 import JobsComponent from "./components/jobs-component/JobsComponent";
+import DummyLayout, { chekcAuthLoader } from "./components/DummyLayout";
 
-const App = () => {
-  const [currentStep, setCurrentStep] = useState(1);
-  const steps = ["Content", "Setup", "Assign"];
+const router = createBrowserRouter([
+  { path: "/login", element: <LoginComponent /> },
+  { path: "/flogin", element: <ForgetPassword /> },
+  { path: "/rlogin", element: <ResetPassword /> },
+  {
+    element: <DummyLayout />,
+    loader: chekcAuthLoader,
+    children: [
+      { path: "addNewMentor", element: <AddMentorComponent /> },
+      { path: "MentorDashBoard", element: <MentorDashboardMainPage /> },
+      { path: "addStudent", element: <AddStudentComponent /> },
+      { path: "Addacademy", element: <AddAcademy currentStep={0} /> },
+      { path: "academyDashboard", element: <AcademyDetails /> },
+      { path: "opportunityView", element: <OpportunityView /> },
+      { path: "opportunityDetails", element: <OpportunityDetails /> },
+      { path: "job-details", element: <JobDetails /> },
+      { path: "addReward", element: <AddReward /> },
+      { path: "rewardDetails", element: <RewardDetails /> },
+      { path: "addNewRole", element: <AddNewRoleComponent /> },
+      {
+        path: "/", 
+        element: <Layout />,
+        children: [
+          { index: true, element: <DashboardPage /> },
+          { path: "courses", element: <CourseDetailsComponent /> },
+          { path: "mentors", element: <MentorsListComponent /> },
+          { path: "students", element: <StudentList /> },
+          { path: "opportunity", element: <OpportunityMain /> },
+          { path: "opportunityView/:id", element: <OpportunityView /> },
+          { path: "opportunity/details/:id", element: <Publishing /> },
+          { path: "settings", element: <Settings currentStep={0} /> },
+          { path: "mentor-list", element: <MentorsListComponent /> },
+          { path: "student-list", element: <StudentList /> },
+          { path: "opportunities", element: <OpportunityMain /> },
+          { path: "jobs", element: <JobsComponent /> },
+          { path: "discount-details-list", element: <DiscountDetailsList /> },
+          { path: "create-discount-coupon", element: <CreateDiscountCoupon /> },
+          { path: "rewards", element: <Rewards /> },
+          { path: "role", element: <RoleCompoenent /> },
+        ],
+      },
+    ],
+  },
+]);
 
-  return (
-    <Router>
-      <Routes>
-        <Route path="/login" element={<LoginComponent />} />
-        <Route path="/flogin" element={<ForgetPassword />} />
-        <Route path="/rlogin" element={<ResetPassword />} />
-        <Route path="/addNewMentor" element={<AddMentorComponent />} />
-        <Route path="/MentorDashBoard" element={<MentorDashboardMainPage />} />
-        <Route path="/addStudent" element={<AddStudentComponent />} />
-        <Route path="/Addacademy" element={<AddAcademy currentStep={0} />} />
-        <Route path="/academyDashboard" element={<AcademyDetails />} />
-        <Route path="/opportunityView" element={<OpportunityView />} />
-        <Route path="/opportunityDetails" element={<OpportunityDetails />} />
-        <Route path="/job-details" element={<JobDetails />} />
-        <Route path="/addReward" element={<AddReward />} />
-        <Route path="/rewardDetails" element={<RewardDetails />} />
-        <Route path="/addNewRole" element={<AddNewRoleComponent />} />
-        {/* <Route path="/studentDetails" element={<Students />} /> */}
-        {/* <Route path="/MentorDetails" element={<MentorDet} */}
-        <Route element={<Layout />}>
-          <Route element={<DashboardPage />} index />
-          {/* <Route
-            path="/"
-            element={<AcademyDetails steps={steps} currentStep={1} />}
-          /> */}
-          <Route path="/courses" element={<CourseDetailsComponent />} />
-          <Route path="/mentors" element={<MentorsListComponent />} />
-          <Route path="/students" element={<StudentList />} />
-          <Route path="/opportunity" element={<OpportunityMain />} />
-          <Route path="/opportunity/view" element={<OpportunityView />} />
-          <Route path="/opportunity/details" element={<Publishing />} />
-          <Route path="/settings" element={<Settings currentStep={0} />} />
-          <Route path="/mentor-list" element={<MentorsListComponent />} />
-          <Route path="/student-list" element={<StudentList />} />
-          <Route path="/opportunities" element={<OpportunityMain />} />
-          <Route path="/jobs" element={<JobsComponent />} />
-          <Route
-            path="/discount-details-list"
-            element={<DiscountDetailsList />}
-          />
-          <Route
-            path="/create-discount-coupon"
-            element={<CreateDiscountCoupon />}
-          />
+export default function App() {
+  return <RouterProvider router={router} />;
+}
 
-          <Route path="/rewards" element={<Rewards />} />
-          <Route path="/role" element={<RoleCompoenent />} />
-          <Route path="/settings" element={<Settings />} />
-        </Route>
-      </Routes>
-    </Router>
-  );
-};
+// const App = () => {
+//   const [currentStep, setCurrentStep] = useState(1);
+//   const steps = ["Content", "Setup", "Assign"];
 
-export default App;
+//   return (
+//     <Router>
+//       <Routes>
+//         <Route path="/" loader={chekcAuthLoader} element={<DummyLayout />}>
+//           <Route path="/login" element={<LoginComponent />} index={true} />
+//           <Route path="/flogin" element={<ForgetPassword />} />
+//           <Route path="/rlogin" element={<ResetPassword />} />
+//           <Route path="/addNewMentor" element={<AddMentorComponent />} />
+//           <Route
+//             path="/MentorDashBoard"
+//             element={<MentorDashboardMainPage />}
+//           />
+//           <Route path="/addStudent" element={<AddStudentComponent />} />
+//           <Route path="/Addacademy" element={<AddAcademy currentStep={0} />} />
+//           <Route path="/academyDashboard" element={<AcademyDetails />} />
+//           <Route path="/opportunityView" element={<OpportunityView />} />
+//           <Route path="/opportunityDetails" element={<OpportunityDetails />} />
+//           <Route path="/job-details" element={<JobDetails />} />
+//           <Route path="/addReward" element={<AddReward />} />
+//           <Route path="/rewardDetails" element={<RewardDetails />} />
+//           <Route path="/addNewRole" element={<AddNewRoleComponent />} />
+//           <Route element={<Layout />}>
+//             <Route element={<DashboardPage />} index />
+//             <Route path="/courses" element={<CourseDetailsComponent />} />
+//             <Route path="/mentors" element={<MentorsListComponent />} />
+//             <Route path="/students" element={<StudentList />} />
+//             <Route path="/opportunity" element={<OpportunityMain />} />
+//             <Route path="/opportunityView/:id" element={<OpportunityView />} />
+//             <Route path="/opportunity/details/:id" element={<Publishing />} />
+//             <Route path="/settings" element={<Settings currentStep={0} />} />
+//             <Route path="/mentor-list" element={<MentorsListComponent />} />
+//             <Route path="/student-list" element={<StudentList />} />
+//             <Route path="/opportunities" element={<OpportunityMain />} />
+//             <Route path="/jobs" element={<JobsComponent />} />
+//             <Route
+//               path="/discount-details-list"
+//               element={<DiscountDetailsList />}
+//             />
+//             <Route
+//               path="/create-discount-coupon"
+//               element={<CreateDiscountCoupon />}
+//             />
+
+//             <Route path="/rewards" element={<Rewards />} />
+//             <Route path="/role" element={<RoleCompoenent />} />
+//             <Route path="/settings" element={<Settings />} />
+//           </Route>
+//         </Route>
+//       </Routes>
+//     </Router>
+//   );
+// };
+
+// export default App;

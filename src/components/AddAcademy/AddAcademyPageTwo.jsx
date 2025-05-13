@@ -37,66 +37,53 @@ const AddAcademyPageTwo = ({ currentStep }) => {
 
   return (
     <>
-      <AcademyTopbar />
-      <div className="grid grid-cols-12 gap-4 add-academy px-10 pt-10">
-        <div className="col-span-3 me-10">
-          <HorizontalSteps
-            title="Add Academy"
-            steps={["Academy Details", "Courses", "Mentors"]}
-            currentStep={currentStep}
-          />
-        </div>
-        <div className="col-span-9">
-          <WhiteCard title="Location">
-            <div className="grid grid-cols-12 gap-4 mt-3">
-              <div className="col-span-6">
-                <label className="font-normal text-xs">Country</label>
-                <ComboAutocomplete options={top100Films} placeholder="Egypt" />
-              </div>
-              <div className="col-span-6">
-                <label className="font-normal text-xs">City</label>
-                <ComboAutocomplete options={top100Films} placeholder="Cairo" />
-              </div>
-              <div className="col-span-6">
-                <InputField label="Area" placeholder="elDokki" type="text" />
-              </div>
-              <div className="col-span-6">
-                <InputField label="Postal Code" type="text" />
-              </div>
-              <div className="col-span-12">
-                <InputField
-                  label="Address"
-                  type="text"
-                  style={{ height: "80px" }}
-                />
-              </div>
+      <div className="px-10 pt-10 space-y-5">
+        {/* Location Card */}
+        <WhiteCard title="Location">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3">
+            <div>
+              <label className="font-normal text-xs">Country</label>
+              <ComboAutocomplete options={top100Films} placeholder="Egypt" />
             </div>
-          </WhiteCard>
-          <WhiteCard title="Courses" style="mt-5">
-            <div className="grid grid-cols-12 gap-4">
-              <PhoneNumberField
-                label="Mobile Number"
-                value={phoneNumber}
-                onChange={setPhoneNumber}
-                className="col-span-6"
-              />
-              <PhoneNumberField
-                label="Landline"
-                value={phoneNumber}
-                onChange={setPhoneNumber}
-                className="col-span-6"
-              />
-              <div className="col-span-12">
-                <InputField
-                  label="Email"
-                  placeholder="ex (example@example.com)"
-                  type="email"
-                  style={{ padding: "0.5rem" }}
-                />
-              </div>
+            <div>
+              <label className="font-normal text-xs">City</label>
+              <ComboAutocomplete options={top100Films} placeholder="Cairo" />
             </div>
-          </WhiteCard>
-        </div>
+            <InputField label="Area" placeholder="elDokki" type="text" />
+            <InputField label="Postal Code" type="text" />
+            <div className="md:col-span-2">
+              <InputField
+                label="Address"
+                type="text"
+                style={{ height: "80px" }}
+              />
+            </div>
+          </div>
+        </WhiteCard>
+
+        {/* Courses Card */}
+        <WhiteCard title="Courses">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <PhoneNumberField
+              label="Mobile Number"
+              value={phoneNumber}
+              onChange={setPhoneNumber}
+            />
+            <PhoneNumberField
+              label="Landline"
+              value={phoneNumber}
+              onChange={setPhoneNumber}
+            />
+            <div className="md:col-span-2">
+              <InputField
+                label="Email"
+                placeholder="ex (example@example.com)"
+                type="email"
+                style={{ padding: "0.5rem" }}
+              />
+            </div>
+          </div>
+        </WhiteCard>
       </div>
     </>
   );

@@ -3,13 +3,18 @@ import GridListButton from "../GridListButton/GridListButton";
 import WhiteCard from "../WhiteCard/WhiteCard";
 import filter from "../../assets/filter.png";
 import CourseGrid from "./CourseGrid";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CourseTable from "./CourseTable";
 import SearchBar from "../SearchBar/SearchBar";
 import PropTypes from "prop-types"; // Import PropTypes for prop validation
 
-const CoursesList = ({ buttonText = "Default Button", showButton = false }) => { // Default values
-  const [selectedView, setSelectedView] = useState("grid");
+const CoursesList = ({
+  lists,
+  buttonText = "Default Button",
+  showButton = false,
+}) => {
+  // Default values
+  const [selectedView, setSelectedView] = useState("list");
 
   const courses = [
     { id: 1, title: "The Designed to STEAM Online Class", lessons: 2 },
@@ -36,18 +41,20 @@ const CoursesList = ({ buttonText = "Default Button", showButton = false }) => {
               setSelected={setSelectedView}
             />
             {/* Conditionally render the BlueButton based on showButton */}
-            {showButton && <BlueButton text={buttonText} buttonStyle={"w-auto"} />}
+            {showButton && (
+              <BlueButton text={buttonText} buttonStyle={"w-auto"} />
+            )}
           </div>
         </div>
 
         {selectedView === "grid" ? (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {courses.map((course) => (
-              <CourseGrid key={course.id} course={course} />
+              <CourseGrid key={course.id} course={course} list={lists} />
             ))}
           </div>
         ) : (
-          <CourseTable courses={courses} />
+          <CourseTable courses={courses} lists={lists} />
         )}
       </WhiteCard>
     </>

@@ -9,12 +9,15 @@ import DatePicker from "react-datepicker";
 import calendarIcon from "../../../assets/calendar.png";
 import "./OpportunityDetails.css";
 import { useNavigate } from "react-router-dom";
-import StepperComponent from "../../course-details-component/stepper-component";
 import PostTopBar from "../../../reusable components/PostTopBar/PostTopBar";
+import { useParams } from "react-router-dom";
+import { get } from "../../../utils/HtppService";
+import { useEffect } from "react";
 
 const OpportunityDetails = () => {
   const navigator = useNavigate();
-  const file = null; // Placeholder for file state, replace with actual file handling logic
+
+  const file = null;
   return (
     <>
       <PostTopBar

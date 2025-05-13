@@ -1,6 +1,6 @@
 import CourseRow from "./CourseRow";
 
-const CoursesTable = () => {
+const CoursesTable = ({lists}) => {
   const courses = [
     {
       id: 1,
@@ -102,8 +102,8 @@ const CoursesTable = () => {
           </tr>
         </thead>
         <tbody>
-          {courses.map((course) => (
-            <CourseRow key={course.id} course={course} />
+          {lists?.map((list) => (
+            <CourseRow key={list.id} course={list} />
           ))}
         </tbody>
       </table>

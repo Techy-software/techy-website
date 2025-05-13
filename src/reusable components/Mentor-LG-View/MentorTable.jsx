@@ -1,56 +1,45 @@
 import MentorRow from "./MentorRow";
+import MentorRowInfo from "./MentorRowInfo";
 
-const MentorTable = () => {
-  const Mentors = [
-    {
-      name: "Ahmed Mealy",
-    },
-    {
-      name: "Ahmed Mealy",
-    },
-    {
-      name: "Ahmed Mealy",
-    },
-    {
-      name: "Ahmed Mealy",
-    },
-    {
-      name: "Ahmed Mealy",
-    },
-    {
-      name: "Ahmed Mealy",
-    },
-  ];
-
+const MentorTable = ({ lists, info = false }) => {
   return (
     <div className="overflow-x-auto">
       <table className="min-w-full bg-white border border-gray-200">
         <thead className="bg-blue-50">
           <tr>
             <th className="py-3 px-1 text-left font-normal text-gray-600 text-xs">
-              Mentor
+              {info ? "Mentor" : "Mentor Name"}
             </th>
             <th className="py-3 px-0 text-center font-normal text-gray-600 text-xs w-">
-              Visible
+              {info ? "Email" : "Visible"}
             </th>
             <th className="py-3 px-0 text-center font-normal text-gray-600 text-xs">
-              Manage
+              {info ? "Mobile Number" : "Manage"}
             </th>
             <th className="py-3 px-0 text-center font-normal text-gray-600 text-xs">
-              Performance
+              {info ? "Gender" : "Performance"}
             </th>
             <th className="py-3 px-0 text-center font-normal text-gray-600 text-xs">
-              Q&A
+              {info ? "Courses" : "Q&A"}
             </th>
             <th className="py-3 px-2 text-center font-normal text-gray-600 text-xs">
-              Actions
+              {info ? "Status" : "Actions"}
             </th>
+            {info && (
+              <th className="py-3 px-2 text-center font-normal text-gray-600 text-xs">
+                Actions
+              </th>
+            )}
           </tr>
         </thead>
         <tbody>
-          {Mentors.map((course) => (
-            <MentorRow key={course.id} mentor={course} />
-          ))}
+          {lists.map((course) =>
+            info ? (
+              <MentorRowInfo key={course.id} mentor={course} />
+            ) : (
+              <MentorRow key={course.id} mentor={course} />
+            )
+          )}
         </tbody>
       </table>
 

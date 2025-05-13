@@ -7,19 +7,10 @@ import AcademyTopbar from "./AcademyTopbar";
 const AddAcademyPageThree = ({ currentStep }) => {
   return (
     <>
-      <AcademyTopbar />
-      <div className="grid grid-cols-12 gap-4 add-academy px-10 pt-10">
-        <div className="col-span-3 me-10">
-          <HorizontalSteps
-            title="Add Academy"
-            steps={["Academy Details", "Courses", "Mentors"]}
-            currentStep={currentStep}
-            style="h-10"
-          />
-        </div>
-        <div className="col-span-9">
+      <div className="px-10 pt-10">
+        <div className="">
           <WhiteCard title="Certificates">
-            <div className="text-blue-700 flex items-start gap-2 mt-4">
+            <div className="text-blue-700 flex items-start gap-2 mt-4 cursor-pointer">
               <img src={plusCircle} alt="certificate" className="w-5 h-5 " />
               <p>Add Certificate</p>
             </div>

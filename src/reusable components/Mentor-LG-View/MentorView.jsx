@@ -8,16 +8,9 @@ import { useState } from "react";
 import MentorTable from "./MentorTable";
 import MentorGrid from "./MentorGrid";
 
-const MentorView = () => {
-  const [selectedView, setSelectedView] = useState("grid");
-  const Mentors = [
-    { id: 1, name: "Abdelahrahman Elshaer", email: "ahmed@gmail.com" },
-    { id: 1, name: "Abdelahrahman Elshaer", email: "ahmed@gmail.com" },
-    { id: 1, name: "Abdelahrahman Elshaer", email: "ahmed@gmail.com" },
-    { id: 1, name: "Abdelahrahman Elshaer", email: "ahmed@gmail.com" },
-    { id: 1, name: "Abdelahrahman Elshaer", email: "ahmed@gmail.com" },
-    { id: 1, name: "Abdelahrahman Elshaer", email: "ahmed@gmail.com" },
-  ];
+const MentorView = ({ lists, info = false, myOnClick }) => {
+  const [selectedView, setSelectedView] = useState("list");
+  console.log("lists", lists);
   return (
     <>
       <WhiteCard>
@@ -39,12 +32,12 @@ const MentorView = () => {
 
         {selectedView === "grid" ? (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {Mentors.map((course) => (
+            {lists.map((course) => (
               <MentorGrid key={course.id} />
             ))}
           </div>
         ) : (
-          <MentorTable />
+          <MentorTable lists={lists} info={info} />
         )}
       </WhiteCard>
     </>

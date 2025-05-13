@@ -19,6 +19,7 @@ import OverviewMentor from "./OverviewMentor";
 import { useMentor } from "../../hooks/useMentor";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { HttpClient } from "../../utils/HttpClient";
 
 const MentorDashboardMainPage = () => {
   const AcademyItems = [
@@ -30,46 +31,11 @@ const MentorDashboardMainPage = () => {
   const navigator = useNavigate();
   const [activeComponent, setActiveComponent] = useState("Overview");
 
-  // const { data, isLoading } = useMentor({ url: "mentors/37/info/" });
-  // console.log(data);
+  // const { data, isLoading } = useMentor({ url: "mentors/37/contact/" });
 
-  axios
-    .get("http://144.126.200.46/api/auth/avatars/")
-    .then((result) => {
-      console.log("result", result);
-    })
-    .catch((error) => {
-      console.log("Errorrr", error);
-    });
+  const data = HttpClient.get("mentors/37/contact/");
 
-  axios
-    .get("http://144.126.200.46/api/mentors/37/info/", {
-      headers: {
-        Authorization:
-          "Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJUZWNoeSIsImlhdCI6MTc0NjEyMjQyOCwiZXhwIjoxNzQ3NDE4NDI4fQ.48YGd7kj3V7t9sPNoPEoPp06c13n4Dpb6CxRSo0eFEZ3secYQn6nAt6Hr5FZkPyo",
-      },
-    })
-    .then((res) => {
-      console.log("my res", res);
-    })
-    .catch((err) => {
-      console.log("My Err", err);
-    });
-
-  axios
-    .post("http://144.126.200.46/api/auth/login/", {
-      usernameOrPhoneNumber: "+201121147961",
-      password: "Amr",
-    })
-    .then((res) => {
-      console.log(res, "res");
-    })
-    .catch((err) => {
-      console.log("errrr", err);
-    });
-
-  // console.log("=======data", data);
-
+  console.log("data", data);
   const handleClick = (label) => {
     setActiveComponent(label);
   };
