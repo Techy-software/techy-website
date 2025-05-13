@@ -20,8 +20,8 @@ const CourseSetup = ({ currentStep, headerStep }) => {
       return <CourseFAQSetup currentStep={currentStep} />;
     case 3:
       return <CoursePaymentSetup currentStep={currentStep} />;
-      case 4:
-        return <CoursePublishingSetup currentStep={currentStep}/> 
+    case 4:
+      return <CoursePublishingSetup currentStep={currentStep} />;
     default:
       return <p className="h-100 w-100 text-center">Invalid Page</p>;
   }
