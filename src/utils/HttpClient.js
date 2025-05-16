@@ -66,7 +66,7 @@ const addHeaders = (config) => {
   config.headers["Accept-Language"] = "en";
   config.headers["cache-control"] = "no-cache";
   const token =
-    "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJUZWNoeSIsImlhdCI6MTc0NjEyMjQyOCwiZXhwIjoxNzQ3NDE4NDI4fQ.48YGd7kj3V7t9sPNoPEoPp06c13n4Dpb6CxRSo0eFEZ3secYQn6nAt6Hr5FZkPyo";
+    "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJUZWNoeSIsImlhdCI6MTc0NzI0MTA4OSwiZXhwIjoxNzQ3ODQ1ODg5fQ.tND5sH9KUksdx6wrDPWIo6obVabC-v6Pv1Z3M_5t2YJn2XMYCki__rm14IzkWxIZ";
   config.headers["Authorization"] = `Bearer ${token}`;
 };
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./add-mentor-component.css";
 import profilePictureCircle from "../../assets/profilePictureCircle.svg";
 import "react-phone-number-input/style.css";
@@ -8,204 +8,269 @@ import addIcon from "../../assets/icons/addIcon.svg";
 import IconTextModal from "./IconTextModal";
 import FileUploader from "./FileUploader";
 import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
-
+import { post } from "../../utils/HtppService";
 const AddMentorComponent = () => {
   const [content, setContent] = useState(getContent("option1"));
   const [showPassword, setShowPassword] = useState(false);
-  const [mobile, setMobile] = useState("");
-  const [landline, setLandline] = useState("");
-  const [email, setEmail] = useState("");
-  const [specialization, setSpecialization] = useState(null);
-  const [experience, setExperience] = useState(null);
+  const [experience, setExperience] = useState({});
+  const [certificate, setCertificate] = useState({});
   const [formData, setFormData] = useState({
     userId: 2,
-    nationality: "nationality1",
-    ssn: "",
-    landLine: "",
-    email: "",
-    specializationName: "",
-    isMarried: false,
-    specializationYOE: "",
+    address: {},
+    workExperince: [],
+    certificate: [],
   });
 
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
+  const handleExperienceSubmit = (e) => {
+    e.preventDefault();
+
+    const form = e.target; // the form element
+    const newExperience = {
+      jobTitle: form.jobTitle.value,
+      companyName: form.companyName.value,
+      startDate: form.startDate.value,
+      endDate: form.endDate.value,
+    };
 
     setFormData((prev) => ({
       ...prev,
-      [name]: type === "checkbox" ? checked : value,
+      workExperince: [...prev.workExperince, newExperience],
     }));
   };
 
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
+  const handleCertificateSubmit = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    console.log("Certificate submitted", form.name.value);
+    const newCertificate = {
+      name: form.name.value,
+      issuingOrganization: form.organization.value,
+      issueDate: form.issueDate.value,
+      expirationDate: form.expirationDate.value,
+      credentialId: form.credentialId.value,
+      credentialUrl: form.credentialUrl.value,
+      // certificates: form.certificates.files[0],
+    };
+    setFormData((prev) => ({
+      ...prev,
+      certificate: [...prev.certificate, newCertificate],
+    }));
+  };
+
+  const handleChange = (e) => {
+    console.log(e.target);
+    const { name, value, type, checked } = e.target;
+    const fieldValue = type === "checkbox" ? checked : value;
+
+    const keys = name.split(".");
+
+    setFormData((prev) => {
+      const updated = { ...prev };
+      let current = updated;
+
+      for (let i = 0; i < keys.length - 1; i++) {
+        const key = keys[i];
+        current[key] = current[key] || {};
+        current = current[key];
+      }
+
+      current[keys[keys.length - 1]] = fieldValue;
+
+      return updated;
+    });
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Form submitted:", formData);
+    const response = post("/school/mentor/create/", formData);
+    console.log("Response:", response);
   };
 
   const WorkExperinceModalContent = () => (
-    <form>
-      <div className="w-4/5 mx-auto bg-white p-6 rounded-lg shadow-lg">
-        <div className="flex justify-between items-center">
-          <h3 className="text-xl font-bold">Add experience</h3>
-          <button className="text-gray-500 hover:text-gray-800">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="2"
-              stroke="currentColor"
-              className="w-6 h-6"
+    <div className="w-4/5 mx-auto bg-white p-6 rounded-lg shadow-lg">
+      <div className="flex justify-between items-center">
+        <h3 className="text-xl font-bold">Add experience</h3>
+        <button className="text-gray-500 hover:text-gray-800">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth="2"
+            stroke="currentColor"
+            className="w-6 h-6"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
+      </div>
+      <form className="space-y-6 mt-4" onSubmit={handleExperienceSubmit}>
+        {/* Job Title */}
+        <div>
+          <label className="block text-sm font-medium mb-2" htmlFor="jobTitle">
+            Job Title <span className="text-red-500">*</span>
+          </label>
+          <input
+            type="text"
+            id="jobTitle"
+            name="jobTitle"
+            className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="Enter job title"
+            value={experience.jobTitle}
+            onChange={(e) =>
+              setExperience((prev) => ({
+                ...prev,
+                [e.target.name]: e.target.value,
+              }))
+            }
+            required
+          />
+        </div>
+
+        {/* Company/Organization Name */}
+        <div>
+          <label
+            className="block text-sm font-medium mb-2"
+            htmlFor="companyName"
+          >
+            Company/organization name <span className="text-red-500">*</span>
+          </label>
+          <input
+            type="text"
+            id="companyName"
+            name="companyName"
+            className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="Enter company/organization name"
+            required
+            value={experience.companyName}
+            onChange={(e) => {
+              setExperience((prev) => ({
+                ...prev,
+                companyName: e.target.value,
+              }));
+            }}
+          />
+        </div>
+
+        {/* Starting and Ending Dates */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div>
+            <label
+              className="block text-sm font-medium mb-2"
+              htmlFor="startDate"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M6 18L18 6M6 6l12 12"
+              Starting from <span className="text-red-500">*</span>
+            </label>
+            <div className="relative">
+              <input
+                type="date"
+                id="startDate"
+                name="startDate"
+                className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required
+                value={experience.startDate}
+                onChange={(e) => {
+                  setExperience((prev) => ({
+                    ...prev,
+                    startDate: e.target.value,
+                  }));
+                }}
               />
-            </svg>
+              <span className="absolute right-3 top-1/2 transform -translate-y-1/2">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="2"
+                  stroke="currentColor"
+                  className="w-5 h-5 text-gray-400"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M8 7h8M7 12h10m-9 5h8m-4 0h-1m-5 0H6v-4h12v4h-1m-9 0v-4H5v-4h14v4h-1m-5 0H9v-4H8v4h1m-1-4V9h6v3H8v-3h1m-1 3V9m0 9v-5m-1 1v5m-2 0v-5m2 0h8v5H8v-5m2 0h4v5h-4v-5z"
+                  />
+                </svg>
+              </span>
+            </div>
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium mb-2" htmlFor="endDate">
+              Ending in <span className="text-red-500">*</span>
+            </label>
+            <div className="relative">
+              <input
+                type="date"
+                id="endDate"
+                name="endDate"
+                className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required
+                value={experience.endDate}
+                onChange={(e) => {
+                  setExperience((prev) => ({
+                    ...prev,
+                    endDate: e.target.value,
+                  }));
+                }}
+              />
+              <span className="absolute right-3 top-1/2 transform -translate-y-1/2">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="2"
+                  stroke="currentColor"
+                  className="w-5 h-5 text-gray-400"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M8 7h8M7 12h10m-9 5h8m-4 0h-1m-5 0H6v-4h12v4h-1m-9 0v-4H5v-4h14v4h-1m-5 0H9v-4H8v4h1m-1-4V9h6v3H8v-3h1m-1 3V9m0 9v-5m-1 1v5m-2 0v-5m2 0h8v5H8v-5m2 0h4v5h-4v-5z"
+                  />
+                </svg>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        {/* Description */}
+        <div>
+          <label
+            className="block text-sm font-medium mb-2"
+            htmlFor="description"
+          >
+            Description <span className="text-red-500">*</span>
+          </label>
+          <textarea
+            id="description"
+            name="description"
+            className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="Enter description"
+            required
+          />
+        </div>
+
+        {/* Buttons */}
+        <div className="flex justify-end space-x-4">
+          <button
+            type="button"
+            className="px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200"
+          >
+            Cancel
+          </button>
+          <button
+            type="submit"
+            className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+          >
+            Submit form
           </button>
         </div>
-        <form className="space-y-6 mt-4">
-          {/* Job Title */}
-          <div>
-            <label
-              className="block text-sm font-medium mb-2"
-              htmlFor="jobTitle"
-            >
-              Job Title <span className="text-red-500">*</span>
-            </label>
-            <input
-              type="text"
-              id="jobTitle"
-              name="jobTitle"
-              className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="Enter job title"
-              required
-            />
-          </div>
-
-          {/* Company/Organization Name */}
-          <div>
-            <label
-              className="block text-sm font-medium mb-2"
-              htmlFor="companyName"
-            >
-              Company/organization name <span className="text-red-500">*</span>
-            </label>
-            <input
-              type="text"
-              id="companyName"
-              name="companyName"
-              className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="Enter company/organization name"
-              required
-            />
-          </div>
-
-          {/* Starting and Ending Dates */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <div>
-              <label
-                className="block text-sm font-medium mb-2"
-                htmlFor="startDate"
-              >
-                Starting from <span className="text-red-500">*</span>
-              </label>
-              <div className="relative">
-                <input
-                  type="date"
-                  id="startDate"
-                  name="startDate"
-                  className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  required
-                />
-                <span className="absolute right-3 top-1/2 transform -translate-y-1/2">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth="2"
-                    stroke="currentColor"
-                    className="w-5 h-5 text-gray-400"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M8 7h8M7 12h10m-9 5h8m-4 0h-1m-5 0H6v-4h12v4h-1m-9 0v-4H5v-4h14v4h-1m-5 0H9v-4H8v4h1m-1-4V9h6v3H8v-3h1m-1 3V9m0 9v-5m-1 1v5m-2 0v-5m2 0h8v5H8v-5m2 0h4v5h-4v-5z"
-                    />
-                  </svg>
-                </span>
-              </div>
-            </div>
-
-            <div>
-              <label
-                className="block text-sm font-medium mb-2"
-                htmlFor="endDate"
-              >
-                Ending in <span className="text-red-500">*</span>
-              </label>
-              <div className="relative">
-                <input
-                  type="date"
-                  id="endDate"
-                  name="endDate"
-                  className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  required
-                />
-                <span className="absolute right-3 top-1/2 transform -translate-y-1/2">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth="2"
-                    stroke="currentColor"
-                    className="w-5 h-5 text-gray-400"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M8 7h8M7 12h10m-9 5h8m-4 0h-1m-5 0H6v-4h12v4h-1m-9 0v-4H5v-4h14v4h-1m-5 0H9v-4H8v4h1m-1-4V9h6v3H8v-3h1m-1 3V9m0 9v-5m-1 1v5m-2 0v-5m2 0h8v5H8v-5m2 0h4v5h-4v-5z"
-                    />
-                  </svg>
-                </span>
-              </div>
-            </div>
-          </div>
-
-          {/* Description */}
-          <div>
-            <label
-              className="block text-sm font-medium mb-2"
-              htmlFor="description"
-            >
-              Description <span className="text-red-500">*</span>
-            </label>
-            <textarea
-              id="description"
-              name="description"
-              className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="Enter description"
-              required
-            />
-          </div>
-
-          {/* Buttons */}
-          <div className="flex justify-end space-x-4">
-            <button
-              type="button"
-              className="px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200"
-            >
-              Cancel
-            </button>
-            <button
-              type="submit"
-              className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
-            >
-              Submit
-            </button>
-          </div>
-        </form>
-      </div>
-    </form>
+      </form>
+    </div>
   );
 
   const AddCertificateModalContent = () => (
@@ -229,7 +294,7 @@ const AddMentorComponent = () => {
           </svg>
         </button>
       </div>
-      <form className="space-y-6">
+      <form className="space-y-6" onSubmit={handleCertificateSubmit}>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           {/* Name */}
           <div>
@@ -243,6 +308,13 @@ const AddMentorComponent = () => {
               className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Enter certificate name"
               required
+              value={certificate.name}
+              onChange={(e) =>
+                setCertificate((prev) => ({
+                  ...prev,
+                  name: e.target.value,
+                }))
+              }
             />
           </div>
 
@@ -261,6 +333,13 @@ const AddMentorComponent = () => {
               className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Enter issuing organization"
               required
+              value={certificate.organization}
+              onChange={(e) =>
+                setCertificate((prev) => ({
+                  ...prev,
+                  organization: e.target.value,
+                }))
+              }
             />
           </div>
         </div>
@@ -281,6 +360,13 @@ const AddMentorComponent = () => {
                 name="issueDate"
                 className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required
+                value={certificate.issueDate}
+                onChange={(e) =>
+                  setCertificate((prev) => ({
+                    ...prev,
+                    issueDate: e.target.value,
+                  }))
+                }
               />
               <span className="absolute right-3 top-1/2 transform -translate-y-1/2">
                 <svg
@@ -316,6 +402,13 @@ const AddMentorComponent = () => {
                 name="expirationDate"
                 className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required
+                value={certificate.expirationDate}
+                onChange={(e) =>
+                  setCertificate((prev) => ({
+                    ...prev,
+                    expirationDate: e.target.value,
+                  }))
+                }
               />
               <span className="absolute right-3 top-1/2 transform -translate-y-1/2">
                 <svg
@@ -353,6 +446,13 @@ const AddMentorComponent = () => {
               className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Enter credential ID"
               required
+              value={certificate.credentialId}
+              onChange={(e) =>
+                setCertificate((prev) => ({
+                  ...prev,
+                  credentialId: e.target.value,
+                }))
+              }
             />
           </div>
 
@@ -371,6 +471,13 @@ const AddMentorComponent = () => {
               className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Enter credential URL"
               required
+              value={certificate.credentialUrl}
+              onChange={(e) =>
+                setCertificate((prev) => ({
+                  ...prev,
+                  credentialUrl: e.target.value,
+                }))
+              }
             />
           </div>
         </div>
@@ -434,19 +541,12 @@ const AddMentorComponent = () => {
     });
     setContent(
       getContent(
+        handleChange,
+        formData,
+        setFormData,
         choice,
         showPassword,
-        togglePasswordVisibility,
-        mobile,
-        landline,
-        setMobile,
-        setLandline,
-        email,
-        setEmail,
-        specialization,
-        setSpecialization,
-        experience,
-        setExperience,
+        setShowPassword,
         WorkExperinceModalContent,
         AddCertificateModalContent,
         handleFileUpload
@@ -458,7 +558,7 @@ const AddMentorComponent = () => {
     <div>
       <div className="header-component">
         <h2>Add New Mentor</h2>
-        <button>submit</button>
+        <button onClick={handleSubmit}>Submit Mentor</button>
       </div>
       <hr className="hr" />
 
@@ -490,19 +590,12 @@ const AddMentorComponent = () => {
 };
 
 const getContent = (
+  handleChange,
+  formData,
+  setFormData,
   choice,
   showPassword,
-  togglePasswordVisibility,
-  mobile,
-  landline,
-  setMobile,
-  setLandline,
-  email,
-  setEmail,
-  specialization,
-  setSpecialization,
-  experience,
-  setExperience,
+  setShowPassword,
   WorkExperinceModalContent,
   AddCertificateModalContent,
   handleFileUpload
@@ -553,7 +646,13 @@ const getContent = (
                   <label>
                     First name ( English ) <span className="required">*</span>
                   </label>
-                  <input type="text" placeholder="ex (Ahmed)" />
+                  <input
+                    type="text"
+                    placeholder="ex (Ahmed)"
+                    onChange={handleChange}
+                    value={formData.fullName}
+                    name="fullName"
+                  />
                 </div>
                 <div className="form-group">
                   <label>
@@ -569,36 +668,59 @@ const getContent = (
                 </div>
                 <div className="form-group">
                   <label>Nationality</label>
-                  <select>
+                  <select
+                    onChange={handleChange}
+                    name="nationality"
+                    value={formData.nationality}
+                  >
                     <option value="">Please select</option>
-                    <option value="nationality1">Nationality 1</option>
-                    <option value="nationality2">Nationality 2</option>
+                    <option value="Egyptian">Egyptian</option>
+                    <option value="American">American</option>
                   </select>
                 </div>
                 <div className="form-group">
                   <label>
-                    ID <span className="required">*</span>
+                    SSN <span className="required">*</span>
                   </label>
-                  <input type="text" placeholder="ex (29831234667765432)" />
+                  <input
+                    type="text"
+                    name="ssn"
+                    placeholder="ex (29831234667765432)"
+                    onChange={handleChange}
+                    value={formData.ssn}
+                  />
                 </div>
                 <div className="form-group">
                   <label>Marital Status</label>
-                  <select>
+                  <select
+                    name="isMarried"
+                    value={formData.isMarried}
+                    onChange={handleChange}
+                  >
                     <option value="">Select status</option>
-                    <option value="single">Single</option>
-                    <option value="married">Married</option>
+                    <option value="false">Single</option>
+                    <option value="true">Married</option>
                   </select>
                 </div>
                 <div className="form-group">
                   <label>Date of birth</label>
-                  <input type="date" />
+                  <input
+                    type="date"
+                    name="dateOfBirth"
+                    value={formData.dateOfBirth}
+                    onChange={handleChange}
+                  />
                 </div>
                 <div className="form-group">
                   <label>Gender</label>
-                  <select>
+                  <select
+                    name="gender"
+                    value={formData.gender}
+                    onChange={handleChange}
+                  >
                     <option value="">Select gender</option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
+                    <option value="1">Male</option>
+                    <option value="2">Female</option>
                   </select>
                 </div>
               </form>
@@ -613,7 +735,13 @@ const getContent = (
                   <label>
                     Username <span className="required">*</span>
                   </label>
-                  <input type="text" placeholder="Enter Username" />
+                  <input
+                    type="text"
+                    placeholder="Enter Username"
+                    name="username"
+                    value={formData.username}
+                    onChange={handleChange}
+                  />
                 </div>
                 <div className="form-group">
                   <label>
@@ -623,11 +751,16 @@ const getContent = (
                     <input
                       type={showPassword ? "text" : "password"}
                       placeholder="Enter Password"
+                      onChange={handleChange}
+                      value={formData.password}
+                      name="password"
                     />
                     <button
                       type="button"
                       className="toggle-password"
-                      onClick={togglePasswordVisibility}
+                      onClick={() => {
+                        setShowPassword((prev) => !prev);
+                      }}
                     >
                       {showPassword ? "🙈" : "👁️"}
                     </button>
@@ -654,7 +787,7 @@ const getContent = (
                       <label>
                         Country <span className="required">*</span>
                       </label>
-                      <select>
+                      <select name="address.Country" onChange={handleChange}>
                         <option value="egypt">Egypt</option>
                         <option value="usa">USA</option>
                         <option value="canada">Canada</option>
@@ -664,7 +797,7 @@ const getContent = (
                       <label>
                         City <span className="required">*</span>
                       </label>
-                      <select>
+                      <select name="address.City" onChange={handleChange}>
                         <option value="cairo">Cairo</option>
                         <option value="alexandria">Alexandria</option>
                         <option value="giza">Giza</option>
@@ -678,18 +811,35 @@ const getContent = (
                       <label>
                         Area <span className="required">*</span>
                       </label>
-                      <input type="text" placeholder="El dokki" />
+                      <input
+                        type="text"
+                        placeholder="El dokki"
+                        onChange={handleChange}
+                        name="address.Area"
+                        value={formData.address.Area}
+                      />
                     </div>
                     <div className="form-group">
                       <label>Postal code</label>
-                      <input type="text" placeholder="Enter postal code" />
+                      <input
+                        type="text"
+                        placeholder="Enter postal code"
+                        onChange={handleChange}
+                        name="address.postalCode"
+                        value={formData.address.postalCode}
+                      />
                     </div>
                   </div>
                   <div className="form-group">
                     <label>
                       Address details <span className="required">*</span>
                     </label>
-                    <textarea placeholder="Enter address details"></textarea>
+                    <textarea
+                      placeholder="Enter address details"
+                      name="address.AddressDetials"
+                      value={formData.address.AddressDetials}
+                      onChange={handleChange}
+                    ></textarea>
                   </div>
                 </form>
               </div>
@@ -704,11 +854,17 @@ const getContent = (
                   Mobile number <span className="required">*</span>
                 </label>
                 <PhoneInput
-                  country={"sa"}
-                  value={mobile}
-                  onChange={setMobile}
+                  country={"eg"}
+                  value={formData.phoneNumber}
+                  name="phoneNumber"
+                  onChange={(value) =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      phoneNumber: value,
+                    }))
+                  }
                   inputProps={{
-                    name: "mobile",
+                    name: "phoneNumber",
                     required: true,
                     autoFocus: true,
                   }}
@@ -719,9 +875,14 @@ const getContent = (
                   Landline <span className="required">*</span>
                 </label>
                 <PhoneInput
-                  country={"in"}
-                  value={landline}
-                  onChange={setLandline}
+                  country={"eg"}
+                  value={formData.landLine}
+                  onChange={(value) =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      landLine: value,
+                    }))
+                  }
                   inputProps={{
                     name: "landline",
                     required: true,
@@ -738,8 +899,8 @@ const getContent = (
                 id="email"
                 name="email"
                 placeholder="ex (example@example.com)"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={formData.email}
+                onChange={handleChange}
                 required
               />
             </div>
@@ -761,8 +922,13 @@ const getContent = (
                   <Select
                     id="specialization"
                     options={optionsSpecialization}
-                    value={specialization}
-                    onChange={setSpecialization}
+                    value={formData.specialization}
+                    onChange={(value) => {
+                      setFormData((prev) => ({
+                        ...prev,
+                        specialization: value.value,
+                      }));
+                    }}
                     placeholder="Select specialization"
                   />
                 </div>
@@ -773,8 +939,13 @@ const getContent = (
                   <Select
                     id="experience"
                     options={optionsExperience}
-                    value={experience}
-                    onChange={setExperience}
+                    value={formData.experience}
+                    onChange={(value) =>
+                      setFormData((prev) => ({
+                        ...prev,
+                        experience: value.value,
+                      }))
+                    }
                     placeholder="Select years of experience"
                   />
                 </div>
@@ -832,9 +1003,7 @@ const getContent = (
     default:
       return (
         <div>
-          <div>Option 1 - Content Block 1</div>
-          <div>Option 1 - Content Block 2</div>
-          <div>Option 1 - Content Block 3</div>
+          <h1>Select a Menu Choice</h1>
         </div>
       );
   }
