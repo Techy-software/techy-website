@@ -1,27 +1,31 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import CourseCard from "./CourseCard";
 import CategorySidebar from "../../reusable components/CategorySidebar/CategorySidebar";
 import { FaFilter, FaTh, FaBars, FaPlus } from "react-icons/fa";
+import { get } from "../../utils/HtppService";
 
 const CourseLibrary = () => {
-  const [courses, setCourses] = useState([]);
+  const [coursesLibraryList, setCoursesLibraryList] = useState([]);
   const [categoryId, setCategoryId] = useState(null);
-  const [currentPage, setCurrentPage] = useState(3);
+  const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(6);
   const [totalPages, setTotalPages] = useState(1);
-  const [view, setView] = useState("grid"); // 'grid' or 'list'
+  const [view, setView] = useState("grid");
+
+  const fetchData = async () => {
+    console.log("Fetching data...");
+    try {
+      const response = await get("/school/course/all/?pageNo=0&pageSize=10&category=1&search=Python");
+      console.log("Courses library list Data:", response?.data);
+      setCoursesLibraryList(response?.data || []);
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   useEffect(() => {
-    if (categoryId) {
-      axios
-        .get(`/api/courses?categoryId=${categoryId}&page=${currentPage}&size=${pageSize}`)
-        .then((res) => {
-          setCourses(res.data.content);
-          setTotalPages(res.data.totalPages);
-        });
-    }
-  }, [categoryId, currentPage, pageSize]);
+    fetchData();
+  }, []);
 
   return (
     <div className="flex">
@@ -31,7 +35,9 @@ const CourseLibrary = () => {
         {/* Top Bar */}
         <div className="flex justify-between items-center mb-4">
           <div>
-            <h1 className="text-xl font-semibold">Development courses (19)</h1>
+            <h1 className="text-xl font-semibold">
+              Development courses ({coursesLibraryList.length})
+            </h1>
             <span className="text-green-600 text-sm font-medium bg-green-100 px-2 py-1 rounded">
               Active
             </span>
@@ -66,7 +72,7 @@ const CourseLibrary = () => {
         {/* Conditional View */}
         {view === "grid" ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-            {courses.map((course) => (
+            {coursesLibraryList.map((course) => (
               <CourseCard key={course.id} course={course} />
             ))}
           </div>
@@ -86,7 +92,7 @@ const CourseLibrary = () => {
                 </tr>
               </thead>
               <tbody>
-                {courses.map((course) => (
+                {coursesLibraryList.map((course) => (
                   <tr key={course.id} className="border-t">
                     <td className="px-4 py-2">{course.name}</td>
                     <td className="px-4 py-2">{course.lessons}</td>
@@ -111,7 +117,6 @@ const CourseLibrary = () => {
                       <button className="text-blue-500 hover:underline text-sm">
                         ⋮
                       </button>
-                      {/* You can use a dropdown here like in the image */}
                     </td>
                   </tr>
                 ))}
