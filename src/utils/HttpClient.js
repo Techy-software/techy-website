@@ -57,11 +57,11 @@ HttpClient.interceptors.request.use(async (config) => {
 const addHeaders = (config) => {
   config.headers["Accept"] = "*/*";
 
-  config.headers["Content-Type"] =
-    config.headers["Content-Type"] != null &&
-    config.headers["Content-Type"] !== undefined
-      ? config.headers["Content-Type"]
-      : "application/json";
+  // config.headers["Content-Type"] =
+  //   config.headers["Content-Type"] != null &&
+  //   config.headers["Content-Type"] !== undefined
+  //     ? config.headers["Content-Type"]
+  //     : "application/json";
 
   config.headers["Accept-Language"] = "en";
   config.headers["cache-control"] = "no-cache";

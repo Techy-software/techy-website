@@ -9,11 +9,17 @@ import IconTextModal from "./IconTextModal";
 import FileUploader from "./FileUploader";
 import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 import { post } from "../../utils/HtppService";
+import { useRef } from "react";
+import { objectToFormData } from "../../utils/objectToFormData";
+
 const AddMentorComponent = () => {
   const [content, setContent] = useState(getContent("option1"));
+
+  const fileInputRef = useRef();
+
   const [showPassword, setShowPassword] = useState(false);
   const [experience, setExperience] = useState({});
-  const [certificate, setCertificate] = useState({});
+  const [certificate, setCertificate] = useState({ certificate: null });
   const [formData, setFormData] = useState({
     userId: 2,
     address: {},
@@ -38,10 +44,27 @@ const AddMentorComponent = () => {
     }));
   };
 
+  const handleCertificateFileChange = (index, e) => {
+    const file = e.target.files[0];
+
+    setFormData((prev) => {
+      const updatedCertificates = [...prev.certificates];
+      updatedCertificates[index] = {
+        ...updatedCertificates[index],
+        image: file,
+      };
+
+      return {
+        ...prev,
+        certificates: updatedCertificates,
+      };
+    });
+  };
+
   const handleCertificateSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
-    console.log("Certificate submitted", form.name.value);
+    console.log("Certificate submitted", form.certificate.files);
     const newCertificate = {
       name: form.name.value,
       issuingOrganization: form.organization.value,
@@ -49,7 +72,7 @@ const AddMentorComponent = () => {
       expirationDate: form.expirationDate.value,
       credentialId: form.credentialId.value,
       credentialUrl: form.credentialUrl.value,
-      // certificates: form.certificates.files[0],
+      certificate: form.certificate.files[0],
     };
     setFormData((prev) => ({
       ...prev,
@@ -58,9 +81,17 @@ const AddMentorComponent = () => {
   };
 
   const handleChange = (e) => {
-    console.log(e.target);
-    const { name, value, type, checked } = e.target;
-    const fieldValue = type === "checkbox" ? checked : value;
+    const { name, type, value, checked, files } = e.target;
+    console.log(files);
+    // Decide value based on input type
+    let fieldValue;
+    if (type === "checkbox") {
+      fieldValue = checked;
+    } else if (type === "file") {
+      fieldValue = files[0];
+    } else {
+      fieldValue = value;
+    }
 
     const keys = name.split(".");
 
@@ -79,11 +110,22 @@ const AddMentorComponent = () => {
       return updated;
     });
   };
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Form submitted:", formData);
-    const response = post("/school/mentor/create/", formData);
-    console.log("Response:", response);
+
+  const handleSubmit = async () => {
+    console.log("Form data to send:", formData);
+    const formDataToSend = objectToFormData(formData);
+
+    for (let [key, value] of formDataToSend.entries()) {
+      console.log(key, value); // Logs key-value pairs
+    }
+    try {
+      const res = await post("/school/mentor/create/", formDataToSend);
+
+      const data = await res.json();
+      console.log("Success:", data);
+    } catch (err) {
+      console.error("Error:", err);
+    }
   };
 
   const WorkExperinceModalContent = () => (
@@ -272,6 +314,10 @@ const AddMentorComponent = () => {
       </form>
     </div>
   );
+
+  const handleFileClick = () => {
+    fileInputRef.current.click();
+  };
 
   const AddCertificateModalContent = () => (
     <div className="w-4/5 mx-auto bg-white p-6 rounded-lg shadow-lg">
@@ -505,10 +551,34 @@ const AddMentorComponent = () => {
                 d="M12 4v16m8-8H4"
               />
             </svg>
-            <p className="text-gray-500">Drag & Drop file here</p>
-            <p className="text-sm text-gray-400">
-              or click to browse (4mb max)
-            </p>
+            <div>
+              <button
+                type="button"
+                onClick={handleFileClick}
+                className="px-4 ms-3 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+              >
+                Click to browse
+              </button>
+
+              <input
+                type="file"
+                accept="image/*"
+                ref={fileInputRef}
+                onChange={(e) => {
+                  const file = e.target.files[0];
+                  //TODO
+                  if (file) {
+                    setCertificate((prev) => ({
+                      ...prev,
+                      certificate: file,
+                    }));
+                    console.log("Selected file:", file);
+                  }
+                }}
+                className="hidden"
+                name="certificate"
+              />
+            </div>
           </div>
         </div>
 
@@ -549,7 +619,8 @@ const AddMentorComponent = () => {
         setShowPassword,
         WorkExperinceModalContent,
         AddCertificateModalContent,
-        handleFileUpload
+        handleFileUpload,
+        fileInputRef
       )
     );
   };
@@ -598,7 +669,8 @@ const getContent = (
   setShowPassword,
   WorkExperinceModalContent,
   AddCertificateModalContent,
-  handleFileUpload
+  handleFileUpload,
+  fileInputRef
 ) => {
   const optionsSpecialization = [
     { value: "frontend", label: "Frontend Development" },
@@ -607,6 +679,9 @@ const getContent = (
     { value: "devops", label: "DevOps" },
   ];
 
+  const handleFileClick = () => {
+    fileInputRef.current.click();
+  };
   const optionsExperience = [
     { value: "1", label: "1 year" },
     { value: "2", label: "2 years" },
@@ -631,7 +706,29 @@ const getContent = (
                 />
               </div>
               <div>
-                <button className="upload-button"> Upload Image</button>
+                <div>
+                  <button
+                    type="button"
+                    onClick={handleFileClick}
+                    className="px-4 ms-3 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+                  >
+                    Upload Image
+                  </button>
+
+                  <input
+                    type="file"
+                    accept="image/*"
+                    ref={fileInputRef}
+                    onChange={(e) =>
+                      setFormData((prev) => ({
+                        ...prev,
+                        image: e.target.files[0],
+                      }))
+                    }
+                    className="hidden"
+                    name="image"
+                  />
+                </div>
               </div>
             </div>
             <div></div>
@@ -995,9 +1092,6 @@ const getContent = (
               </div>
             </div>
           </div>
-          <div>Option 4 - Content Block 2</div>
-          <div>Option 4 - Content Block 3</div>
-          <div>Option 4 - Content Block 4</div>
         </div>
       );
     default:
