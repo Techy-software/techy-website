@@ -8,9 +8,8 @@ const Layout = () => {
     <div className="flex h-screen">
       {/* Sidebar */}
       <Sidebar />
-
       {/* Main content area */}
-      <div className="flex flex-col flex-1 ml-32">
+      <div className="flex flex-col flex-1 ml-20">
         {/* Topbar */}
         <Topbar />
 

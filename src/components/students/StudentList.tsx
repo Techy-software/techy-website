@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import InfoCard from "../../reusable components/InfoCard/InfoCard";
 import { faPlus, faUpload } from "@fortawesome/free-solid-svg-icons";
@@ -8,6 +8,34 @@ import { useNavigate } from "react-router-dom";
 
 const StudentList = () => {
   const navigator = useNavigate();
+  const [students, setStudents] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const fetchData = async () => {
+    try {
+      const response = await fetch(
+        "/school/students/all/?pageNo=0&pageSize=10"
+      );
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <div className="loader"></div>
+      </div>
+    );
+  }
+
   const handleUploadClick = () => {
     console.log("Upload CSV clicked");
   };

@@ -2,14 +2,13 @@ import { HttpClient } from "../../utils/HttpClient";
 
 export const mentorServices = {
   getRequest: (props) => {
-    HttpClient.get(props.url)
-
+    return HttpClient.get(props.url)
       .then((res) => {
-        console.log("ressss", res);
+        console.log("ressss", res.data);
         res.data;
       })
       .catch((err) => {
-        console.log("err", err);
+        // console.log("err", err);
         throw err;
       });
   },
