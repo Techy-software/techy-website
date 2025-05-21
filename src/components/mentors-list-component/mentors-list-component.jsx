@@ -27,14 +27,6 @@ const MentorsListComponent = () => {
     fetchData();
   }, []);
 
-  // useEffect(() => {
-  //   if (data) {
-  //     console.log("Mentor List Data:", data);
-  //   } else {
-  //     console.log("No data available");
-  //   }
-  // }, [data]);
-
   const handleUploadClick = () => {
     console.log("Upload CSV clicked");
   };
