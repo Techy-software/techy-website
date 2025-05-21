@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import CourseDetilasComponent from "./components/course-details-component/course-details-component";
 import AddMentorComponent from "./components/add-mentor-component/add-mentor-component";
 import AddAcademy from "./components/AddAcademy/AddAcademy";
@@ -23,7 +22,7 @@ import AddNewRoleComponent from "./components/role-component/add-new-role-compon
 import CourseLibraryComponent from "./components/course-library-component/course-library-component";
 import AddStudentComponent from "./components/add-student-component/AddStudentComponent";
 import MentorsListComponent from "./components/mentors-list-component/mentors-list-component";
-import StudentList from "./components/students/StudentList";
+import StudentDashboardMainPage from "./components/StudentDashboard/StudentDashboardMainPage";
 import DiscountDetailsList from "./components/DiscountComponent/DiscountDetails";
 import CreateDiscountCoupon from "./components/DiscountComponent/CreateDiscountCoupon";
 import OpportunityMain from "./components/Opportunity/OpportunityMain";
@@ -34,10 +33,11 @@ import ForgetPassword from "./components/login-component/ForgetPassword";
 import ResetPassword from "./components/login-component/ResetPassword";
 import DashboardPage from "./pages/DashboardPage";
 import CourseDetailsComponent from "./components/course-details-component/course-details-component";
-import Students from "./components/AcademyDetails/Students";
+// import Students from "./components/AcademyDetails/Students";
 import OpportunityDetails from "./components/Opportunity/OpportunityDetails/OpportunityDetails";
 import JobsComponent from "./components/jobs-component/JobsComponent";
 import DummyLayout, { chekcAuthLoader } from "./components/DummyLayout";
+import StudentsTable from "./components/students/StudentsTable";
 
 const router = createBrowserRouter([
   { path: "/login", element: <LoginComponent /> },
@@ -50,6 +50,7 @@ const router = createBrowserRouter([
       { path: "addNewMentor", element: <AddMentorComponent /> },
       { path: "MentorDashBoard", element: <MentorDashboardMainPage /> },
       { path: "addStudent", element: <AddStudentComponent /> },
+      { path: "StudentDashBoard", element: <StudentDashboardMainPage /> },
       { path: "Addacademy", element: <AddAcademy currentStep={0} /> },
       { path: "academyDashboard", element: <AcademyDetails /> },
       { path: "opportunityView", element: <OpportunityView /> },
@@ -59,19 +60,19 @@ const router = createBrowserRouter([
       { path: "rewardDetails", element: <RewardDetails /> },
       { path: "addNewRole", element: <AddNewRoleComponent /> },
       {
-        path: "/", 
+        path: "/",
         element: <Layout />,
         children: [
           { index: true, element: <DashboardPage /> },
           { path: "courses", element: <CourseDetailsComponent /> },
           { path: "mentors", element: <MentorsListComponent /> },
-          { path: "students", element: <StudentList /> },
+          { path: "students", element: <StudentsTable /> },
           { path: "opportunity", element: <OpportunityMain /> },
           { path: "opportunityView/:id", element: <OpportunityView /> },
           { path: "opportunity/details/:id", element: <Publishing /> },
           { path: "settings", element: <Settings currentStep={0} /> },
           { path: "mentor-list", element: <MentorsListComponent /> },
-          { path: "student-list", element: <StudentList /> },
+          // { path: "student-list", element: <StudentList /> },
           { path: "opportunities", element: <OpportunityMain /> },
           { path: "jobs", element: <JobsComponent /> },
           { path: "discount-details-list", element: <DiscountDetailsList /> },

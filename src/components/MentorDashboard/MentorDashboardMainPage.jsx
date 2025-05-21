@@ -1,11 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import WhiteCard from "../../reusable components/WhiteCard/WhiteCard";
-import Topbar from "../Topbar";
-import {
-  faLocation,
-  faPerson,
-  faPhone,
-} from "@fortawesome/free-solid-svg-icons";
+import { faPerson, faPhone } from "@fortawesome/free-solid-svg-icons";
 import {
   faCalendarDays,
   faEnvelope,
@@ -16,8 +11,6 @@ import PersonalPicture from "../../assets/PersonalPicture.png";
 import { useState } from "react";
 import postImage from "../../assets/postImage.jpeg";
 import OverviewMentor from "./OverviewMentor";
-import { useMentor } from "../../hooks/useMentor";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { HttpClient } from "../../utils/HttpClient";
 
