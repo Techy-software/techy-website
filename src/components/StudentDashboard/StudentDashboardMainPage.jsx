@@ -12,6 +12,7 @@ import PostsStudent from "./PostsStudent";
 import { get } from "../../utils/HtppService";
 import GrowthStudent from "./GrowthStudent";
 import OrderStudent from "./OrdersStudent";
+import OpportunityStudent from "./OpportunityStudent";
 
 const StudentDashboardMainPage = () => {
   const AcademyItems = [
@@ -205,7 +206,9 @@ const StudentDashboardMainPage = () => {
               {activeComponent === "Orders" && (
                 <OrderStudent studentId={studentId} />
               )}
-              {activeComponent === "Feedbacks" && <div></div>}
+              {activeComponent === "Opportunities" && (
+                <OpportunityStudent studentId={studentId} />
+              )}
               {activeComponent === "Feedbacks" && <div></div>}
             </div>
           </div>
