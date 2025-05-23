@@ -10,6 +10,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import OverviewStudent from "./OverViewStudent";
 import PostsStudent from "./PostsStudent";
 import { get } from "../../utils/HtppService";
+import GrowthStudent from "./GrowthStudent";
+import OrderStudent from "./OrdersStudent";
 
 const StudentDashboardMainPage = () => {
   const AcademyItems = [
@@ -197,9 +199,13 @@ const StudentDashboardMainPage = () => {
               {activeComponent === "Posts" && (
                 <PostsStudent studentId={studentId} />
               )}
-              {activeComponent === "Component 3" && (
-                <div>Content for Component 3</div>
+              {activeComponent === "Growth" && (
+                <GrowthStudent studentId={studentId} />
               )}
+              {activeComponent === "Orders" && (
+                <OrderStudent studentId={studentId} />
+              )}
+              {activeComponent === "Feedbacks" && <div></div>}
               {activeComponent === "Feedbacks" && <div></div>}
             </div>
           </div>
