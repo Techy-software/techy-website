@@ -1,181 +1,216 @@
-.course-library-header{
-    display: flex;
-    justify-self: center;
-    align-items: center;
-    padding-left: 20px;
-    padding-right: 20px;    
+.course-container {
+  padding: 24px;
+  font-family: 'Arial', sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
 
-
-.course-library-header h2{
-    margin-left: 15px;
-    background-color: #E6E6E6;
-    padding: 4px 16px;
-    border-radius: 8px;
-    color: #7E7E7E;
+.lesson-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.course-library-title{
-    white-space: nowrap;
-    overflow: hidden; /* Optional */
-    width: 23%;
-    padding-left: 30px;
-    padding-bottom: 20px;
-    padding-top: 20px;
-    font-weight: 700;
-    font-size: 24px;
-    color: #121212;
+.lesson-header .left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
-.data-container{
-    display: flex;
-    margin-left: 25px;
-    margin-top: 20px;
+.course-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0;
 }
 
-.categories-container{
-    border: 2px solid #E6E6E6;
-    /* padding: 15px; */
-    border-radius: 15px;
-    width: 25%;
-    margin-right: 20px;
+.status-badge {
+  background-color: #d1f7e8;
+  color: #0e7c56;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 14px;
 }
 
-.categories-container-header{
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 30px;
-    align-items: center;
+.lesson-header .right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
-.unit-image-container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex: 1; /* Take the remaining space in the container */
-    width: 100%;
+.saved-status {
+  font-size: 14px;
+  font-weight: 500;
+  margin-left: 4px;
 }
 
-.unit-image{
-    max-width: 100%; /* Ensures the image is responsive */
-    height: auto;
-}
-
-.categories-text{
-    font-weight: 500;
-    font-size: 18px;
-    color: #121212;
-
-}
-
-.icon-styling{
-    border: 2px solid #E6E6E6;
-    border-radius: 15px;    
-    padding: 10px;
-}
-
-.left-container{
-    border: 2px solid #E6E6E6;
-    /* padding: 15px; */
-    border-radius: 15px;
-    width: 75%;
-    margin-right: 20px;
-}
-
-.left-container-header{
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 30px;
-    align-items: center;
-}
-
-.courses-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh; /* Adjust the height as needed */
-    text-align: center;
-}
-
-.courses-container img {
-    max-width: 100%; /* Ensures the image is responsive */
-    height: auto;
-}
-
-.courses-container h2 {
-    margin-top: 20px; /* Adjust the spacing as needed */
-    font-size: 16px;
-    font-weight: 600;
-}
-
-.courses-container h3 {
-    margin-top: 10px; /* Adjust the spacing as needed */
-    font-size: 14px;
-    font-weight: 400;
-}
-
-.add-course-button {
-    margin-top: 20px; /* Adjust the spacing as needed */
-    padding: 10px 20px;
-    font-size: 16px; /* Adjust the font size as needed */
-    background-color: #007bff; /* Adjust the button color as needed */
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-}
-
-.add-course-button .button-icon {
-    margin-right: 10px; /* Adjust the spacing between the icon and text */
-    width: 20px; /* Adjust the icon size */
-    height: 20px; /* Adjust the icon size */
-    color: white;
-}
-
-.add-course-button:hover {
-    background-color: #0056b3; /* Adjust the hover color as needed */
-}
-
-.left-header-side-class{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 38%;
-}
-
-.left-header-side-class h3{
-    margin-left: 10px;
-    margin-right:10px ;
-    color: #7E7E7E;
-    font-size: 16px;
-    font-weight: 500;
+.icon-styling {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
 }
 
 .arrow-button {
-    display: flex;
-    align-items: center;
-    padding: 10px 20px;
-    font-size: 16px;
-    color: white;
-    background-color: #007bff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-left: 10px;
-    /* margin-right: 40px; */
-    white-space: nowrap;
-    overflow: hidden;
-    width: 38%;
-}
-
-.arrow-button:hover {
-    background-color: #0056b3;
+  background-color: #0043ce;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  border-radius: 6px;
+  cursor: pointer;
 }
 
 .arrow-icon {
-    margin-left: 10px;
+  margin-left: 8px;
+}
+
+.data-wrapper {
+  display: flex;
+  gap: 24px;
+}
+
+.units-panel {
+  width: 30%;
+  background: #f8f9fa;
+  padding: 16px;
+  border-radius: 8px;
+}
+
+.units-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.unit-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.unit-item {
+  margin-bottom: 16px;
+}
+
+.unit-title {
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+
+.lesson-list {
+  padding-left: 16px;
+}
+
+.lesson-item {
+  margin-bottom: 4px;
+}
+
+.new-lesson {
+  color: #0070f3;
+  cursor: pointer;
+  margin-top: 12px;
+}
+
+.lesson-details-panel {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.video-preview .video-box {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.discussion-section {
+  background: #fff;
+  border: 1px solid #ddd;
+  padding: 16px;
+  border-radius: 8px;
+}
+
+.tabs {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.tab {
+  background: #f1f1f1;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.tab.active {
+  background: #0043ce;
+  color: white;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.avatar {
+  background: #0070f3;
+  color: white;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.user-meta {
+  display: flex;
+  flex-direction: column;
+}
+
+.role-badge {
+  font-size: 12px;
+  color: #666;
+}
+
+.date {
+  font-size: 12px;
+  color: #aaa;
+}
+
+.question-text {
+  margin: 12px 0;
+  font-size: 15px;
+}
+
+.interaction-buttons {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.reply-box textarea {
+  width: 100%;
+  min-height: 80px;
+  margin-bottom: 8px;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.reply-button {
+  background: #0070f3;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
 }

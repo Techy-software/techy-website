@@ -69,7 +69,7 @@ const LoginComponent = (props) => {
               Password:
             </label>
             <input
-              type="text"
+              type="password"
               placeholder="Enter Password"
               className="input-field"
               value={credentials.password}
