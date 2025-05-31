@@ -1,7 +1,9 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsis } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router-dom";
 
 const MentorRowInfo = ({ mentor }) => {
+  const navigator = useNavigate();
   return (
     <tr className="border-b border-gray-200 hover:bg-gray-50">
       <td className="py-3 px-2 text-sm">{mentor.fullName}</td>
@@ -24,7 +26,12 @@ const MentorRowInfo = ({ mentor }) => {
           {mentor.isActive ? " Active" : "Inactive"}
         </span>
       </td>
-      <td className="py-3 px-4 text-center">
+      <td
+        className="py-3 px-4 text-center"
+        onClick={() => {
+          navigator("/MentorDashBoard", { state: { id: mentor.id } });
+        }}
+      >
         <FontAwesomeIcon icon={faEllipsis} style={{ color: "#016BDD" }} />
       </td>
     </tr>

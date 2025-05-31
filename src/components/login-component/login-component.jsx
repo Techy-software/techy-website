@@ -7,9 +7,10 @@ import techyLogo from "../../assets/techyLogo.svg";
 import switchIcon from "../../assets/switchIcon.svg";
 import { post } from "../../utils/HtppService";
 import secureLocalStorage from "react-secure-storage";
-import { redirect } from "react-router-dom";
+import { redirect, useNavigate } from "react-router-dom";
 
 const LoginComponent = (props) => {
+  const navigator = useNavigate();
   const [credentials, setCredentials] = React.useState({
     username: "",
     password: "",
@@ -20,9 +21,10 @@ const LoginComponent = (props) => {
       password: credentials.password,
     });
     console.log("token", token);
-    
+
     secureLocalStorage.setItem("securityToken", token.accessToken);
-    redirect("/");
+    // redirect("");
+    navigator("/");
   };
   return (
     <div>
@@ -69,7 +71,7 @@ const LoginComponent = (props) => {
               Password:
             </label>
             <input
-              type="text"
+              type="password"
               placeholder="Enter Password"
               className="input-field"
               value={credentials.password}

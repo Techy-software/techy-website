@@ -1,67 +1,178 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { useEffect, useMemo, useState } from "react";
 import {
-  studentsData,
-  Student,
-} from "/Users/alihaggag/Documents/GitHub/techy-website/src/data/data.ts";
-import React, { useMemo, useState } from "react";
-import { FaSortUp, FaSortDown, FaSort, FaTh, FaList } from "react-icons/fa";
+  FaSortUp,
+  FaSortDown,
+  FaSort,
+  FaTh,
+  FaList,
+  FaEdit,
+} from "react-icons/fa";
 import ReactPaginate from "react-paginate";
+import { useNavigate } from "react-router-dom";
 import { useTable, useSortBy } from "react-table";
+import { faEllipsis } from "@fortawesome/free-solid-svg-icons";
+import { get } from "../../utils/HtppService";
 
-interface Props {}
-
-const StudentsTable: React.FC<Props> = () => {
+const StudentsTable = () => {
+  const navigator = useNavigate();
   const [currentPage, setCurrentPage] = useState(0);
   const [itemsPerPage, setItemsPerPage] = useState(6);
   const [searchQuery, setSearchQuery] = useState("");
   const [isGridView, setIsGridView] = useState(false);
+  const [studentsData, setStudentsData] = useState([]);
+  const [pageData, setPageData] = useState({});
+  const [loading, setLoading] = useState(true);
+
+  const fetchData = async () => {
+    try {
+      const response = await get("/school/students/all/?pageNo=0&pageSize=10");
+      console.log("studentsDataaaaaaaa", response);
+      setStudentsData(response.content);
+    } catch (error) {
+      console.error("Error fetching students data:", error);
+    }
+
+    try {
+      const response = await get("/school/students/overview/");
+      setPageData(response);
+    } catch (error) {
+      console.error("Error fetching page data:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  console.log("studentsData", studentsData);
+
+  // if (!studentsData) {
+  //   return (
+  //     <div className="flex justify-center items-center h-screen">
+  //       <div className="loader"></div>
+  //       <style jsx>{`
+  //         .loader {
+  //           border: 8px solid #f3f3f3;
+  //           border-top: 8px solid #3498db;
+  //           border-radius: 50%;
+  //           width: 60px;
+  //           height: 60px;
+  //           animation: spin 2s linear infinite;
+  //         }
+  //         @keyframes spin {
+  //           0% {
+  //             transform: rotate(0deg);
+  //           }
+  //           100% {
+  //             transform: rotate(360deg);
+  //           }
+  //         }
+  //       `}</style>
+  //     </div>
+  //   );
+  // }
 
   const filteredData = useMemo(() => {
+    console.log("studentsData", studentsData);
     return studentsData.filter(
       (student) =>
-        student.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        student.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        student.mobileNumber.includes(searchQuery)
+        student.fullName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        student.email?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        student.phoneNumber?.includes(searchQuery)
     );
-  }, [searchQuery]);
+  }, [searchQuery, studentsData]);
 
   const columns = useMemo(
     () => [
+      // {
+      //   Header: "Profile",
+      //   accessor: "profilePicture",
+      //   Cell: ({ value }) => (
+      //     <div className="relative w-10 h-10 bg-gray-200 rounded-full overflow-hidden border border-white">
+      //       <img
+      //         src={value || "/default-profile-pic.jpg"} // Fallback image if URL is not available
+      //         alt={value}
+      //         className="w-full h-full object-cover"
+      //       />
+      //     </div>
+      //   ),
+      // },
       {
         Header: "Student",
-        accessor: "name",
+        accessor: "fullName",
       },
       {
         Header: "Email",
         accessor: "email",
+        Cell: ({ value }) => (
+          <span className="text-gray-600">{value || "N/A"}</span>
+        ),
       },
       {
         Header: "Mobile number",
-        accessor: "mobileNumber",
+        accessor: "phoneNumber",
       },
       {
         Header: "Gender",
         accessor: "gender",
+        Cell: ({ value }) => (
+          <span className="text-gray-600">
+            {value === 1 ? <>Male</> : <>Female</>}
+          </span>
+        ),
+      },
+      {
+        Header: "Status",
+        accessor: "isActive",
+        Cell: ({ value }) => {
+          let statusClass = "";
+          if (value) {
+            statusClass = "bg-green-100 text-green-800";
+          } else {
+            statusClass = "bg-orange-100 text-orange-800";
+          }
+          return (
+            <span className={`px-2 py-1 rounded-full text-sm ${statusClass}`}>
+              {value ? "Active" : "Inactive"}
+            </span>
+          );
+        },
+      },
+      {
+        Header: "Actions",
+        id: "actions",
+        Cell: ({ row }) => (
+          <button
+            onClick={() => {
+              navigator("/StudentDashBoard", {
+                state: { student: row.original },
+              });
+            }}
+            className="text-blue-500 hover:text-blue-700"
+          >
+            <FontAwesomeIcon icon={faEllipsis} style={{ color: "#016BDD" }} />
+          </button>
+        ),
       },
     ],
     []
   );
 
   const { getTableProps, getTableBodyProps, headerGroups, prepareRow, rows } =
-    useTable<Student>({ columns, data: filteredData }, useSortBy);
+    useTable({ columns, data: filteredData }, useSortBy);
 
   const pageCount = Math.ceil(filteredData.length / itemsPerPage);
-  const handlePageClick = (selectedItem: { selected: number }) => {
+  const handlePageClick = (selectedItem) => {
     setCurrentPage(selectedItem.selected);
   };
 
-  const handleItemsPerPageChange = (
-    event: React.ChangeEvent<HTMLSelectElement>
-  ) => {
+  const handleItemsPerPageChange = (event) => {
     setItemsPerPage(Number(event.target.value));
     setCurrentPage(0); // Reset to the first page
   };
 
-  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSearchChange = (event) => {
     setSearchQuery(event.target.value);
   };
 
@@ -82,7 +193,10 @@ const StudentsTable: React.FC<Props> = () => {
           <button className="px-4 py-2 bg-white text-blue-500 border border-gray-200 rounded hover:bg-gray-100">
             Upload CSV
           </button>
-          <button className="px-4 py-2 bg-blue-500 text-white border border-blue-500 rounded hover:bg-blue-600">
+          <button
+            className="px-4 py-2 bg-blue-500 text-white border border-blue-500 rounded hover:bg-blue-600"
+            onClick={() => navigator("/addStudent")}
+          >
             Add Student
           </button>
         </div>
@@ -91,19 +205,19 @@ const StudentsTable: React.FC<Props> = () => {
       <div className="grid grid-cols-4 gap-4 mb-6">
         <div className="bg-gray-100 p-4 rounded">
           <span>Total Students</span>
-          <p className="text-xl font-bold">130</p>
+          <p className="text-xl font-bold">{pageData.totalStudents}</p>
         </div>
         <div className="bg-gray-100 p-4 rounded">
           <span>Active Students</span>
-          <p className="text-xl font-bold">100</p>
+          <p className="text-xl font-bold">{pageData.activeStudents}</p>
         </div>
         <div className="bg-gray-100 p-4 rounded">
           <span>Un-active Students</span>
-          <p className="text-xl font-bold">30</p>
+          <p className="text-xl font-bold">{pageData.unActiveStudents}</p>
         </div>
         <div className="bg-gray-100 p-4 rounded">
           <span>Un-assigned Students</span>
-          <p className="text-xl font-bold">13</p>
+          <p className="text-xl font-bold">{pageData.unassignedStudents}</p>
         </div>
       </div>
 
@@ -142,6 +256,7 @@ const StudentsTable: React.FC<Props> = () => {
       {isGridView ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {paginatedRows.map((row) => {
+            console.log("row", row);
             prepareRow(row);
             return (
               <div
@@ -152,7 +267,7 @@ const StudentsTable: React.FC<Props> = () => {
                 <div className="relative w-20 h-20 bg-gray-200 rounded-full overflow-hidden border border-white">
                   <img
                     src={
-                      row.original.profilePicUrl || "/default-profile-pic.jpg"
+                      row.original.profilePicture || "/default-profile-pic.jpg"
                     } // Fallback image if URL is not available
                     alt={row.original.name}
                     className="w-full h-full object-cover"
@@ -177,7 +292,12 @@ const StudentsTable: React.FC<Props> = () => {
                 {/* Card Contents */}
                 <div className="mt-16">
                   {row.cells.map((cell) => {
-                    if (cell.column.id === "mobileNumber") return null; // Skip mobile number in grid view
+                    console.log("cell", cell);
+                    if (
+                      cell.column.id === "phoneNumber" ||
+                      cell.column.id === "actions"
+                    )
+                      return null; // Skip mobile number in grid view
                     return (
                       <div key={cell.column.id} className="mb-2">
                         <strong>{cell.column.Header}:</strong>{" "}
