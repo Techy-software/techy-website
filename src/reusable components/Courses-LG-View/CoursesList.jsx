@@ -9,7 +9,7 @@ import SearchBar from "../SearchBar/SearchBar";
 import PropTypes from "prop-types"; // Import PropTypes for prop validation
 
 const CoursesList = ({
-  lists,
+  lists = [],
   buttonText = "Default Button",
   showButton = false,
 }) => {
