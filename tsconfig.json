@@ -9,7 +9,9 @@
     "skipLibCheck": true,
     "allowJs": true,
     "checkJs": false,
-    "noImplicitAny": false
+    "noImplicitAny": false,
+    "outDir": "dist",
+    "rootDir": "src"
   },
   "include": ["src"]
 }
