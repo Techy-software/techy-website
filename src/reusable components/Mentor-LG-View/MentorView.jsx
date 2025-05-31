@@ -9,7 +9,7 @@ import MentorTable from "./MentorTable";
 import MentorGrid from "./MentorGrid";
 
 const MentorView = ({ lists, info = false, myOnClick }) => {
-  const [selectedView, setSelectedView] = useState("list");
+  const [selectedView, setSelectedView] = useState("grid");
   console.log("lists", lists);
   return (
     <>
@@ -33,7 +33,7 @@ const MentorView = ({ lists, info = false, myOnClick }) => {
         {selectedView === "grid" ? (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {lists.map((course) => (
-              <MentorGrid key={course.id} />
+              <MentorGrid key={course.id} mentor={course} />
             ))}
           </div>
         ) : (

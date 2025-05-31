@@ -1,26 +1,23 @@
-import './course-details-component.css';
-import addIcon from '../../assets/icons/addIcon.svg';
-import moreIcon from '../../assets/icons/moreCircle.svg';
-import unitsImages from '../../assets/unitsImages.svg';
-import lessonDetailsImage from '../../assets/lessonDetailsImage.svg';
-import tickCircle from '../../assets/tickCircle.svg';
-import StepperComponent from './stepper-component';
-import '@fortawesome/fontawesome-free/css/all.min.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import "./course-details-component.css";
+import addIcon from "../../assets/icons/addIcon.svg";
+import moreIcon from "../../assets/icons/moreCircle.svg";
+import tickCircle from "../../assets/tickCircle.svg";
+import StepperComponent from "./stepper-component";
+import "@fortawesome/fontawesome-free/css/all.min.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { get } from "../../utils/HtppService";
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 const CourseDetailsComponent = ({ steps, currentStep }) => {
-
-  const [coursesList, setCoursesList] = useState([]);
+  const [courseData, setCourseData] = useState(null);
 
   const fetchData = async () => {
     console.log("Fetching data...");
     try {
-      const response = await get("/course/67699daa-70cb-4c40-a7c8-06e3901eb434/");
-      console.log("Courses List Data:", response?.data);
-      setCoursesList(response?.data || []);
+      const response = await get("/course/b2e814be-69e5-4a13-8518-20259c2b9a9f/");
+      console.log("Courses List Data:", response);
+      setCourseData(response || null);
     } catch (err) {
       console.error(err);
     }
@@ -31,80 +28,91 @@ const CourseDetailsComponent = ({ steps, currentStep }) => {
   }, []);
 
   return (
-    <div>
-      <div className='course-library-header'>
-        <h1 className='course-library-title'>Courses Details</h1>
-        <h2>Draft</h2>
-        <StepperComponent steps={steps} currentStep={currentStep} />
-        <div className='left-header-side-class'>
-          <img src={tickCircle} alt="tick image" />
-          <h3>Saved</h3>
-          <img src={moreIcon} alt="Add icon" className='icon-styling' />
-          <button className="arrow-button">
-            Next Step
-            <FontAwesomeIcon icon={faArrowRight} className="arrow-icon" />
-          </button>
-        </div>
-      </div>
-
-      <hr style={{ width: '100%', border: '1px solid #E6E6E6' }} />
-
-      <div className='data-container'>
-        <div className='categories-container'>
-          <div className='categories-container-header'>
-            <h1 className='categories-text'>Units</h1>
-            <img src={addIcon} alt="Add icon" className='icon-styling' />
+    <>
+      {courseData && (
+        <div className="course-container">
+          <div className="lesson-header">
+            <div className="left">
+              <h1 className="course-title">{courseData.course.title || "Course Title"}</h1>
+              <span className="status-badge">Active</span>
+            </div>
+            <div className="right">
+              <img src={tickCircle} alt="tick icon" />
+              <span className="saved-status">Saved</span>
+              <img src={moreIcon} alt="More icon" className="icon-styling" />
+              <button className="arrow-button">
+                Next Step
+                <FontAwesomeIcon icon={faArrowRight} className="arrow-icon" />
+              </button>
+            </div>
           </div>
-          <hr style={{ width: '98%', border: '1px solid #E6E6E6' }} />
 
-          <div className='courses-container'>
-            {coursesList.length === 0 ? (
-              <>
-                <img src={unitsImages} alt="Units image" />
-                <h2>No Units added yet</h2>
-                <h3>Start putting together your course by creating Units and lessons</h3>
-              </>
-            ) : (
-              <ul>
-                {coursesList.map((course, index) => (
-                  <li key={index}>
-                    <h2>{course.unitTitle || 'Unit Title'}</h2>
-                    <p>{course.unitDescription || 'No description provided.'}</p>
+          <div className="data-wrapper">
+            <div className="units-panel">
+              <div className="units-header">
+                <h2>Units</h2>
+                <img src={addIcon} alt="Add unit" className="icon-styling" />
+              </div>
+              <ul className="unit-list">
+                {courseData.sectionDetails?.map((section, index) => (
+                  <li key={index} className="unit-item">
+                    <div className="unit-title">{section.title || `Unit ${index + 1}`}</div>
+                    <ul className="lesson-list">
+                      {section.videos?.map((video, vidIndex) => (
+                        <li key={vidIndex} className="lesson-item">
+                          {video.title || `Lesson ${vidIndex + 1}`}
+                        </li>
+                      ))}
+                    </ul>
                   </li>
                 ))}
+                <li className="new-lesson">+ New lesson</li>
               </ul>
-            )}
+            </div>
+
+            <div className="lesson-details-panel">
+              <div className="video-preview">
+                <div className="video-box">
+                  <video width="100%" controls poster="/placeholder.jpg">
+                    <source
+                      src={courseData.sectionDetails?.[0]?.videos?.[0]?.media || ""}
+                      type="video/mp4"
+                    />
+                    Your browser does not support the video tag.
+                  </video>
+                </div>
+              </div>
+
+              <div className="discussion-section">
+                <div className="tabs">
+                  <button className="tab active">Discussions</button>
+                  <button className="tab">About</button>
+                </div>
+                <div className="discussion-post">
+                  <div className="user-info">
+                    <div className="avatar">A</div>
+                    <div className="user-meta">
+                      <strong>Abdelrahman E</strong>
+                      <span className="role-badge">Learner</span>
+                      <span className="date">Jun 23, 2020</span>
+                    </div>
+                  </div>
+                  <div className="question-text">How do you access peer feedback on your work?</div>
+                  <div className="interaction-buttons">
+                    <span className="like">👍 Like 3</span>
+                    <span className="reply">💬 Reply 2</span>
+                  </div>
+                  <div className="reply-box">
+                    <textarea placeholder="Write a reply for this question"></textarea>
+                    <button className="reply-button">Reply</button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-
-        <div className='left-container'>
-          <div className='left-container-header'>
-            <h1 className='categories-text'>Lesson details</h1>
-            <img src={moreIcon} alt="Add icon" className='icon-styling' />
-          </div>
-          <hr style={{ width: '100%', border: '1px solid #E6E6E6' }} />
-
-          <div className='courses-container'>
-            {coursesList.length === 0 ? (
-              <>
-                <img src={lessonDetailsImage} alt="Notebook image" className='image-container' />
-                <h2>No lessons added yet</h2>
-                <h3>Start putting together your course by creating lessons.</h3>
-              </>
-            ) : (
-              <ul>
-                {coursesList.map((course, index) => (
-                  <li key={index}>
-                    <h2>{course.lessonTitle || 'Lesson Title'}</h2>
-                    <p>{course.lessonDescription || 'No description available.'}</p>
-                  </li>
-                ))}
-              </ul>
-            )}
-          </div>
-        </div>
-      </div>
-    </div>
+      )}
+    </>
   );
 };
 
