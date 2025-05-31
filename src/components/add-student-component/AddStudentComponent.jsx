@@ -1,18 +1,90 @@
-import React, { useState } from "react";
-import profilePictureCircle from "../../assets/profilePictureCircle.svg";
+import { useRef, useState } from "react";
 import IconTextModal from "../add-mentor-component/IconTextModal";
 import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
+import { objectToFormData } from "../../utils/objectToFormData";
 
 const AddStudentComponent = () => {
   const [content, setContent] = useState(getContent("option1"));
-  const [showPassword, setShowPassword] = useState(false);
-  const [mobile, setMobile] = useState("");
-  const [landline, setLandline] = useState("");
-  const [email, setEmail] = useState("");
-  const [specialization, setSpecialization] = useState(null);
-  const [experience, setExperience] = useState(null);
+  const fileInputRef = useRef();
 
-  const [selectedInterests, setSelectedInterests] = useState([]);
+  const [showPassword, setShowPassword] = useState(false);
+  const [formData, setFormData] = useState({
+    age: "",
+    userId: 2,
+    address: {},
+    topics: [],
+    certificate: [],
+  });
+
+  const handleCertificateSubmit = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    console.log("Certificate submitted", form.certificate.files);
+    const newCertificate = {
+      name: form.name.value,
+      issuingOrganization: form.organization.value,
+      issueDate: form.issueDate.value,
+      expirationDate: form.expirationDate.value,
+      credentialId: form.credentialId.value,
+      credentialUrl: form.credentialUrl.value,
+      certificate: form.certificate.files[0],
+    };
+    setFormData((prev) => ({
+      ...prev,
+      certificate: [...prev.certificate, newCertificate],
+    }));
+  };
+
+  const handleChange = (e) => {
+    const { name, type, value, checked, files } = e.target;
+    // Decide value based on input type
+    let fieldValue;
+    if (type === "checkbox") {
+      fieldValue = checked;
+    } else if (type === "file") {
+      fieldValue = files[0];
+    } else {
+      fieldValue = value;
+    }
+
+    const keys = name.split(".");
+
+    setFormData((prev) => {
+      const updated = { ...prev };
+      let current = updated;
+
+      for (let i = 0; i < keys.length - 1; i++) {
+        const key = keys[i];
+        current[key] = current[key] || {};
+        current = current[key];
+      }
+
+      current[keys[keys.length - 1]] = fieldValue;
+
+      return updated;
+    });
+  };
+
+  const handleSubmit = async () => {
+    console.log("Form data to send:", formData);
+    // const formDataToSend = objectToFormData(formData);
+
+    // for (let [key, value] of formDataToSend.entries()) {
+    //   console.log(key, value); // Logs key-value pairs
+    // }
+    // try {
+    //   // const res = await post("/school/students/create/", formDataToSend);
+
+    //   const data = await res.json();
+    //   console.log("Success:", data);
+    // } catch (err) {
+    //   console.error("Error:", err);
+    // }
+  };
+
+  const handleFileClick = () => {
+    fileInputRef.current.click();
+  };
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -203,8 +275,19 @@ const AddStudentComponent = () => {
       <div className="flex justify-between items-center border-b pb-4 mb-4">
         <h3 className="text-xl font-bold">Add Certificate</h3>
         <button className="text-gray-500 hover:text-gray-800">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" className="w-6 h-6">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth="2"
+            stroke="currentColor"
+            className="w-6 h-6"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M6 18L18 6M6 6l12 12"
+            />
           </svg>
         </button>
       </div>
@@ -227,7 +310,10 @@ const AddStudentComponent = () => {
 
           {/* Issuing Organization */}
           <div>
-            <label className="block text-sm font-medium mb-2" htmlFor="organization">
+            <label
+              className="block text-sm font-medium mb-2"
+              htmlFor="organization"
+            >
               Issuing organization <span className="text-red-500">*</span>
             </label>
             <input
@@ -244,7 +330,10 @@ const AddStudentComponent = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           {/* Issue Date */}
           <div>
-            <label className="block text-sm font-medium mb-2" htmlFor="issueDate">
+            <label
+              className="block text-sm font-medium mb-2"
+              htmlFor="issueDate"
+            >
               Issue date <span className="text-red-500">*</span>
             </label>
             <div className="relative">
@@ -256,8 +345,19 @@ const AddStudentComponent = () => {
                 required
               />
               <span className="absolute right-3 top-1/2 transform -translate-y-1/2">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" className="w-5 h-5 text-gray-400">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M8 7h8M7 12h10m-9 5h8m-4 0h-1m-5 0H6v-4h12v4h-1m-9 0v-4H5v-4h14v4h-1m-5 0H9v-4H8v4h1m-1-4V9h6v3H8v-3h1m-1 3V9m0 9v-5m-1 1v5m-2 0v-5m2 0h8v5H8v-5m2 0h4v5h-4v-5z" />
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="2"
+                  stroke="currentColor"
+                  className="w-5 h-5 text-gray-400"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M8 7h8M7 12h10m-9 5h8m-4 0h-1m-5 0H6v-4h12v4h-1m-9 0v-4H5v-4h14v4h-1m-5 0H9v-4H8v4h1m-1-4V9h6v3H8v-3h1m-1 3V9m0 9v-5m-1 1v5m-2 0v-5m2 0h8v5H8v-5m2 0h4v5h-4v-5z"
+                  />
                 </svg>
               </span>
             </div>
@@ -265,7 +365,10 @@ const AddStudentComponent = () => {
 
           {/* Expiration Date */}
           <div>
-            <label className="block text-sm font-medium mb-2" htmlFor="expirationDate">
+            <label
+              className="block text-sm font-medium mb-2"
+              htmlFor="expirationDate"
+            >
               Expiration date <span className="text-red-500">*</span>
             </label>
             <div className="relative">
@@ -277,8 +380,19 @@ const AddStudentComponent = () => {
                 required
               />
               <span className="absolute right-3 top-1/2 transform -translate-y-1/2">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" className="w-5 h-5 text-gray-400">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M8 7h8M7 12h10m-9 5h8m-4 0h-1m-5 0H6v-4h12v4h-1m-9 0v-4H5v-4h14v4h-1m-5 0H9v-4H8v4h1m-1-4V9h6v3H8v-3h1m-1 3V9m0 9v-5m-1 1v5m-2 0v-5m2 0h8v5H8v-5m2 0h4v5h-4v-5z" />
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="2"
+                  stroke="currentColor"
+                  className="w-5 h-5 text-gray-400"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M8 7h8M7 12h10m-9 5h8m-4 0h-1m-5 0H6v-4h12v4h-1m-9 0v-4H5v-4h14v4h-1m-5 0H9v-4H8v4h1m-1-4V9h6v3H8v-3h1m-1 3V9m0 9v-5m-1 1v5m-2 0v-5m2 0h8v5H8v-5m2 0h4v5h-4v-5z"
+                  />
                 </svg>
               </span>
             </div>
@@ -288,7 +402,10 @@ const AddStudentComponent = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           {/* Credential ID */}
           <div>
-            <label className="block text-sm font-medium mb-2" htmlFor="credentialId">
+            <label
+              className="block text-sm font-medium mb-2"
+              htmlFor="credentialId"
+            >
               Credential ID <span className="text-red-500">*</span>
             </label>
             <input
@@ -303,7 +420,10 @@ const AddStudentComponent = () => {
 
           {/* Credential URL */}
           <div>
-            <label className="block text-sm font-medium mb-2" htmlFor="credentialUrl">
+            <label
+              className="block text-sm font-medium mb-2"
+              htmlFor="credentialUrl"
+            >
               Credential URL <span className="text-red-500">*</span>
             </label>
             <input
@@ -319,15 +439,31 @@ const AddStudentComponent = () => {
 
         {/* Certificates Upload */}
         <div>
-          <label className="block text-sm font-medium mb-2" htmlFor="certificates">
+          <label
+            className="block text-sm font-medium mb-2"
+            htmlFor="certificates"
+          >
             Certificates
           </label>
           <div className="w-full p-4 border-2 border-dashed border-gray-300 rounded-md text-center">
-            <svg xmlns="http://www.w3.org/2000/svg" className="mx-auto h-12 w-12 text-blue-500" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="mx-auto h-12 w-12 text-blue-500"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth="2"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M12 4v16m8-8H4"
+              />
             </svg>
             <p className="text-gray-500">Drag & Drop file here</p>
-            <p className="text-sm text-gray-400">or click to browse (4mb max)</p>
+            <p className="text-sm text-gray-400">
+              or click to browse (4mb max)
+            </p>
           </div>
         </div>
 
@@ -359,27 +495,21 @@ const AddStudentComponent = () => {
       button.classList.remove("selected");
     });
     setContent(
-      getContent(
+      getContent({
         choice,
+        handleChange,
         showPassword,
+        formData,
+        setFormData,
+        handleSubmit,
+        handleCertificateSubmit,
         togglePasswordVisibility,
-        mobile,
-        landline,
-        setMobile,
-        setLandline,
-        email,
-        setEmail,
-        specialization,
-        setSpecialization,
-        experience,
-        setExperience,
         ReletiveModalContent,
         IntrestsModalContent,
         AddCertificateModalContent,
-        selectedInterests,
-        setSelectedInterests,
-        handleFileUpload
-      )
+        handleFileUpload,
+        fileInputRef,
+      })
     );
   };
 
@@ -387,7 +517,7 @@ const AddStudentComponent = () => {
     <div>
       <div className="header-component">
         <h2>Add New Student</h2>
-        <button>submit</button>
+        <button onClick={handleSubmit}>submit</button>
       </div>
       <hr className="hr" />
 
@@ -418,27 +548,21 @@ const AddStudentComponent = () => {
   );
 };
 
-const getContent = (
+const getContent = ({
   choice,
+  handleChange,
   showPassword,
+  formData,
+  setFormData,
+  handleSubmit,
+  handleCertificateSubmit,
   togglePasswordVisibility,
-  mobile,
-  landline,
-  setMobile,
-  setLandline,
-  email,
-  setEmail,
-  specialization,
-  setSpecialization,
-  experience,
-  setExperience,
   ReletiveModalContent,
   IntrestsModalContent,
   AddCertificateModalContent,
-  selectedInterests,
-  setSelectedInterests,
-  handleFileUpload
-) => {
+  handleFileUpload,
+  fileInputRef,
+}) => {
   switch (choice) {
     case "option1":
       return (
@@ -468,6 +592,11 @@ const getContent = (
                   type="text"
                   placeholder="ex (Ahmed)"
                   className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
+                  onChange={(e) => {
+                    handleChange(e);
+                  }}
+                  name="fullName"
+                  value={formData.fullName}
                 />
               </div>
               <div>
@@ -478,16 +607,23 @@ const getContent = (
                   type="text"
                   placeholder="ex (17 years)"
                   className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
+                  // onChange={handleChange}
+                  // name="age"
+                  // value={formData.age}
                 />
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700">
                   Gender
                 </label>
-                <select className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm">
-                  <option>Select gender</option>
-                  <option>Male</option>
-                  <option>Female</option>
+                <select
+                  className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
+                  onChange={handleChange}
+                  value={formData.gender}
+                >
+                  <option value={0}>Select gender</option>
+                  <option value={1}>Male</option>
+                  <option value={2}>Female</option>
                 </select>
               </div>
             </div>

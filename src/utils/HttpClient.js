@@ -2,12 +2,10 @@ import axios from "axios";
 import secureLocalStorage from "react-secure-storage";
 
 export const HttpClient = axios.create({
-  baseURL: "http://144.126.200.46/api/",
+  baseURL: "http://144.126.200.46/backend/api/",
   timeout: 60 * 1 * 1000,
   timeoutErrorMessage: "Network Error",
-  // withCredentials: true,
 });
-// cors
 HttpClient.interceptors.request.use(async (config) => {
   addHeaders(config);
   const method = config.method?.toUpperCase();
@@ -65,9 +63,8 @@ const addHeaders = (config) => {
 
   config.headers["Accept-Language"] = "en";
   config.headers["cache-control"] = "no-cache";
-  const token =
-    "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJUZWNoeSIsImlhdCI6MTc0Nzg0OTYwMCwiZXhwIjoxNzQ4NDU0NDAwfQ.Ozxp2EF9gVD2-pDn8xLT25C98gt23SnREOZhN-JVnTxe_eCofsNqL3jPRmp-i8ho";
-  config.headers["Authorization"] = `Bearer ${token}`;
+  const token = secureLocalStorage.getItem("securityToken");
+  if (token) config.headers["Authorization"] = `Bearer ${token}`;
 };
 
 HttpClient.interceptors.response.use(

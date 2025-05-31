@@ -44,22 +44,6 @@ const AddMentorComponent = () => {
     }));
   };
 
-  const handleCertificateFileChange = (index, e) => {
-    const file = e.target.files[0];
-
-    setFormData((prev) => {
-      const updatedCertificates = [...prev.certificates];
-      updatedCertificates[index] = {
-        ...updatedCertificates[index],
-        image: file,
-      };
-
-      return {
-        ...prev,
-        certificates: updatedCertificates,
-      };
-    });
-  };
 
   const handleCertificateSubmit = (e) => {
     e.preventDefault();
