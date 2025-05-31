@@ -19,7 +19,6 @@ import {
 import Settings from "./components/Settings/Settings";
 import RoleCompoenent from "./components/role-component/role-component";
 import AddNewRoleComponent from "./components/role-component/add-new-role-component";
-import CourseLibraryComponent from "./components/course-library-component/course-library-component";
 import AddStudentComponent from "./components/add-student-component/AddStudentComponent";
 import MentorsListComponent from "./components/mentors-list-component/mentors-list-component";
 import StudentDashboardMainPage from "./components/StudentDashboard/StudentDashboardMainPage";
@@ -33,11 +32,11 @@ import ForgetPassword from "./components/login-component/ForgetPassword";
 import ResetPassword from "./components/login-component/ResetPassword";
 import DashboardPage from "./pages/DashboardPage";
 import CourseDetailsComponent from "./components/course-details-component/course-details-component";
-// import Students from "./components/AcademyDetails/Students";
 import OpportunityDetails from "./components/Opportunity/OpportunityDetails/OpportunityDetails";
 import JobsComponent from "./components/jobs-component/JobsComponent";
 import DummyLayout, { chekcAuthLoader } from "./components/DummyLayout";
 import StudentsTable from "./components/students/StudentsTable";
+import CourseLibraryComponent from "./components/course-library-component/course-library-component";
 
 const router = createBrowserRouter([
   { path: "/login", element: <LoginComponent /> },
@@ -47,6 +46,7 @@ const router = createBrowserRouter([
     element: <DummyLayout />,
     loader: chekcAuthLoader,
     children: [
+      { path: "courseDetails", element: <CourseDetailsComponent /> },
       { path: "addNewMentor", element: <AddMentorComponent /> },
       { path: "MentorDashBoard", element: <MentorDashboardMainPage /> },
       { path: "addStudent", element: <AddStudentComponent /> },
