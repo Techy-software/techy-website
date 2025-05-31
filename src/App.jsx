@@ -64,7 +64,7 @@ const router = createBrowserRouter([
         element: <Layout />,
         children: [
           { index: true, element: <DashboardPage /> },
-          { path: "courses", element: <CourseLibraryComponent /> },
+          { path: "courses", element: <CourseDetailsComponent staps={0} currentStep={0}/> },
           { path: "mentors", element: <MentorsListComponent /> },
           { path: "students", element: <StudentsTable /> },
           { path: "opportunity", element: <OpportunityMain /> },
