@@ -2,7 +2,6 @@ import "./course-details-component.css";
 import addIcon from "../../assets/icons/addIcon.svg";
 import moreIcon from "../../assets/icons/moreCircle.svg";
 import tickCircle from "../../assets/tickCircle.svg";
-import StepperComponent from "./stepper-component";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
