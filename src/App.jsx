@@ -37,6 +37,7 @@ import JobsComponent from "./components/jobs-component/JobsComponent";
 import DummyLayout, { chekcAuthLoader } from "./components/DummyLayout";
 import StudentsTable from "./components/students/StudentsTable";
 import CourseLibraryComponent from "./components/course-library-component/course-library-component";
+import CoursesDashboard from "./components/CoursesDashboard/CoursesDashboard"
 
 const router = createBrowserRouter([
   { path: "/login", element: <LoginComponent /> },
@@ -79,6 +80,7 @@ const router = createBrowserRouter([
           { path: "create-discount-coupon", element: <CreateDiscountCoupon /> },
           { path: "rewards", element: <Rewards /> },
           { path: "role", element: <RoleCompoenent /> },
+          { path: "course-details", element: <CoursesDashboard /> },
         ],
       },
     ],
