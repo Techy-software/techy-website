@@ -1,14 +1,11 @@
-import React from "react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Card, CardContent } from "@/components/ui/card";
 import { Search, Filter, Grid3x3, List, Plus } from "lucide-react";
+import { Button, Card, CardContent, Input } from "@mui/material";
 
 const mentors = Array.from({ length: 10 }, (_, i) => ({
   id: i,
   name: "Abdelrahman Elshaer",
   email: "ahmed@gamil.com",
-  status: "Active"
+  status: "Active",
 }));
 
 export default function MentorGrid() {

@@ -11,7 +11,6 @@ import "./HorizontalSteps.css";
 // output: horizontal steps with active step
 
 const HorizontalSteps = (props) => {
-  console.log("Props: ", props);
   return (
     <div className="default-background-horizontal-steps">
       <h3 className="title-horizontal-steps">{props.title}</h3>

@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsis } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 
-const MentorRowInfo = ({ mentor }) => {
+const MentorRowInfo = ({ mentor, OptionsButton }) => {
   const navigator = useNavigate();
   return (
     <tr className="border-b border-gray-200 hover:bg-gray-50">
@@ -28,9 +28,14 @@ const MentorRowInfo = ({ mentor }) => {
       </td>
       <td
         className="py-3 px-4 text-center"
-        onClick={() => {
-          navigator("/MentorDashBoard", { state: { id: mentor.id } });
+        onClick={(e) => {
+          if (OptionsButton) {
+            OptionsButton(e);
+          } else {
+            navigator("/MentorDashBoard", { state: { id: mentor.id } });
+          }
         }}
+        data-id={mentor.mentorId}
       >
         <FontAwesomeIcon icon={faEllipsis} style={{ color: "#016BDD" }} />
       </td>
