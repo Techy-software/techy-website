@@ -1,13 +1,4 @@
 import WhiteCard from "../../reusable components/WhiteCard/WhiteCard";
-import Academy from "../../assets/Academy.png";
-import ImagePost from "../../assets/postImage.jpeg";
-import InputField from "../../reusable components/InputField/InputField";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faCommentDots,
-  faShareFromSquare,
-  faThumbsUp,
-} from "@fortawesome/free-regular-svg-icons";
 import CourseContent from "./CourseContent ";
 const Overview = ({courseData}) => {
 
