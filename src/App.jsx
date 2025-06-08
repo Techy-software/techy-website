@@ -52,7 +52,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "courseDetails/:courseId",
-        element: <CourseDetailsComponent staps={0} currentStep={0} />,
+        element: <CourseDetailsComponent />,
       },
       {
         path: "courseSetup/:courseId",
