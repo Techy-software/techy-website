@@ -155,7 +155,7 @@ const CoursesDashboard = () => {
               <Leaderboard leaderboardData={courseData} />
             )}
             {activeComponent === "Mentors" && (
-              <Mentors mentor={course.mentor} />
+              <Mentors courseData={course}/>
             )}
           </div>
         </div>
