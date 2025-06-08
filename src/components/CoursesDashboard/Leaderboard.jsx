@@ -1,16 +1,15 @@
-import react from "react";
 import WhiteCard from "../../reusable components/WhiteCard/WhiteCard";
 
-
-const FAQs = () => {
+const Leaderboard = () => {
+ 
 
   return (
     <div>
-      <WhiteCard title="FAQs" style={"mb-4 pt-1 pt-5"}>
+      <WhiteCard title="Leaderboard" style={"mb-4 pt-1 pt-5"}>
         
       </WhiteCard>
     </div>
   );
 };
 
-export default FAQs;
+export default Leaderboard;

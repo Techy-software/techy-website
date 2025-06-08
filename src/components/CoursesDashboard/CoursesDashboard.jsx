@@ -3,12 +3,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import Overview from "./Overview";
-import CoursesList from "../../reusable components/Courses-LG-View/CoursesList";
-import MentorView from "../../reusable components/Mentor-LG-View/MentorView";
-import Orders from "./Orders";
 import { useNavigate } from "react-router-dom";
 import { get } from "../../utils/HtppService";
 import FAQs from "./FAQs";
+import Reviews from "./Reviews";
+import Leaderboard from "./Leaderboard";
+import Mentors from "./Mentors";
 
 const Box = ({ label, onClick, isActive }) => (
   <div
@@ -149,13 +149,13 @@ const CoursesDashboard = () => {
             {activeComponent === "Overview" && <Overview courseData={course} />}
             {activeComponent === "FAQs" && <FAQs faqs={course.faqs} />}
             {activeComponent === "Reviews" && (
-              <CoursesList reviewsData={courseData} />
+              <Reviews reviewsData={courseData} />
             )}
             {activeComponent === "Leaderboard" && (
-              <Orders leaderboardData={courseData} />
+              <Leaderboard leaderboardData={courseData} />
             )}
             {activeComponent === "Mentors" && (
-              <MentorView mentor={course.mentor} />
+              <Mentors mentor={course.mentor} />
             )}
           </div>
         </div>
