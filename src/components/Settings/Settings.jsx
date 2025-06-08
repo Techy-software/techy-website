@@ -1,16 +1,7 @@
-import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
-import BlueButton from "../../reusable components/BlueButton/BlueButton";
-import HorizontalManagment from "../../reusable components/HorizontalMangment/HorizontalManagment";
-import InputField from "../../reusable components/InputField/InputField";
-import ProfilePicture from "../../reusable components/ProfilePicture/ProfilePicture";
-import WhiteCard from "../../reusable components/WhiteCard/WhiteCard";
-import Topbar from "../Topbar";
 import { useState } from "react";
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "./Settings.css";
 import "../../reusable components/InputField/InputField.css";
-import calendarIcon from "../../assets/calendar.png";
 import SettingsPageOne from "./SettingsPageOne";
 import SettingsPageTwo from "./SettingsPageTwo";
 import SettingsPageThree from "./SettingsPageThree";

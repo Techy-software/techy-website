@@ -1,15 +1,14 @@
 import WhiteCard from "../../reusable components/WhiteCard/WhiteCard";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLocationDot, faPhone } from "@fortawesome/free-solid-svg-icons";
-import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
+import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
-import Feed from "./Feed";
 import Overview from "./Overview";
-import CoursesList from "../../reusable components/Courses-LG-View/CoursesList";
-import MentorView from "../../reusable components/Mentor-LG-View/MentorView";
-import Orders from "./Orders";
 import { useNavigate } from "react-router-dom";
 import { get } from "../../utils/HtppService";
+import FAQs from "./FAQs";
+import Reviews from "./Reviews";
+import Leaderboard from "./Leaderboard";
+import Mentors from "./Mentors";
 
 const Box = ({ label, onClick, isActive }) => (
   <div
@@ -44,8 +43,8 @@ const CoursesDashboard = () => {
       const response = await get(
         "course/b2e814be-69e5-4a13-8518-20259c2b9a9f/"
       );
-      setCourseData(response.data || null);
-      console.log("Fetched course data:", response.data);
+      setCourseData(response || null);
+      console.log("Fetched course data:", response);
     } catch (err) {
       console.error("Error fetching course data:", err);
     }
@@ -92,43 +91,44 @@ const CoursesDashboard = () => {
       <div className="grid grid-cols-12 gap-4 px-10 pt-10">
         <div className="col-span-4">
           <WhiteCard>
-            <div className="flex items-center flex-col">
+            <div className="flex items-center flex-col text-center">
               <img
-                src={course?.thumbnail || "/default-course.png"}
+                src={courseData.course.thumbnail}
                 alt="Course Thumbnail"
-                className="w-24 h-24 object-cover rounded-md"
+                className="w-24 h-24 object-cover rounded-full"
               />
-              <h2 className="text-xl font-bold mt-4">{course.title}</h2>
-              <hr className="my-3 w-full" />
-              <div className="flex justify-between w-full px-4 mb-4">
-                <span className="text-gray-500">Rating</span>
-                <span className="text-blue-500 font-bold">
-                  {rating?.toFixed(1) || "0.0"}
-                </span>
+              <h2 className="text-xl font-bold mt-4">
+                {courseData.course.title}
+              </h2>
+              <p className="text-sm text-gray-500 mt-1">
+                {courseData.course.school.fullName}
+              </p>
+              <p className="text-yellow-500 text-sm mt-1">
+                ⭐ {courseData.rating.toFixed(1)} (0 Reviews)
+              </p>
+              <hr className="my-3 w-full border-gray-200" />
+
+              <div className="text-lg text-blue-600 font-bold">
+                {courseData.course.discountPrice} EGP
+              </div>
+              <div className="text-gray-400 line-through">
+                {courseData.course.originalPrice} EGP
               </div>
             </div>
-            <div className="flex items-center my-2">
+
+            <ul className="text-sm mt-4 space-y-2 text-left">
+              <li>📂 {courseData.course.category.categoryName}</li>
+              <li>🎯 {courseData.course.level}</li>
+              <li>⏰ {courseData.course.duration}</li>
+              <li>🖥️ {courseData.course.attendanceType}</li>
+            </ul>
+
+            <div className="mt-4 text-sm flex items-center">
               <FontAwesomeIcon
                 icon={faLocationDot}
                 className="mr-2 w-5 h-5 text-gray-600"
               />
-              <span>{course.location}</span>
-            </div>
-            <div className="my-4 text-slate-600 font-semibold">
-              CONTACT INFO
-            </div>
-            <div className="flex items-center my-2">
-              <FontAwesomeIcon icon={faPhone} className="mr-2 text-gray-600" />
-              <span>{school.phoneNumber}</span>
-            </div>
-            <div className="flex items-center">
-              <FontAwesomeIcon
-                icon={faEnvelope}
-                className="mr-2 text-gray-600"
-              />
-              <span>
-                {school.fullName?.toLowerCase().replace(/\s+/g, ".")}@gmail.com
-              </span>
+              <span>{courseData.course.location}</span>
             </div>
           </WhiteCard>
         </div>
@@ -146,16 +146,16 @@ const CoursesDashboard = () => {
           </div>
 
           <div className="mt-4">
-            {activeComponent === "Overview" && <Feed courseData={courseData} />}
-            {activeComponent === "FAQs" && <Overview faqs={course.faqs} />}
+            {activeComponent === "Overview" && <Overview courseData={course} />}
+            {activeComponent === "FAQs" && <FAQs faqs={course.faqs} />}
             {activeComponent === "Reviews" && (
-              <CoursesList reviewsData={courseData} />
+              <Reviews reviewsData={courseData} />
             )}
             {activeComponent === "Leaderboard" && (
-              <Orders leaderboardData={courseData} />
+              <Leaderboard leaderboardData={courseData} />
             )}
             {activeComponent === "Mentors" && (
-              <MentorView mentor={course.mentor} />
+              <Mentors mentor={course.mentor} />
             )}
           </div>
         </div>
