@@ -1,7 +1,7 @@
 import MentorRow from "./MentorRow";
 import MentorRowInfo from "./MentorRowInfo";
 
-const MentorTable = ({ lists, info = false }) => {
+const MentorTable = ({ lists, info = false, OptionsButton }) => {
   return (
     <div className="overflow-x-auto">
       <table className="min-w-full bg-white border border-gray-200">
@@ -35,7 +35,11 @@ const MentorTable = ({ lists, info = false }) => {
         <tbody>
           {lists.map((course) =>
             info ? (
-              <MentorRowInfo key={course.id} mentor={course} />
+              <MentorRowInfo
+                key={course.id}
+                mentor={course}
+                OptionsButton={OptionsButton}
+              />
             ) : (
               <MentorRow key={course.id} mentor={course} />
             )

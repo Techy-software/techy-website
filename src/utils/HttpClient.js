@@ -98,5 +98,6 @@ const handleAxiosError = (error) => {
 
 const handle401 = (error) => {
   console.log("=======error401", error);
+  secureLocalStorage.removeItem("securityToken");
   //To be written
 };

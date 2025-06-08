@@ -15,8 +15,11 @@ export default DummyLayout;
 export function chekcAuthLoader() {
   const currentDate = new Date().getTime();
   const tokenDate = secureLocalStorage.getItem("tokenDate");
-  console.log("tokenDate", secureLocalStorage.getItem("securityToken"));
-  if (!secureLocalStorage.getItem("securityToken")) {
+  if (
+    !secureLocalStorage.getItem("securityToken") ||
+    currentDate - tokenDate > 1800000 // 30 minutes in milliseconds
+  ) {
+    // Redirect to login if token is invalid or expired (30 minutes)
     return redirect("/login");
   }
   return null;

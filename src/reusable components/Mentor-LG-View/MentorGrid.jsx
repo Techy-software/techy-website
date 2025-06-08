@@ -1,9 +1,10 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import personalImage from "../../assets/PersonalPicture.png";
-import { faEllipsis } from "@fortawesome/free-solid-svg-icons";
+import { faEllipsis, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 
-const MentorGrid = ({ mentor }) => {
+const MentorGrid = ({ mentor, OptionsButton }) => {
+  console.log(mentor);
   const navigator = useNavigate();
   return (
     <div className="bg-slate-50 p-3 rounded-xl">
@@ -29,8 +30,16 @@ const MentorGrid = ({ mentor }) => {
           >
             View Profile
           </button>
-          <button className="bg-white border p-2 px-3 rounded-xl">
-            <FontAwesomeIcon icon={faEllipsis} style={{ color: "#016BDD" }} />
+          <button
+            className="bg-white border p-2 px-3 rounded-xl"
+            onClick={OptionsButton}
+            data-id={mentor.mentorId}
+          >
+            <FontAwesomeIcon
+              icon={OptionsButton ? faPlus : faEllipsis}
+              style={{ color: "#016BDD" }}
+              value={mentor.mentorId}
+            />
           </button>
         </div>
       </div>

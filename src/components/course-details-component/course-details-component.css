@@ -1,6 +1,6 @@
 .course-container {
   padding: 24px;
-  font-family: 'Arial', sans-serif;
+  font-family: "Arial", sans-serif;
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -45,8 +45,8 @@
 }
 
 .icon-styling {
-  width: 20px;
-  height: 20px;
+  width: 15px;
+  height: 15px;
   cursor: pointer;
 }
 
