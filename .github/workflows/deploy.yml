@@ -1,0 +1,27 @@
+name: Techy CI/CD
+
+on:
+  push:
+    branches:
+      - UAT
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Deploy to server
+        if: github.ref == 'refs/heads/UAT'
+        uses: appleboy/ssh-action@v0.1.10
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.PORT }}
+          script: |
+            cd /root/app/techy-website
+            git pull
+            docker compose up -d --build
