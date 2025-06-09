@@ -1,6 +1,5 @@
 import React from "react";
 import "./login-component.css";
-import myImage from "../../assets/blueBackgroundWithGlasses.svg";
 import techyBoy from "../../assets/techyBoy.svg";
 import userImage from "../../assets/userImage.svg";
 import techyLogo from "../../assets/techyLogo.svg";
@@ -16,6 +15,12 @@ const LoginComponent = (props) => {
     password: "",
   });
   const handleLogin = async () => {
+  if (!credentials.username || !credentials.password) {
+    alert("Please enter both username and password.");
+    return;
+  }
+
+  try {
     const token = await post("/auth/login/", {
       usernameOrPhoneNumber: credentials.username,
       password: credentials.password,
@@ -23,9 +28,14 @@ const LoginComponent = (props) => {
     console.log("token", token);
 
     secureLocalStorage.setItem("securityToken", token.accessToken);
-    // redirect("");
-    navigator("/");
-  };
+    navigator("/", { replace: true });
+  } catch (err) {
+    alert("Login failed. Please check your credentials.");
+    setCredentials({ username: "", password: "" }); // ❌ Clear input fields
+    console.error(err);
+  }
+};
+
   return (
     <div>
       <div className="top-div">
@@ -78,6 +88,11 @@ const LoginComponent = (props) => {
               onChange={(e) =>
                 setCredentials({ ...credentials, password: e.target.value })
               }
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  handleLogin();
+                }
+              }}
             />
           </div>
 
