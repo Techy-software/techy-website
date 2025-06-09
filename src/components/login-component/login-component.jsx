@@ -11,7 +11,7 @@ import { redirect, useNavigate } from "react-router-dom";
 const LoginComponent = (props) => {
   const navigator = useNavigate();
   const [credentials, setCredentials] = React.useState({
-    username: "",
+    username: "+201121147961",
     password: "",
   });
   const handleLogin = async () => {
@@ -47,7 +47,7 @@ const LoginComponent = (props) => {
           </p>
           <p className="caption-text">
             track you students progress and manage your courses
-            <span class="line-break">
+            <span className="line-break">
               {" "}
               mentors, opportunities all in one platform.
             </span>
