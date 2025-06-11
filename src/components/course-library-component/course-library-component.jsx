@@ -21,7 +21,6 @@ const CourseLibraryComponent = () => {
       const response = await get(
         `/school/course/all/?pageNo=${page}&pageSize=${size}`
       );
-      // const response = mockResponse; //? For testing, use mock data from DummyCourseData
       setCoursesData(response.content);
       setPageNo(response.pageNo);
       setTotalPages(response.totalPages);
@@ -62,18 +61,18 @@ const CourseLibraryComponent = () => {
 
         {/* Courses Area */}
         <div className="left-container">
-          <div className="left-container-header">
+          <div className="flex justify-between items-center mx-5 my-3">
             <h1 className="categories-text">Untitled Category</h1>
-            <img src={moreIcon} alt="More icon" className="icon-styling" />
+            <button
+              className="add-course-button"
+              onClick={() => navigator("/courseDetails/new")}
+            >
+              <img src={addIconWhite} alt="Add" className="button-icon" />
+              Add Course
+            </button>{" "}
           </div>
           <hr style={{ width: "100%", border: "1px solid #E6E6E6" }} />
-          <button
-            className="add-course-button"
-            onClick={() => navigator("/courseDetails/new")}
-          >
-            <img src={addIconWhite} alt="Add" className="button-icon" />
-            Add Course
-          </button>
+
           {coursesData.length === 0 ? (
             <div className="courses-container">
               <img src={notebook} alt="Notebook" className="image-container" />
