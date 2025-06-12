@@ -147,16 +147,14 @@ const CoursesDashboard = () => {
 
           <div className="mt-4">
             {activeComponent === "Overview" && <Overview courseData={course} />}
-            {activeComponent === "FAQs" && <FAQs faqs={course.faqs} />}
+            {activeComponent === "FAQs" && <FAQs courseData={course.faqs} />}
             {activeComponent === "Reviews" && (
               <Reviews reviewsData={courseData} />
             )}
             {activeComponent === "Leaderboard" && (
               <Leaderboard leaderboardData={courseData} />
             )}
-            {activeComponent === "Mentors" && (
-              <Mentors courseData={course}/>
-            )}
+            {activeComponent === "Mentors" && <Mentors courseData={course} />}
           </div>
         </div>
       </div>
