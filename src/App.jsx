@@ -41,11 +41,13 @@ import CourseSetup from "./components/course-setup-component/CourseSetup";
 import "leaflet/dist/leaflet.css";
 import CourseMentorAssignScreen from "./components/course-mentor/CourseMentorAssignScreen";
 import CoursesDashboard from "./components/CoursesDashboard/CoursesDashboard"
+import HomePage from "./AdminDashboard/screens/HomePage/HomePage";
 
 const router = createBrowserRouter([
   { path: "/login", element: <LoginComponent /> },
   { path: "/flogin", element: <ForgetPassword /> },
   { path: "/rlogin", element: <ResetPassword /> },
+  {path: "/Home", element: <HomePage />},
   {
     element: <DummyLayout />,
     loader: chekcAuthLoader,
