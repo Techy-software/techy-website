@@ -31,7 +31,7 @@ const LoginComponent = (props) => {
     navigator("/", { replace: true });
   } catch (err) {
     alert("Login failed. Please check your credentials.");
-    setCredentials({ username: "", password: "" }); // ❌ Clear input fields
+    setCredentials({ username: "", password: "" }); 
     console.error(err);
   }
 };
