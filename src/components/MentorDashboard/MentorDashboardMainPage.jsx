@@ -8,11 +8,12 @@ import {
 } from "@fortawesome/free-regular-svg-icons";
 import { Box } from "../AcademyDetails/AcademyDetails";
 import PersonalPicture from "../../assets/PersonalPicture.png";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import postImage from "../../assets/postImage.jpeg";
 import OverviewMentor from "./OverviewMentor";
 import { useNavigate } from "react-router-dom";
 import { HttpClient } from "../../utils/HttpClient";
+import { get } from "../../utils/HtppService";
 
 const MentorDashboardMainPage = () => {
   const AcademyItems = [
@@ -23,12 +24,23 @@ const MentorDashboardMainPage = () => {
   ];
   const navigator = useNavigate();
   const [activeComponent, setActiveComponent] = useState("Overview");
-
+  const [data, setData] = useState({});
   // const { data, isLoading } = useMentor({ url: "mentors/37/contact/" });
 
-  const data = HttpClient.get("mentors/37/contact/");
+  const fetchData = async () => {
+    try {
+      const response = await get("/school/mentor/details/117");
+      console.log("data", response);
+      setData(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-  console.log("data", data);
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   const handleClick = (label) => {
     setActiveComponent(label);
   };
@@ -57,7 +69,7 @@ const MentorDashboardMainPage = () => {
               />
             </svg>
           </button>
-          <h1 className="text-2xl font-bold mr-4">Mentor #123</h1>
+          <h1 className="text-2xl font-bold mr-4">Mentor Dashboard</h1>
           <span className="ml-2 px-2 py-1 text-sm text-gray-500 bg-green-200 rounded">
             Active
           </span>
@@ -74,11 +86,11 @@ const MentorDashboardMainPage = () => {
           <WhiteCard>
             <div className="flex items-center flex-col">
               <img
-                src={PersonalPicture}
+                src={data.image}
                 alt="Academy Photo"
                 className="w-24 rounded-full"
               />
-              <h2 className="text-xl font-bold mt-4">Ahmed Mealy</h2>
+              <h2 className="text-xl font-bold mt-4">{data.fullName}</h2>
               <hr className="my-3" />
               <div className="flex justify-between mx-2 w-full my-3">
                 <span className="text-gray-500">PERSONAL INFO</span>
@@ -94,22 +106,22 @@ const MentorDashboardMainPage = () => {
             </div>
             <div className="flex">
               <FontAwesomeIcon icon={faPerson} className="mr-2 w-5 h-5 mb-4" />
-              <span>Male</span>
+              <span>{data.gender === 1 ? "Male" : "Female"}</span>
             </div>
             <div className="flex">
               <FontAwesomeIcon icon={faCalendarDays} className="mr-2 w-5 h-5" />
-              <span>Joined at 11 Apr. 2023</span>
+              <span>{data.dateOfBirth}</span>
             </div>
             <div className="my-4">
               <span className="text-slate-600 my-4">CONTACT INFO</span>
             </div>
             <div className="flex my-4">
               <FontAwesomeIcon icon={faPhone} className="mr-2" />
-              <span>+20 114 6432 345</span>
+              <span>{data.phoneNumber}</span>
             </div>
             <div>
               <FontAwesomeIcon icon={faEnvelope} className="mr-2" />
-              <span>Techy.School@gmail.com</span>
+              <span>{data.email}</span>
             </div>
             <hr className="my-4" />
             <div>
