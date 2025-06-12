@@ -1,14 +1,23 @@
 import React from "react";
 import HorizontalSteps from "../../reusable components/HorizontalSteps/HorizontalSteps";
 import CourseHeader from "../../reusable components/Header/CourseHeader";
+import DragNDrop from "../../reusable components/DragNDrop";
+import MapLocationPicker from "../../reusable components/MapLocationPicker";
 
-const OverViewCourseSetup = ({ headerStep, currentStep }) => {
+const OverViewCourseSetup = ({ setCurrentStep, formData, setFormData }) => {
   const handleBack = () => {
     console.log("Go back");
   };
 
   const handleNext = () => {
     console.log("Proceed to next step");
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    console.log("items", name, value);
+    setFormData((prev) => ({ ...prev, [name]: value }));
+    console.log("Form data updated:", formData);
   };
 
   return (
@@ -20,6 +29,7 @@ const OverViewCourseSetup = ({ headerStep, currentStep }) => {
         onBack={handleBack}
         onNext={handleNext}
         nextLabel="Next Assign Mentors"
+        disabled
       />
 
       <div className="flex gap-6 p-6">
@@ -29,108 +39,167 @@ const OverViewCourseSetup = ({ headerStep, currentStep }) => {
             title="Publish your course"
             steps={[
               "Overview",
-              "Completion",
               "FAQs",
               "Pricing and payment methods",
               "Publishing",
             ]}
-            currentStep={currentStep}
+            currentStep={0}
+            setCurrentStep={setCurrentStep}
           />
         </div>
 
         {/* Right Side - Form Content */}
         <div className="w-3/4 space-y-8">
-          {/* Thumbnail Upload */}
-          <div className="border rounded-lg p-6 bg-white shadow-sm">
-            <h2 className="text-lg font-semibold mb-4">Thumbnail</h2>
-            <div className="border-dashed border-2 border-gray-300 rounded-lg p-6 text-center">
-              <div className="flex justify-center items-center space-x-4">
-                <div className="text-gray-500">
-                  <p className="font-medium">Drag & Drop file here</p>
-                  <p className="text-sm">or click to browse (4 mb max)</p>
-                </div>
-              </div>
-              <p className="text-xs text-gray-400 mt-2">
-                Upload your course image here. It must meet our{" "}
-                <a href="#" className="underline">
-                  course image quality standards
-                </a>{" "}
-                to be accepted. Important guidelines: 750x422 pixels; .jpg,
-                .jpeg, .gif, or .png; no text on the image.
-              </p>
-            </div>
-          </div>
-
+          <DragNDrop formData={formData} setFormData={setFormData} />
           {/* Course Details */}
-          <div className="border rounded-lg p-6 bg-white shadow-sm space-y-4">
-            <h2 className="text-lg font-semibold">Course details</h2>
-            <div className="grid grid-cols-2 gap-4">
+          <div className="border rounded-2xl p-8 bg-white shadow-sm space-y-6">
+            <h2 className="text-xl font-semibold text-gray-800">
+              Course Details
+            </h2>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Course ID */}
               <div>
-                <label className="text-sm font-medium">Course ID</label>
-                <input type="text" className="input" placeholder="1234" disabled />
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Course ID
+                </label>
+                <input
+                  type="text"
+                  className="w-full border border-gray-300 rounded-lg px-4 py-2 bg-gray-100 text-gray-500 cursor-not-allowed"
+                  placeholder="1234"
+                  disabled
+                />
               </div>
+
+              {/* Category */}
               <div>
-                <label className="text-sm font-medium">
+                <label className="block text-sm font-medium text-gray-700 mb-1">
                   Category <span className="text-red-500">*</span>
                 </label>
-                <select className="input">
-                  <option>Web development</option>
+                <select
+                  className="h-10 w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  name="categoryIdentifier"
+                  value={formData.categoryIdentifier}
+                  onChange={handleChange}
+                  required
+                >
+                  <option value="1">Web Development</option>
+                  <option value="2">Data Science</option>
+                  <option value="3">Mobile Development</option>
                 </select>
               </div>
+
+              {/* Title English */}
               <div>
-                <label className="text-sm font-medium">
-                  Course title <span className="text-red-500">*</span>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Course Title (English) <span className="text-red-500">*</span>
                 </label>
-                <input type="text" className="input" placeholder="ex (English)" />
+                <input
+                  type="text"
+                  className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  placeholder="ex: Web Development Bootcamp"
+                  name="title"
+                  onChange={handleChange}
+                  required
+                  value={formData.TitleEn}
+                />
               </div>
+
+              {/* Title Arabic */}
               <div>
-                <label className="text-sm font-medium">
-                  Course title (Arabic) <span className="text-red-500">*</span>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Course Title (Arabic)
                 </label>
-                <input type="text" className="input" />
+                <input
+                  type="text"
+                  className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
               </div>
+
+              {/* Description English */}
               <div>
-                <label className="text-sm font-medium">Description (English)</label>
-                <textarea className="input h-24" placeholder="Add your description ..." />
-              </div>
-              <div>
-                <label className="text-sm font-medium">Description (Arabic)</label>
-                <textarea className="input h-24" />
-              </div>
-              <div className="col-span-2">
-                <label className="text-sm font-medium">
-                  Deadline <span className="text-red-500">*</span>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Description (English)
                 </label>
-                <select className="input">
-                  <option>30 days after enrollment</option>
-                </select>
+                <textarea
+                  className="w-full border border-gray-300 rounded-lg px-4 py-2 h-28 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  placeholder="Add your description..."
+                  name="description"
+                  onChange={handleChange}
+                  value={formData.description}
+                />
+              </div>
+
+              {/* Description Arabic */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Description (Arabic)
+                </label>
+                <textarea
+                  className="w-full border border-gray-300 rounded-lg px-4 py-2 h-28 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  placeholder="Add your Arabic description..."
+                />
+              </div>
+
+              {/* Deadline */}
+              <div className="md:col-span-2">
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Duration <span className="text-red-500">*</span>
+                </label>
+                <input
+                  className="h-10 w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  name="duration"
+                  onChange={handleChange}
+                  value={formData.duration}
+                />
               </div>
             </div>
           </div>
-
           {/* Course Location */}
-          <div className="border rounded-lg p-6 bg-white shadow-sm space-y-4">
-            <h2 className="text-lg font-semibold">Course location</h2>
-            <div className="grid grid-cols-2 gap-4">
+          <div className="border rounded-2xl p-8 bg-white shadow-sm space-y-6">
+            <h2 className="text-xl font-semibold text-gray-800">
+              Course Location
+            </h2>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Course Type */}
               <div>
-                <label className="text-sm font-medium">
-                  Course type <span className="text-red-500">*</span>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Course Type <span className="text-red-500">*</span>
                 </label>
-                <select className="input">
-                  <option>Offline</option>
+                <select
+                  className=" h-10 w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  name="attendanceType"
+                  value={formData.attendanceType}
+                  onChange={handleChange}
+                >
+                  <option value="OFFLINE">Offline</option>
+                  <option value="ONLINE">Online</option>
+                  <option value="HYBRID">Hybrid</option>
                 </select>
               </div>
+
+              {/* Location (read-only) */}
               <div>
-                <label className="text-sm font-medium">
+                <label className="block text-sm font-medium text-gray-700 mb-1">
                   Location <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="text"
-                  className="input"
-                  value="El-Gaish, Tanta Qism 2, Tanta, Gharbia"
-                  readOnly
+                  className="h-10 w-full border border-gray-300 rounded-lg px-4 py-2 text-gray-600"
+                  placeholder="SS School..."
+                  value={formData.location}
+                  name="location"
+                  onChange={handleChange}
+                  required
                 />
               </div>
+            </div>
+            <div>
+              <MapLocationPicker
+                formData={formData}
+                setFormData={setFormData}
+              />
             </div>
           </div>
         </div>

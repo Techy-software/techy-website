@@ -1,37 +1,25 @@
 import HorizontalSteps from "../../reusable components/HorizontalSteps/HorizontalSteps";
 import CourseHeader from "../../reusable components/Header/CourseHeader";
+import React from "react";
 
-const CourseFAQSetup = ({ currentStep }) => {
+const CourseFAQSetup = ({ setCurrentStep, formData, setFormData }) => {
   const handleBack = () => {
-    console.log("Go back");
+    setCurrentStep((prev) => prev - 1);
   };
 
   const handleNext = () => {
-    console.log("Proceed to next step");
+    setCurrentStep((prev) => prev + 1);
   };
 
-  const renderFAQItem = () => (
-    <div className="border rounded-lg bg-white p-6 shadow-sm">
-      <div className="flex items-start justify-between">
-        <div className="flex items-start space-x-2">
-          <div className="mt-1 h-5 w-5 cursor-move text-gray-400">|||</div>
-          <div>
-            <h3 className="font-semibold text-sm mb-2">
-              What will I get if I subscribe to this Specialization?
-            </h3>
-            <p className="text-sm text-gray-600">
-              When you enroll in the course, you get access to all of the courses in the
-              Specialization, and you earn a certificate when you complete the work. Your electronic
-              Certificate will be added to your Accomplishments page - from there, you can print
-              your Certificate or add it to your LinkedIn profile. If you only want to read and view
-              the course content, you can audit the course for free.
-            </p>
-          </div>
-        </div>
-        <div className="text-gray-300 text-xl">🙂</div>
-      </div>
-    </div>
-  );
+  const handleFAQChange = (field, value) => {
+    setFormData((prev) => ({
+      ...prev,
+      faqs: {
+        ...prev.faqs,
+        [field]: value,
+      },
+    }));
+  };
 
   return (
     <>
@@ -41,7 +29,7 @@ const CourseFAQSetup = ({ currentStep }) => {
         headerStep="Setup"
         onBack={handleBack}
         onNext={handleNext}
-        nextLabel="Next Assign Mentors"
+        nextLabel="Next: Assign Mentors"
       />
 
       <div className="flex gap-6 p-6">
@@ -51,29 +39,48 @@ const CourseFAQSetup = ({ currentStep }) => {
             title="Publish your course"
             steps={[
               "Overview",
-              "Completion",
               "FAQs",
               "Pricing and payment methods",
               "Publishing",
             ]}
-            currentStep={currentStep}
+            currentStep={1}
+            setCurrentStep={setCurrentStep}
           />
         </div>
 
-        {/* FAQ Section */}
+        {/* FAQ Form */}
         <div className="w-3/4 space-y-6">
-          <div className="flex justify-between items-center">
-            <h2 className="text-lg font-semibold">FAQ</h2>
-            <button className="flex items-center space-x-2 border border-blue-500 text-blue-500 px-3 py-1.5 rounded-md hover:bg-blue-50">
-              <FaPlus className="text-sm" />
-              <span className="text-sm">New FAQ</span>
-            </button>
-          </div>
+          <h2 className="text-lg font-semibold">Frequently Asked Question</h2>
 
-          {/* Render FAQ items */}
-          {[1, 2, 3, 4].map((_, index) => (
-            <React.Fragment key={index}>{renderFAQItem()}</React.Fragment>
-          ))}
+          <div className="border rounded-lg bg-white p-6 shadow-sm space-y-4">
+            <div>
+              <label className="block text-sm font-medium mb-1">
+                Question <span className="text-red-500">*</span>
+              </label>
+              <input
+                type="text"
+                className="w-full p-3 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                placeholder="What will I get if I subscribe to this Specialization?"
+                value={formData.faqs?.question || ""}
+                onChange={(e) => handleFAQChange("question", e.target.value)}
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium mb-1">
+                About this course <span className="text-red-500">*</span>
+              </label>
+              <textarea
+                rows="5"
+                className="w-full p-3 border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                placeholder="When you enroll in this course, you will..."
+                value={formData.faqs?.["about course"] || ""}
+                onChange={(e) =>
+                  handleFAQChange("about course", e.target.value)
+                }
+              />
+            </div>
+          </div>
         </div>
       </div>
     </>

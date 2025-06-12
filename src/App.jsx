@@ -37,6 +37,10 @@ import JobsComponent from "./components/jobs-component/JobsComponent";
 import DummyLayout, { chekcAuthLoader } from "./components/DummyLayout";
 import StudentsTable from "./components/students/StudentsTable";
 import CourseLibraryComponent from "./components/course-library-component/course-library-component";
+import CourseSetup from "./components/course-setup-component/CourseSetup";
+import "leaflet/dist/leaflet.css";
+import CourseMentorAssignScreen from "./components/course-mentor/CourseMentorAssignScreen";
+import CoursesDashboard from "./components/CoursesDashboard/CoursesDashboard"
 
 const router = createBrowserRouter([
   { path: "/login", element: <LoginComponent /> },
@@ -46,7 +50,18 @@ const router = createBrowserRouter([
     element: <DummyLayout />,
     loader: chekcAuthLoader,
     children: [
-      { path: "courseDetails", element: <CourseDetailsComponent /> },
+      {
+        path: "courseDetails/:courseId",
+        element: <CourseDetailsComponent />,
+      },
+      {
+        path: "courseSetup/:courseId",
+        element: <CourseSetup currentStep={0} />,
+      },
+      {
+        path: "CourseMentorAssign/:courseId",
+        element: <CourseMentorAssignScreen />,
+      },
       { path: "addNewMentor", element: <AddMentorComponent /> },
       { path: "MentorDashBoard", element: <MentorDashboardMainPage /> },
       { path: "addStudent", element: <AddStudentComponent /> },
@@ -64,7 +79,10 @@ const router = createBrowserRouter([
         element: <Layout />,
         children: [
           { index: true, element: <DashboardPage /> },
-          { path: "courses", element: <CourseDetailsComponent staps={0} currentStep={0}/> },
+          {
+            path: "courses",
+            element: <CourseLibraryComponent />,
+          },
           { path: "mentors", element: <MentorsListComponent /> },
           { path: "students", element: <StudentsTable /> },
           { path: "opportunity", element: <OpportunityMain /> },
@@ -79,6 +97,7 @@ const router = createBrowserRouter([
           { path: "create-discount-coupon", element: <CreateDiscountCoupon /> },
           { path: "rewards", element: <Rewards /> },
           { path: "role", element: <RoleCompoenent /> },
+          { path: "course-details", element: <CoursesDashboard /> },
         ],
       },
     ],

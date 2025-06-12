@@ -2,7 +2,7 @@ import React from "react";
 import HorizontalSteps from "../../reusable components/HorizontalSteps/HorizontalSteps";
 import CourseHeader from "../../reusable components/Header/CourseHeader";
 
-const CompletionCourseSetup = ({ headerStep, currentStep }) => {
+const CompletionCourseSetup = ({ setCurrentStep }) => {
   return (
     <>
       <CourseHeader
@@ -11,7 +11,8 @@ const CompletionCourseSetup = ({ headerStep, currentStep }) => {
         headerStep="Setup"
         onBack={() => {}}
         onNext={() => {}}
-        nextLabel="Next"
+        nextLabel="Next Assign Mentors"
+        disabled
       />
 
       <div className="flex gap-6 p-6">
@@ -27,6 +28,7 @@ const CompletionCourseSetup = ({ headerStep, currentStep }) => {
               "Publishing",
             ]}
             currentStep={1}
+            setCurrentStep={setCurrentStep}
           />
         </div>
 
