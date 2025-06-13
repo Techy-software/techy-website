@@ -41,13 +41,12 @@ import CourseSetup from "./components/course-setup-component/CourseSetup";
 import "leaflet/dist/leaflet.css";
 import CourseMentorAssignScreen from "./components/course-mentor/CourseMentorAssignScreen";
 import CoursesDashboard from "./components/CoursesDashboard/CoursesDashboard"
-<<<<<<< Updated upstream
-import HomePage from "./AdminDashboard/screens/HomePage/HomePage";
-=======
-import ForAcademy from './AdminDashboard/screens/ForAcademy/foracademy';
-import PricingSection from './AdminDashboard/screens/PricingSection/PricingSection';
 
->>>>>>> Stashed changes
+import HomePage from "./AdminDashboard/screens/HomePage/HomePage";
+
+import ForAcademy from './AdminDashboard/screens/ForAcademy/foracademy';
+import AboutTechy from './AdminDashboard/screens/AboutTechy/AboutTechy';
+
 
 const router = createBrowserRouter([
   { path: "/login", element: <LoginComponent /> },
@@ -107,7 +106,7 @@ const router = createBrowserRouter([
           { path: "role", element: <RoleCompoenent /> },
           { path: "course-details", element: <CoursesDashboard /> },
           { path: "for-academy", element: <ForAcademy /> },
-          { path: "pricing-section", element: <PricingSection /> },
+          { path: "aboutTechy", element: <AboutTechy /> },
 
         ],
       },
