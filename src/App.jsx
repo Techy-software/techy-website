@@ -46,6 +46,9 @@ import HomePage from "./AdminDashboard/screens/HomePage/HomePage";
 
 import ForAcademy from './AdminDashboard/screens/ForAcademy/foracademy';
 import AboutTechy from './AdminDashboard/screens/AboutTechy/AboutTechy';
+import BecomeAPartner from './AdminDashboard/screens/BecomeAPartner/BecomeAPartner';
+import DiscoverJobs from './AdminDashboard/screens/DiscoverJobs/DiscoverJobs';
+
 
 
 const router = createBrowserRouter([
@@ -107,6 +110,8 @@ const router = createBrowserRouter([
           { path: "course-details", element: <CoursesDashboard /> },
           { path: "for-academy", element: <ForAcademy /> },
           { path: "aboutTechy", element: <AboutTechy /> },
+          { path: "discoverJobs", element: <DiscoverJobs /> },
+          { path: "becomeAPartner", element: <BecomeAPartner /> },
 
         ],
       },
