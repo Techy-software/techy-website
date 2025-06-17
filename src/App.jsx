@@ -40,22 +40,22 @@ import CourseLibraryComponent from "./components/course-library-component/course
 import CourseSetup from "./components/course-setup-component/CourseSetup";
 import "leaflet/dist/leaflet.css";
 import CourseMentorAssignScreen from "./components/course-mentor/CourseMentorAssignScreen";
-import CoursesDashboard from "./components/CoursesDashboard/CoursesDashboard"
+import CoursesDashboard from "./components/CoursesDashboard/CoursesDashboard";
 
 import HomePage from "./AdminDashboard/screens/HomePage/HomePage";
 
-import ForAcademy from './AdminDashboard/screens/ForAcademy/foracademy';
-import AboutTechy from './AdminDashboard/screens/AboutTechy/AboutTechy';
-import BecomeAPartner from './AdminDashboard/screens/BecomeAPartner/BecomeAPartner';
-import DiscoverJobs from './AdminDashboard/screens/DiscoverJobs/DiscoverJobs';
-
-
+import ForAcademy from "./AdminDashboard/screens/ForAcademy/foracademy";
+import AboutTechy from "./AdminDashboard/screens/AboutTechy/AboutTechy";
+import BecomeAPartner from "./AdminDashboard/screens/BecomeAPartner/BecomeAPartner";
+import DiscoverJobs from "./AdminDashboard/screens/DiscoverJobs/DiscoverJobs";
+import Course from "./AdminDashboard/screens/Course/Course";
 
 const router = createBrowserRouter([
   { path: "/login", element: <LoginComponent /> },
   { path: "/flogin", element: <ForgetPassword /> },
   { path: "/rlogin", element: <ResetPassword /> },
-  {path: "/Home", element: <HomePage />},
+  { path: "/Home", element: <HomePage /> },
+  { path: "/CourseOverview", element: <Course /> },
   {
     element: <DummyLayout />,
     loader: chekcAuthLoader,
@@ -112,7 +112,6 @@ const router = createBrowserRouter([
           { path: "aboutTechy", element: <AboutTechy /> },
           { path: "discoverJobs", element: <DiscoverJobs /> },
           { path: "becomeAPartner", element: <BecomeAPartner /> },
-
         ],
       },
     ],

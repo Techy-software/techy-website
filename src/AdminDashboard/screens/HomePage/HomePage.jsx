@@ -1,3 +1,6 @@
+import FaqSection from "../../components/FaqSection/FaqSection";
+import Footer from "../../components/footer/Footer";
+import NavBar from "../../components/NavBar/NavBar";
 import ExploreLearningHub from "./ExploreLearningHub";
 import HowItWorks from "./HowItWorks";
 import PortfolioHero from "./PortfolioHero";
@@ -6,39 +9,7 @@ import TechLeaders from "./TechLeaders";
 const HomePage = () => {
   return (
     <div className="min-h-screen bg-white font-sans text-gray-800 antialiased">
-      <header className="py-4 px-6 md:px-12 bg-white shadow-sm sticky top-0 z-50">
-        <nav className="flex items-center justify-between max-w-7xl mx-auto">
-          <div className="text-2xl font-extrabold text-gray-900 tracking-tight">
-            Techy
-          </div>
-          <div className="hidden md:flex space-x-8 text-sm font-medium">
-            {["Home", "Features", "About", "Contact"].map((item) => (
-              <a
-                key={item}
-                href="#"
-                className="text-gray-600 hover:text-yellow-500 transition-colors duration-200"
-              >
-                {item}
-              </a>
-            ))}
-          </div>
-          <button className="md:hidden p-2 rounded-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-300">
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h16m-7 6h7"
-              />
-            </svg>
-          </button>
-        </nav>
-      </header>
+      <NavBar />
 
       <main className="relative max-w-7xl mx-auto px-6 py-16 md:py-24">
         <div className="absolute top-10 right-6 md:top-20 md:right-10 text-pink-500 opacity-60">
@@ -233,6 +204,8 @@ const HomePage = () => {
       <main className="relative max-w-7xl mx-auto px-6 py-16 md:py-24">
         <PortfolioHero />
       </main>
+      <FaqSection />
+      <Footer />
     </div>
   );
 };
