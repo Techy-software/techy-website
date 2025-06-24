@@ -7,7 +7,7 @@ const TodaySales = () => {
       <div className="flex items-center justify-between mb-4">
         <div>
           <h2 className="text-lg font-bold">Today's Sales</h2>
-          <p className="text-sm text-gray-600">Subtitle</p>
+          <p className="text-sm text-gray-600">Sales Summery</p>
         </div>
         <button className="bg-blue-500 text-white py-2 px-4 rounded">
           Export
