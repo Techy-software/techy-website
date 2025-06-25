@@ -46,29 +46,6 @@ const MentorTable = ({ lists, info = false, OptionsButton }) => {
           )}
         </tbody>
       </table>
-
-      <div className="flex justify-between items-center mt-4">
-        <div className="flex items-center space-x-2">
-          <span>Show</span>
-          <select className="border rounded-md px-2 py-1 text-gray-400">
-            <option>6</option>
-            <option>12</option>
-            <option>24</option>
-          </select>
-        </div>
-        <div className="flex items-center space-x-8">
-          <button className="text-gray-400">&lt;</button>
-          <button className="px-3 py-1 rounded bg-blue-500 text-white">
-            1
-          </button>
-          <button className="">2</button>
-          <button className="">3</button>
-          <button className="">4</button>
-          <span>...</span>
-          <button className="">7</button>
-          <button className="text-gray-400">&gt;</button>
-        </div>
-      </div>
     </div>
   );
 };
