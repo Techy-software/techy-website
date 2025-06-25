@@ -1,6 +1,20 @@
 import React from "react";
+import { post } from "../../utils/HtppService";
+import { objectToFormData } from "../../utils/objectToFormData";
+import { useNavigate } from "react-router-dom";
 
-const AcademyTopbar = () => {
+const AcademyTopbar = ({ academyData, setAcademyData }) => {
+  const navigator = useNavigate();
+  const createNewAcademy = async () => {
+    const formDataToSend = objectToFormData(academyData);
+    try {
+      const response = await post("/school/management/create/", formDataToSend);
+      console.log(response);
+    } catch (error) {
+      console.error("Error creating academy:", error);
+      return;
+    }
+  };
   return (
     <>
       <div className="sticky top-0 flex justify-between items-center bg-white p-6 shadow pb-6">
@@ -31,7 +45,10 @@ const AcademyTopbar = () => {
         <div className="flex items-center">
           <span className="mr-4 px-2 py-1 text-sm text-gray-500">Saved</span>
           {/* <span className="text-gray-500 mr-4">Saved</span> */}
-          <button className="bg-blue-500 text-white px-10 py-2 rounded w-100 ">
+          <button
+            className="bg-blue-500 text-white px-10 py-2 rounded w-100"
+            onClick={createNewAcademy}
+          >
             Submit
           </button>
         </div>

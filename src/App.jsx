@@ -40,7 +40,7 @@ import CourseLibraryComponent from "./components/course-library-component/course
 import CourseSetup from "./components/course-setup-component/CourseSetup";
 import "leaflet/dist/leaflet.css";
 import CourseMentorAssignScreen from "./components/course-mentor/CourseMentorAssignScreen";
-import CoursesDashboard from "./components/CoursesDashboard/CoursesDashboard"
+import CoursesDashboard from "./components/CoursesDashboard/CoursesDashboard";
 
 const router = createBrowserRouter([
   { path: "/login", element: <LoginComponent /> },
@@ -66,7 +66,7 @@ const router = createBrowserRouter([
       { path: "MentorDashBoard", element: <MentorDashboardMainPage /> },
       { path: "addStudent", element: <AddStudentComponent /> },
       { path: "StudentDashBoard", element: <StudentDashboardMainPage /> },
-      { path: "Addacademy", element: <AddAcademy currentStep={0} /> },
+      { path: "Addacademy", element: <AddAcademy /> },
       { path: "academyDashboard", element: <AcademyDetails /> },
       { path: "opportunityView", element: <OpportunityView /> },
       { path: "opportunityDetails", element: <OpportunityDetails /> },

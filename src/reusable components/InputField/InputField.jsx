@@ -15,7 +15,7 @@ export default function InputField({
         type={type}
         placeholder={placeholder}
         value={value}
-        // onChange={setValue}  // Uncomment when onChange is Ready
+        onChange={setValue} // Uncomment when onChange is Ready
         required
         style={style}
       />
