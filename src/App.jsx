@@ -76,7 +76,7 @@ const router = createBrowserRouter([
       { path: "MentorDashBoard", element: <MentorDashboardMainPage /> },
       { path: "addStudent", element: <AddStudentComponent /> },
       { path: "StudentDashBoard", element: <StudentDashboardMainPage /> },
-      { path: "Addacademy", element: <AddAcademy currentStep={0} /> },
+      { path: "Addacademy", element: <AddAcademy /> },
       { path: "academyDashboard", element: <AcademyDetails /> },
       { path: "opportunityView", element: <OpportunityView /> },
       { path: "opportunityDetails", element: <OpportunityDetails /> },

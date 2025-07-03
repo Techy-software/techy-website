@@ -1,20 +1,17 @@
 import React from "react";
-import { Outlet } from "react-router-dom"; // To render the nested routes
+import { Outlet } from "react-router-dom";
 import Topbar from "./Topbar";
 import Sidebar from "./Sidebar";
 
 const Layout = () => {
   return (
-    <div className="flex h-screen">
-      {/* Sidebar */}
+    <div className="h-screen">
       <Sidebar />
-      {/* Main content area */}
-      <div className="flex flex-col flex-1 ml-20">
-        {/* Topbar */}
+
+      <div className="flex flex-col h-full">
         <Topbar />
 
-        {/* Main content outlet for nested routes */}
-        <div className="flex-1 p-4 overflow-y-auto">
+        <div className="flex-1 p-4 overflow-y-auto pl-20">
           <Outlet />
         </div>
       </div>

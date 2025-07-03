@@ -4,6 +4,11 @@ import { useNavigate } from "react-router-dom";
 
 const MentorRowInfo = ({ mentor, OptionsButton }) => {
   const navigator = useNavigate();
+
+  const handleDefaultAction = () => {
+    navigator("/MentorDashBoard", { state: { id: mentor.userId } });
+  };
+
   return (
     <tr className="border-b border-gray-200 hover:bg-gray-50">
       <td className="py-3 px-2 text-sm">{mentor.fullName}</td>
@@ -23,21 +28,26 @@ const MentorRowInfo = ({ mentor, OptionsButton }) => {
               : "bg-gray-100 text-gray-600"
           }`}
         >
-          {mentor.isActive ? " Active" : "Inactive"}
+          {mentor.isActive ? "Active" : "Inactive"}
         </span>
       </td>
-      <td
-        className="py-3 px-4 text-center"
-        onClick={(e) => {
-          if (OptionsButton) {
-            OptionsButton(e);
-          } else {
-            navigator("/MentorDashBoard", { state: { id: mentor.id } });
-          }
-        }}
-        data-id={mentor.mentorId}
-      >
-        <FontAwesomeIcon icon={faEllipsis} style={{ color: "#016BDD" }} />
+      <td className="py-3 px-4 text-center">
+        {OptionsButton ? (
+          <div
+            onClick={(e) => OptionsButton(e)}
+            data-id={mentor.mentorId}
+            className="cursor-pointer"
+          >
+            <FontAwesomeIcon icon={faEllipsis} style={{ color: "#016BDD" }} />
+          </div>
+        ) : (
+          <button
+            className="px-2 py-1 bg-white text-blue-500 border border-gray-200 rounded hover:bg-gray-100"
+            onClick={handleDefaultAction}
+          >
+            View Profile
+          </button>
+        )}
       </td>
     </tr>
   );
