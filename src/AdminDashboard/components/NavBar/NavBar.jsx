@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const NavBar = () => {
   const [activeTab, setActiveTab] = useState("Home");
+  const navigator = useNavigate();
 
   const tabs = [
     "Home",
@@ -12,6 +14,14 @@ const NavBar = () => {
     "FAQs",
     "Contact us",
   ];
+
+  const handleLogin = () => {
+    navigator("/login");
+  };
+
+  const handleBecomePartner = () => {
+    navigator("/becomeAPartner");
+  };
 
   return (
     <header className="py-2 px-4 bg-blue-600 shadow-sm sticky top-0 z-50 rounded-b-xl">
@@ -53,9 +63,20 @@ const NavBar = () => {
           ))}
         </nav>
 
-        <button className="bg-orange-400 text-white font-semibold py-2.5 px-6 rounded-full shadow-md hover:bg-yellow-500 transition-colors duration-200">
-          Become A Partner
-        </button>
+        <div className="flex gap-4">
+          <button
+            onClick={handleLogin}
+            className="bg-white text-blue-600 font-semibold py-2.5 px-6 rounded-full shadow-md hover:bg-gray-100 transition-colors duration-200"
+          >
+            Login
+          </button>
+          <button
+            onClick={handleBecomePartner}
+            className="bg-orange-400 text-white font-semibold py-2.5 px-6 rounded-full shadow-md hover:bg-yellow-500 transition-colors duration-200"
+          >
+            Become A Partner
+          </button>
+        </div>
       </div>
     </header>
   );
