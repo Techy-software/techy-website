@@ -12,6 +12,7 @@ import { eye } from "react-icons-kit/feather/eye";
 import { eyeOff } from "react-icons-kit/feather/eyeOff";
 import Cookies from "js-cookie";
 import CryptoJS from "crypto-js";
+import { cross } from "react-icons-kit/icomoon/cross";
 
 const ENCRYPTION_KEY = "mySecret1234!";
 
@@ -23,7 +24,8 @@ const LoginComponent = () => {
     password: "",
   });
   const [showPassword, setShowPassword] = React.useState(false);
-  const [showForgotPasswordModal, setShowForgotPasswordModal] = React.useState(false);
+  const [showForgotPasswordModal, setShowForgotPasswordModal] =
+    React.useState(false);
   const [forgotMobile, setForgotMobile] = React.useState("");
   const [otpModalVisible, setOtpModalVisible] = React.useState(false);
   const [otpCode, setOtpCode] = React.useState("");
@@ -54,7 +56,10 @@ const LoginComponent = () => {
       secureLocalStorage.setItem("securityToken", token.accessToken);
 
       // Encrypt and store in cookie
-      const encrypted = CryptoJS.AES.encrypt(credentials.password, ENCRYPTION_KEY).toString();
+      const encrypted = CryptoJS.AES.encrypt(
+        credentials.password,
+        ENCRYPTION_KEY
+      ).toString();
       Cookies.set(
         "lastUser",
         JSON.stringify({ username: credentials.username, password: encrypted }),
@@ -70,7 +75,10 @@ const LoginComponent = () => {
 
   const handleLastUserLogin = async () => {
     try {
-      const decrypted = CryptoJS.AES.decrypt(encryptedPassword, ENCRYPTION_KEY).toString(CryptoJS.enc.Utf8);
+      const decrypted = CryptoJS.AES.decrypt(
+        encryptedPassword,
+        ENCRYPTION_KEY
+      ).toString(CryptoJS.enc.Utf8);
 
       const token = await post("/auth/login/", {
         usernameOrPhoneNumber: lastUser,
@@ -120,10 +128,14 @@ const LoginComponent = () => {
         <img src={techyLogo} alt="Techy logo" className="logo-img" />
         <div className="text-div">
           <h1 className="welcome-text">Welcome to techy</h1>
-          <p className="desctiption-text">the simplest way to manage your Academy</p>
+          <p className="desctiption-text">
+            the simplest way to manage your Academy
+          </p>
           <p className="caption-text">
             track your students' progress and manage your courses
-            <span className="line-break">mentors, opportunities all in one platform.</span>
+            <span className="line-break">
+              mentors, opportunities all in one platform.
+            </span>
           </p>
         </div>
       </div>
@@ -165,7 +177,10 @@ const LoginComponent = () => {
                   setCredentials({ ...credentials, password: e.target.value })
                 }
               />
-              <span className="input-icon" onClick={() => setShowPassword(!showPassword)}>
+              <span
+                className="input-icon"
+                onClick={() => setShowPassword(!showPassword)}
+              >
                 <Icon icon={showPassword ? eyeOff : eye} size={18} />
               </span>
             </div>
@@ -193,13 +208,89 @@ const LoginComponent = () => {
       </div>
 
       {/* Last User Login */}
-      {lastUser && (
-        <div>
+      {/* {lastUser && (
+        <div className="relative">
           <h2 className="login-text">Login as</h2>
-          <div className="user-container cursor-pointer" onClick={handleLastUserLogin}>
+          <div
+            className="user-container cursor-pointer"
+            onClick={handleLastUserLogin}
+          >
             <img src={userImage} alt="User" />
             <h3 className="user-name-text">{lastUser}</h3>
             <h4 className="activity-caption">Last logged in</h4>
+          </div>
+          <span
+            className="absolute top-0 right-2 text-gray-500 hover:text-red-500 cursor-pointer"
+            onClick={() => {
+              Cookies.remove("lastUser");
+              setLastUser("");
+              setEncryptedPassword("");
+            }}
+            title="Remove last user"
+          >
+            <Icon icon={cross} size={18} />
+          </span>
+        </div>
+      )} */}
+
+      {/* <div className="relative">
+        <h2 className="login-text">Login as</h2>
+        <div
+          className={`user-container ${
+            lastUser ? "cursor-pointer" : "opacity-50 cursor-default"
+          }`}
+          onClick={() => lastUser && handleLastUserLogin()}
+        >
+          <img src={userImage} alt="User" />
+          <h3 className="user-name-text">{lastUser || "No saved user"}</h3>
+          <h4 className="activity-caption">
+            {lastUser ? "Last logged in" : "No recent login saved"}
+          </h4>
+        </div>
+
+        <span
+          className="absolute top-0 right-2 text-gray-500 hover:text-red-500 cursor-pointer"
+          onClick={() => {
+            Cookies.remove("lastUser");
+            setLastUser("");
+            setEncryptedPassword("");
+          }}
+          title="Remove last user"
+        >
+          <Icon icon={cross} size={18} />
+        </span>
+      </div> */}
+
+      {lastUser && (
+        <div className="mt-8 ml-8">
+          <h2 className="text-xl font-semibold mb-4 text-gray-800">Login as</h2>
+
+          <div className="relative bg-white shadow-md rounded-xl p-4 flex flex-col items-center w-64">
+            {/* Close (X) icon */}
+            <span
+              className="absolute top-2 right-2 text-gray-400 hover:text-red-500 cursor-pointer"
+              onClick={() => {
+                Cookies.remove("lastUser");
+                localStorage.removeItem("lastUser");
+                secureLocalStorage.removeItem("securityToken");
+                setLastUser("");
+                setEncryptedPassword("");
+              }}
+              title="Remove saved user"
+            >
+              <Icon icon={cross} size={16} />
+            </span>
+
+            <img src={userImage} alt="User" className="w-16 h-16 mb-2" />
+            <h3 className="text-lg font-medium text-gray-700">{lastUser}</h3>
+            <h4 className="text-sm text-gray-500">Last logged in</h4>
+
+            <button
+              onClick={handleLastUserLogin}
+              className="mt-3 px-4 py-1 bg-blue-600 text-white text-sm rounded hover:bg-blue-700 transition"
+            >
+              Log in
+            </button>
           </div>
         </div>
       )}
@@ -208,8 +299,12 @@ const LoginComponent = () => {
       {showForgotPasswordModal && (
         <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
           <div className="bg-white w-[90%] max-w-md rounded-xl shadow-lg p-6 text-center">
-            <h2 className="text-2xl font-semibold mb-3 text-gray-800">Forgot Password</h2>
-            <p className="text-sm text-gray-600 mb-4">Enter your registered mobile number:</p>
+            <h2 className="text-2xl font-semibold mb-3 text-gray-800">
+              Forgot Password
+            </h2>
+            <p className="text-sm text-gray-600 mb-4">
+              Enter your registered mobile number:
+            </p>
             <input
               type="text"
               placeholder="Mobile number"
@@ -239,7 +334,9 @@ const LoginComponent = () => {
       {otpModalVisible && (
         <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
           <div className="bg-white w-[90%] max-w-md rounded-xl shadow-lg p-6 text-center">
-            <h2 className="text-2xl font-semibold mb-3 text-gray-800">Enter OTP</h2>
+            <h2 className="text-2xl font-semibold mb-3 text-gray-800">
+              Enter OTP
+            </h2>
             <p className="text-sm text-gray-600 mb-4">
               Enter the 6-digit code sent to your mobile.
             </p>
