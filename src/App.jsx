@@ -1,4 +1,3 @@
-import CourseDetilasComponent from "./components/course-details-component/course-details-component";
 import AddMentorComponent from "./components/add-mentor-component/add-mentor-component";
 import AddAcademy from "./components/AddAcademy/AddAcademy";
 import JobDetails from "./components/jobs-component/JobDetails";
@@ -7,12 +6,8 @@ import MentorDashboardMainPage from "./components/MentorDashboard/MentorDashboar
 import Rewards from "./components/Reward/Rewards";
 import RewardDetails from "./components/Reward/RewardDetails";
 import AddReward from "./components/Reward/AddReward";
-import Sidebar from "./components/Sidebar";
 import Layout from "./components/Layout";
 import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
@@ -40,12 +35,22 @@ import CourseLibraryComponent from "./components/course-library-component/course
 import CourseSetup from "./components/course-setup-component/CourseSetup";
 import "leaflet/dist/leaflet.css";
 import CourseMentorAssignScreen from "./components/course-mentor/CourseMentorAssignScreen";
-import CoursesDashboard from "./components/CoursesDashboard/CoursesDashboard"
+import CoursesDashboard from "./components/CoursesDashboard/CoursesDashboard";
+
+import HomePage from "./AdminDashboard/screens/HomePage/HomePage";
+
+import ForAcademy from "./AdminDashboard/screens/ForAcademy/foracademy";
+import AboutTechy from "./AdminDashboard/screens/AboutTechy/AboutTechy";
+import BecomeAPartner from "./AdminDashboard/screens/BecomeAPartner/BecomeAPartner";
+import DiscoverJobs from "./AdminDashboard/screens/DiscoverJobs/DiscoverJobs";
+import Course from "./AdminDashboard/screens/Course/Course";
 
 const router = createBrowserRouter([
   { path: "/login", element: <LoginComponent /> },
   { path: "/flogin", element: <ForgetPassword /> },
   { path: "/rlogin", element: <ResetPassword /> },
+  { path: "/Home", element: <HomePage /> },
+  { path: "/CourseOverview", element: <Course /> },
   {
     element: <DummyLayout />,
     loader: chekcAuthLoader,
@@ -66,7 +71,7 @@ const router = createBrowserRouter([
       { path: "MentorDashBoard", element: <MentorDashboardMainPage /> },
       { path: "addStudent", element: <AddStudentComponent /> },
       { path: "StudentDashBoard", element: <StudentDashboardMainPage /> },
-      { path: "Addacademy", element: <AddAcademy currentStep={0} /> },
+      { path: "Addacademy", element: <AddAcademy /> },
       { path: "academyDashboard", element: <AcademyDetails /> },
       { path: "opportunityView", element: <OpportunityView /> },
       { path: "opportunityDetails", element: <OpportunityDetails /> },
@@ -98,6 +103,10 @@ const router = createBrowserRouter([
           { path: "rewards", element: <Rewards /> },
           { path: "role", element: <RoleCompoenent /> },
           { path: "course-details", element: <CoursesDashboard /> },
+          { path: "for-academy", element: <ForAcademy /> },
+          { path: "aboutTechy", element: <AboutTechy /> },
+          { path: "discoverJobs", element: <DiscoverJobs /> },
+          { path: "becomeAPartner", element: <BecomeAPartner /> },
         ],
       },
     ],

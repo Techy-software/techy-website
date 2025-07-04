@@ -11,7 +11,7 @@ import PersonalPicture from "../../assets/PersonalPicture.png";
 import { useEffect, useState } from "react";
 import postImage from "../../assets/postImage.jpeg";
 import OverviewMentor from "./OverviewMentor";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { HttpClient } from "../../utils/HttpClient";
 import { get } from "../../utils/HtppService";
 
@@ -25,11 +25,11 @@ const MentorDashboardMainPage = () => {
   const navigator = useNavigate();
   const [activeComponent, setActiveComponent] = useState("Overview");
   const [data, setData] = useState({});
-  // const { data, isLoading } = useMentor({ url: "mentors/37/contact/" });
+  const location = useLocation();
 
   const fetchData = async () => {
     try {
-      const response = await get("/school/mentor/details/117");
+      const response = await get(`/school/mentor/details/${location.state.id}`);
       console.log("data", response);
       setData(response);
     } catch (error) {

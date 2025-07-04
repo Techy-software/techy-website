@@ -25,12 +25,12 @@ const MentorGrid = ({ mentor, OptionsButton }) => {
           <button
             className="bg-white text-blue-500 text-semibold border py-2 px-3 rounded-xl"
             onClick={() => {
-              navigator("/MentorDashBoard", { state: { id: mentor.id } });
+              navigator("/MentorDashBoard", { state: { id: mentor.userId } });
             }}
           >
             View Profile
           </button>
-          <button
+          {OptionsButton && <button
             className="bg-white border p-2 px-3 rounded-xl"
             onClick={OptionsButton}
             data-id={mentor.mentorId}
@@ -40,7 +40,7 @@ const MentorGrid = ({ mentor, OptionsButton }) => {
               style={{ color: "#016BDD" }}
               value={mentor.mentorId}
             />
-          </button>
+          </button>}
         </div>
       </div>
     </div>

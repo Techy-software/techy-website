@@ -1,37 +1,36 @@
-.logo-img{
+.logo-img {
   margin-left: 73px;
   margin-top: 25px;
 }
 
-.top-div{
+.top-div {
   position: absolute;
-  width: 100%;                 
-  height: 50%;                
-  background-image: url('../../assets/blueBackgroundWithGlasses.svg');
-  background-size: cover;        
-  background-position: center;   
-  background-repeat: no-repeat;  
-  border: 1px solid black;      
+  width: 100%;
+  height: 50%;
+  background-image: url("../../assets/blueBackgroundWithGlasses.svg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border: 1px solid black;
   overflow: hidden;
   display: grid;
   grid-template-rows: 1fr auto;
-
 }
 
-.text-div{
+.text-div {
   align-self: end;
   padding-left: 73px;
   padding-bottom: 20px;
 }
 
-.welcome-text{
+.welcome-text {
   align-self: end;
   color: #fff;
   font-size: 48px;
   font-weight: 700;
 }
 
-.desctiption-text{
+.desctiption-text {
   padding-top: 8px;
   padding-bottom: 8px;
   color: #fff;
@@ -39,7 +38,7 @@
   font-weight: 700;
 }
 
-.caption-text{
+.caption-text {
   color: #fff;
   font-size: 14px;
   font-weight: 400;
@@ -47,31 +46,31 @@
 
 .line-break {
   display: block;
-  margin-top: 1px; 
+  margin-top: 1px;
 }
 
-.container{
+.container {
   position: relative;
-    width: 100%;
-    background-image: url('path/to/your/background-image.jpg'); /* Replace with your background image */
-    background-size: cover;
-    background-position: center;
-    align-items: center;
-    justify-content: center;
-    display: flex;
-    height: 70vh;
+  width: 100%;
+  background-image: url("path/to/your/background-image.jpg"); /* Replace with your background image */
+  background-size: cover;
+  background-position: center;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  height: 70vh;
 }
 
-.center-image{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    z-index: 1;
-    padding-right: 70px;
+.center-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  z-index: 1;
+  padding-right: 70px;
 }
 
-.login-container{
+.login-container {
   display: flex;
   flex-direction: column; /* Stack elements vertically */
   align-items: center; /* Center items horizontally within the container */
@@ -81,29 +80,29 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow for visibility */
   position: absolute; /* Absolute positioning */
   right: 0; /* Align to the right */
-  margin: 20px; 
+  margin: 20px;
   width: 37%;
   margin-top: 150px;
   z-index: 1;
 }
-.login-top-row{
+.login-top-row {
   display: flex;
   justify-content: space-between;
   justify-content: center;
 }
 
-.switch-language{
+.switch-language {
   font-weight: 500;
   font-size: 14px;
-  color: #016BDD;
-  align-self:center;
+  color: #016bdd;
+  align-self: center;
   padding-left: 5px;
 }
 
-.login-container-text{
+.login-container-text {
   display: flex;
   flex-direction: column;
-  align-items: flex-start; 
+  align-items: flex-start;
   padding-right: 250px;
 }
 .password-label {
@@ -114,125 +113,234 @@
   align-content: start;
 }
 
-.username-label{
+.username-label {
   margin-bottom: 5px;
 }
 
-.username-container{
-  width: 100%; /* Adjust to fit your design */
-    margin-top: 10px;
-    margin-bottom: 10px;
-    padding-left: 40px;/* Center the container horizontally */
-    display: flex;
-    flex-direction: column;
+.username-container {
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding-left: 40px;
+  display: flex;
+  flex-direction: column;
 }
 
-.input-field{
+.input-wrapper {
+  position: relative;
   width: 90%;
-  height: 40px;
-  border-radius: 10px; /* Rounds the edges of the input field */
-  border: 1px solid #ccc; 
-  padding: 10px;
+  max-width: 420px; /* Optional: set consistent max width */
 }
 
+.input-field {
+  width: 100%;
+  height: 40px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  padding: 0 38px 0 12px; /* Enough space for the icon */
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.input-icon {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #555;
+}
 
 .checkbox-container {
   display: flex;
-  align-items: center; /* Vertically center items */
-  justify-content: space-between; /* Space items to the edges */
-  max-width: 400px; /* Adjust to fit your design */
-  margin: 0 auto; /* Center the container horizontally */
-  padding-top: 20px;
+  justify-content: space-between; /* Pushes items to ends */
+  align-items: center;
+  width: 100%; /* Full width of the login container */
+  padding: 0 40px; /* Left & right padding */
+  margin-top: 20px;
 }
 
 /* Styling for the checkbox and its label */
 .checkbox-label {
   display: flex;
-  align-items: center; /* Center checkbox and text vertically */
-  font-size: 16px; /* Adjust font size as needed */
-  color: #333; /* Adjust color as needed */
-  margin-right: 170px;
+  align-items: center;
+  font-size: 16px;
+  color: #333;
+  gap: 8px; /* Optional: adds space between checkbox and text */
+  margin: 0;
 }
 
 .checkbox-input {
   margin-right: 8px; /* Space between checkbox and text */
 }
 
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: #ffffff;
+  padding: 30px 20px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.modal-content h2 {
+  margin-bottom: 16px;
+  font-size: 22px;
+  font-weight: 600;
+  color: #333;
+}
+
+.modal-content p {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 12px;
+}
+
+.modal-content .input-field {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.modal-content .input-field:focus {
+  border-color: #007bff;
+}
+
+.button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.modal-content .login-button,
+.modal-content .login-button.cancel {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.modal-content .login-button {
+  background-color: #016bdd;
+  color: white;
+}
+
+.modal-content .login-button.cancel {
+  background-color: #e0e0e0;
+  color: #333;
+}
+
+/* Optional fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 .forgot-password {
   font-size: 16px; /* Adjust font size as needed */
   color: #007bff; /* Link color (adjust as needed) */
   text-decoration: none; /* Remove underline */
+  cursor: pointer;
+  margin-left: auto;
 }
 
 .forgot-password:hover {
   text-decoration: none; /* Ensure no underline on hover */
 }
 
-.login-button-container{
+.login-button-container {
   display: flex;
   justify-content: center; /* Center the button horizontally */
   margin-top: 20px; /* Space above the button */
   width: 83%; /* Adjust to fit your design */
 }
 
-.login-button{
+.login-button {
   display: block; /* Ensures the button takes up the full width of its container */
-    width: 100%; /* Makes the button span the full width */
-    padding: 12px 20px; /* Adds space inside the button */
-    font-size: 16px; /* Adjust font size as needed */
-    border: none; /* Removes the default border */
-    border-radius: 8px; /* Rounds the corners of the button */
-    background-color: #016BDD; /* Blue background color */
-    color: #fff; /* White text color */
-    cursor: pointer; /* Changes the cursor to a pointer on hover */
-    text-align: center; /* Centers the text inside the button */
-    transition: background-color 0.3s;
+  width: 100%; /* Makes the button span the full width */
+  padding: 12px 20px; /* Adds space inside the button */
+  font-size: 16px; /* Adjust font size as needed */
+  border: none; /* Removes the default border */
+  border-radius: 8px; /* Rounds the corners of the button */
+  background-color: #016bdd; /* Blue background color */
+  color: #fff; /* White text color */
+  cursor: pointer; /* Changes the cursor to a pointer on hover */
+  text-align: center; /* Centers the text inside the button */
+  transition: background-color 0.3s;
 }
 
-.bottom-div{
+.bottom-div {
   position: absolute;
-  width: 100%;                 
-  height: 50%; 
+  width: 100%;
+  height: 50%;
   display: grid;
   grid-template-rows: 1fr auto;
 }
 
-.user-container{
-    margin-left: 73px;
-    color: #000;
-    font-size: 14px;
-    font-weight: 500;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid #E6E6E6;
-    border-radius: 15px; 
-    display: inline-block;
-    padding: 25px;
-    background-color: #FAFBFC;
+.user-container {
+  margin-left: 73px;
+  color: #000;
+  font-size: 14px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #e6e6e6;
+  border-radius: 15px;
+  display: inline-block;
+  padding: 25px;
+  background-color: #fafbfc;
 }
 
-.login-text{
-    color: #000;
-    font-size: 16px;
-    font-weight: 500;
-    padding-left: 73px;
-    margin-bottom: 10px;
-    margin-top: -85px;
+.login-text {
+  color: #000;
+  font-size: 16px;
+  font-weight: 500;
+  padding-left: 73px;
+  margin-bottom: 10px;
+  margin-top: -85px;
 }
 
-.activity-caption{
-    color: #7E7E7E;
-    font-size: 12px;
-    font-weight: 400;
+.activity-caption {
+  color: #7e7e7e;
+  font-size: 12px;
+  font-weight: 400;
 }
 
-.user-name-text{
+.user-name-text {
   margin-top: 15px;
   margin-bottom: 5px;
-    color: #000;
-    font-size: 14px;
-    font-weight: 500;
+  color: #000;
+  font-size: 14px;
+  font-weight: 500;
 }
-
-
