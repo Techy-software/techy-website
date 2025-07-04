@@ -118,40 +118,58 @@
   margin-bottom: 5px;
 }
 
-.username-container{
-  width: 100%; /* Adjust to fit your design */
-    margin-top: 10px;
-    margin-bottom: 10px;
-    padding-left: 40px;/* Center the container horizontally */
-    display: flex;
-    flex-direction: column;
+.username-container {
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding-left: 40px;
+  display: flex;
+  flex-direction: column;
 }
 
-.input-field{
+.input-wrapper {
+  position: relative;
   width: 90%;
+  max-width: 420px; /* Optional: set consistent max width */
+}
+
+.input-field {
+  width: 100%;
   height: 40px;
-  border-radius: 10px; /* Rounds the edges of the input field */
-  border: 1px solid #ccc; 
-  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  padding: 0 38px 0 12px; /* Enough space for the icon */
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.input-icon {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #555;
 }
 
 
 .checkbox-container {
   display: flex;
-  align-items: center; /* Vertically center items */
-  justify-content: space-between; /* Space items to the edges */
-  max-width: 400px; /* Adjust to fit your design */
-  margin: 0 auto; /* Center the container horizontally */
-  padding-top: 20px;
+  justify-content: space-between; /* Pushes items to ends */
+  align-items: center;
+  width: 100%; /* Full width of the login container */
+  padding: 0 40px; /* Left & right padding */
+  margin-top: 20px;
 }
 
 /* Styling for the checkbox and its label */
 .checkbox-label {
   display: flex;
-  align-items: center; /* Center checkbox and text vertically */
-  font-size: 16px; /* Adjust font size as needed */
-  color: #333; /* Adjust color as needed */
-  margin-right: 170px;
+  align-items: center;
+  font-size: 16px;
+  color: #333;
+  gap: 8px; /* Optional: adds space between checkbox and text */
+  margin: 0;
 }
 
 .checkbox-input {
