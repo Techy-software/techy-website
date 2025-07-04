@@ -5,23 +5,18 @@ const NavBar = () => {
   const [activeTab, setActiveTab] = useState("Home");
   const navigator = useNavigate();
 
-  const tabs = [
-    "Home",
-    "About us",
-    "Our products",
-    "Partners",
-    "Careers",
-    "FAQs",
-    "Contact us",
-  ];
-
-  const handleLogin = () => {
-    navigator("/login");
+  const tabs = {
+    home: { title: "Home", path: "/" },
+    about: { title: "About us", path: "/about" },
+    products: { title: "Our products", path: "/products" },
+    partners: { title: "Partners", path: "/partners" },
+    careers: { title: "Careers", path: "/careers" },
+    faqs: { title: "FAQs", path: "/faqs" },
+    contact: { title: "Contact us", path: "/contact" },
   };
 
-  const handleBecomePartner = () => {
-    navigator("/becomeAPartner");
-  };
+  const handleLogin = () => navigator("/login");
+  const handleBecomePartner = () => navigator("/becomeAPartner");
 
   return (
     <header className="py-2 px-4 bg-blue-600 shadow-sm sticky top-0 z-50 rounded-b-xl">
@@ -29,19 +24,23 @@ const NavBar = () => {
         <div className="text-xl font-bold me-16 text-white"></div>
 
         <nav className="hidden lg:flex space-x-6 text-white font-medium">
-          {tabs.map((item) => (
+          {Object.entries(tabs).map(([key, item]) => (
             <a
-              key={item}
+              key={key}
               href="#"
-              onClick={() => setActiveTab(item)}
+              onClick={(e) => {
+                e.preventDefault();
+                setActiveTab(item.title);
+                navigator(item.path);
+              }}
               className={`relative flex items-center transition-colors duration-200 ${
-                activeTab === item
+                activeTab === item.title
                   ? "text-white"
                   : "text-white/70 hover:text-white"
               }`}
             >
-              {item}
-              {item === "Our products" && (
+              {item.title}
+              {item.title === "Our products" && (
                 <svg
                   className="w-4 h-4 ml-1"
                   fill="none"
@@ -56,7 +55,7 @@ const NavBar = () => {
                   />
                 </svg>
               )}
-              {activeTab === item && (
+              {activeTab === item.title && (
                 <span className="absolute -bottom-4 left-0 w-full h-0.5 bg-orange-400 rounded" />
               )}
             </a>
