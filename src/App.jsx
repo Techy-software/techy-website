@@ -7,10 +7,7 @@ import Rewards from "./components/Reward/Rewards";
 import RewardDetails from "./components/Reward/RewardDetails";
 import AddReward from "./components/Reward/AddReward";
 import Layout from "./components/Layout";
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Settings from "./components/Settings/Settings";
 import RoleCompoenent from "./components/role-component/role-component";
 import AddNewRoleComponent from "./components/role-component/add-new-role-component";
@@ -44,13 +41,25 @@ import AboutTechy from "./AdminDashboard/screens/AboutTechy/AboutTechy";
 import BecomeAPartner from "./AdminDashboard/screens/BecomeAPartner/BecomeAPartner";
 import DiscoverJobs from "./AdminDashboard/screens/DiscoverJobs/DiscoverJobs";
 import Course from "./AdminDashboard/screens/Course/Course";
+import LandingLayout from "./components/LandingLayout";
 
 const router = createBrowserRouter([
   { path: "/login", element: <LoginComponent /> },
   { path: "/flogin", element: <ForgetPassword /> },
   { path: "/rlogin", element: <ResetPassword /> },
-  { path: "/Home", element: <HomePage /> },
+
   { path: "/CourseOverview", element: <Course /> },
+  {
+    element: <LandingLayout />,
+    path: "/",
+    children: [
+      { index: true, element: <HomePage /> },
+      { path: "for-academy", element: <ForAcademy /> },
+      { path: "aboutTechy", element: <AboutTechy /> },
+      { path: "discoverJobs", element: <DiscoverJobs /> },
+      { path: "becomeAPartner", element: <BecomeAPartner /> },
+    ],
+  },
   {
     element: <DummyLayout />,
     loader: chekcAuthLoader,
@@ -80,7 +89,7 @@ const router = createBrowserRouter([
       { path: "rewardDetails", element: <RewardDetails /> },
       { path: "addNewRole", element: <AddNewRoleComponent /> },
       {
-        path: "/",
+        path: "/home",
         element: <Layout />,
         children: [
           { index: true, element: <DashboardPage /> },
@@ -103,10 +112,6 @@ const router = createBrowserRouter([
           { path: "rewards", element: <Rewards /> },
           { path: "role", element: <RoleCompoenent /> },
           { path: "course-details", element: <CoursesDashboard /> },
-          { path: "for-academy", element: <ForAcademy /> },
-          { path: "aboutTechy", element: <AboutTechy /> },
-          { path: "discoverJobs", element: <DiscoverJobs /> },
-          { path: "becomeAPartner", element: <BecomeAPartner /> },
         ],
       },
     ],

@@ -15,17 +15,17 @@ const Sidebar = () => {
   const location = useLocation();
 
   const links = [
-    { to: "/", icon: home, alt: "home" },
-    { to: "/courses", icon: course, alt: "course" },
-    { to: "/mentors", icon: mentor, alt: "mentor" },
-    { to: "/students", icon: mentor, alt: "student" },
+    { to: "/home", icon: home, alt: "home" },
+    { to: "/home/courses", icon: course, alt: "course" },
+    { to: "/home/mentors", icon: mentor, alt: "mentor" },
+    { to: "/home/students", icon: mentor, alt: "student" },
     { to: "/addAcademy", icon: academy, alt: "academy" },
-    { to: "/opportunities", icon: tickets, alt: "opportunity" },
-    { to: "/jobs", icon: job, alt: "job" },
-    { to: "/discount-details-list", icon: discount, alt: "discount" },
-    { to: "/rewards", icon: gift, alt: "rewards" },
-    { to: "/Role", icon: role, alt: "role" },
-    { to: "/Settings", icon: setting, alt: "settings" },
+    { to: "/home/opportunities", icon: tickets, alt: "opportunity" },
+    { to: "/home/jobs", icon: job, alt: "job" },
+    { to: "/home/discount-details-list", icon: discount, alt: "discount" },
+    { to: "/home/rewards", icon: gift, alt: "rewards" },
+    { to: "/home/Role", icon: role, alt: "role" },
+    { to: "/home/Settings", icon: setting, alt: "settings" },
   ];
 
   return (

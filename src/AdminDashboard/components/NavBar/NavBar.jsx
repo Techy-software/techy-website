@@ -7,9 +7,9 @@ const NavBar = () => {
 
   const tabs = {
     home: { title: "Home", path: "/" },
-    about: { title: "About us", path: "/about" },
+    about: { title: "About us", path: "/aboutTechy" },
     products: { title: "Our products", path: "/products" },
-    partners: { title: "Partners", path: "/partners" },
+    partners: { title: "Partners", path: "/becomeAPartner" },
     careers: { title: "Careers", path: "/careers" },
     faqs: { title: "FAQs", path: "/faqs" },
     contact: { title: "Contact us", path: "/contact" },
