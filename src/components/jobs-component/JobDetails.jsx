@@ -224,7 +224,7 @@ const JobDetails = () => {
                       Experience Needed <span className="text-red-500">*</span>
                     </label>
                     <select
-                      className="w-full p-3 border border-gray-300 rounded"
+                      className="w-full h-12 px-4 border border-gray-300 rounded"
                       value={experienceNeeded}
                       onChange={handleDropdownChange(setExperienceNeeded)}
                     >
@@ -238,7 +238,7 @@ const JobDetails = () => {
                       Career Level <span className="text-red-500">*</span>
                     </label>
                     <select
-                      className="w-full p-3 border border-gray-300 rounded"
+                     className="w-full h-12 px-4 border border-gray-300 rounded"
                       value={careerLevel}
                       onChange={handleDropdownChange(setCareerLevel)}
                     >
@@ -254,7 +254,7 @@ const JobDetails = () => {
                       Education Level <span className="text-red-500">*</span>
                     </label>
                     <select
-                      className="w-full p-3 border border-gray-300 rounded"
+                      className="w-full h-12 px-4 border border-gray-300 rounded"
                       value={educationLevel}
                       onChange={handleDropdownChange(setEducationLevel)}
                     >
@@ -268,7 +268,7 @@ const JobDetails = () => {
                       Gender <span className="text-red-500">*</span>
                     </label>
                     <select
-                      className="w-full p-3 border border-gray-300 rounded"
+                      className="w-full h-12 px-4 border border-gray-300 rounded"
                       value={gender}
                       onChange={handleDropdownChange(setGender)}
                     >
@@ -284,7 +284,7 @@ const JobDetails = () => {
                       Workplace <span className="text-red-500">*</span>
                     </label>
                     <select
-                      className="w-full p-3 border border-gray-300 rounded"
+                      className="w-full h-12 px-4 border border-gray-300 rounded"
                       value={workplace}
                       onChange={handleDropdownChange(setWorkplace)}
                     >
@@ -312,7 +312,7 @@ const JobDetails = () => {
                     </label>
                     <input
                       type="text"
-                      className="w-full p-3 border border-gray-300 rounded"
+                      className="w-full h-12 px-4 border border-gray-300 rounded"
                       value={salary}
                       onChange={handleInputChange(setSalary)}
                     />
@@ -322,7 +322,7 @@ const JobDetails = () => {
                       Currency <span className="text-red-500">*</span>
                     </label>
                     <select
-                      className="w-full p-3 border border-gray-300 rounded"
+                      className="w-full h-12 px-4 border border-gray-300 rounded"
                       value={currency}
                       onChange={handleDropdownChange(setCurrency)}
                     >
