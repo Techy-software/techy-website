@@ -173,14 +173,15 @@ const JobDetails = () => {
                   </label>
                   <input
                     type="text"
-                    className="w-full p-3 border border-gray-300 rounded"
+                    className="w-full h-12 px-4 border border-gray-300 rounded"
                   />
                 </div>
                 <div className="flex flex-col">
                   <label className="block text-sm font-bold mb-2">
                     Job Type <span className="text-red-500">*</span>
                   </label>
-                  <select className="w-full p-3 border border-gray-300 rounded">
+                  <select className="w-full h-12 px-4 border border-gray-300 rounded">
+                    
                     <option>Full-time</option>
                     <option>Part-time</option>
                     <option>Contract</option>
