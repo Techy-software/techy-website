@@ -66,7 +66,7 @@ const LoginComponent = () => {
         { expires: 7 }
       );
 
-      navigator("/", { replace: true });
+      navigator("/home", { replace: true });
     } catch (err) {
       alert("Login failed. Please check your credentials.");
       console.error(err);

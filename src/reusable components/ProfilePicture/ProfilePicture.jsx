@@ -21,6 +21,8 @@ const ProfilePicture = ({ title, src, alt, children, onImageChange }) => {
 
   return (
     <WhiteCard title={title}>
+      <h2 className="font-semibold text-lg mb-2">Profile Picture</h2>
+      <hr />
       <div className="flex items-center mt-7">
         <div className="border-2 border-dashed rounded-full me-5 w-24 h-24 overflow-hidden flex items-center justify-center bg-gray-100">
           {preview ? (
@@ -33,14 +35,12 @@ const ProfilePicture = ({ title, src, alt, children, onImageChange }) => {
             <FontAwesomeIcon icon={faUser} className="text-gray-400 text-4xl" />
           )}
         </div>
-
         <button
           className="border-2 text-blue-500 p-3 rounded-lg"
           onClick={() => fileInputRef.current.click()}
         >
           Upload Picture
         </button>
-
         <input
           type="file"
           accept="image/*"
@@ -49,7 +49,6 @@ const ProfilePicture = ({ title, src, alt, children, onImageChange }) => {
           onChange={handleFileChange}
         />
       </div>
-
       {children}
     </WhiteCard>
   );

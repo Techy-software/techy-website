@@ -11,7 +11,12 @@ import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 import { post } from "../../utils/HtppService";
 import { useRef } from "react";
 import { objectToFormData } from "../../utils/objectToFormData";
-
+import ProfilePicture from "../../reusable components/ProfilePicture/ProfilePicture";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCalendar } from "@fortawesome/free-regular-svg-icons";
+import password from "../../assets/visible.png";
 const AddMentorComponent = () => {
   const [content, setContent] = useState(getContent("option1"));
 
@@ -25,6 +30,8 @@ const AddMentorComponent = () => {
     address: {},
     workExperince: [],
     certificate: [],
+    myData: "Testing",
+    dateOfBirth: "2023-10-19",
   });
 
   const handleExperienceSubmit = (e) => {
@@ -43,7 +50,6 @@ const AddMentorComponent = () => {
       workExperince: [...prev.workExperince, newExperience],
     }));
   };
-
 
   const handleCertificateSubmit = (e) => {
     e.preventDefault();
@@ -66,7 +72,7 @@ const AddMentorComponent = () => {
 
   const handleChange = (e) => {
     const { name, type, value, checked, files } = e.target;
-    console.log(files);
+    console.log(e.target);
     // Decide value based on input type
     let fieldValue;
     if (type === "checkbox") {
@@ -113,37 +119,20 @@ const AddMentorComponent = () => {
   };
 
   const WorkExperinceModalContent = () => (
-    <div className="w-4/5 mx-auto bg-white p-6 rounded-lg shadow-lg">
-      <div className="flex justify-between items-center">
-        <h3 className="text-xl font-bold">Add experience</h3>
-        <button className="text-gray-500 hover:text-gray-800">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth="2"
-            stroke="currentColor"
-            className="w-6 h-6"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M6 18L18 6M6 6l12 12"
-            />
-          </svg>
-        </button>
-      </div>
-      <form className="space-y-6 mt-4" onSubmit={handleExperienceSubmit}>
+    <div className="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-md">
+      {/* Header */}
+
+      <form className="space-y-5" onSubmit={handleExperienceSubmit}>
         {/* Job Title */}
         <div>
-          <label className="block text-sm font-medium mb-2" htmlFor="jobTitle">
+          <label className="block text-sm font-medium text-gray-700 mb-1">
             Job Title <span className="text-red-500">*</span>
           </label>
           <input
             type="text"
             id="jobTitle"
             name="jobTitle"
-            className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none text-sm"
             placeholder="Enter job title"
             value={experience.jobTitle}
             onChange={(e) =>
@@ -156,38 +145,33 @@ const AddMentorComponent = () => {
           />
         </div>
 
-        {/* Company/Organization Name */}
+        {/* Company Name */}
         <div>
-          <label
-            className="block text-sm font-medium mb-2"
-            htmlFor="companyName"
-          >
-            Company/organization name <span className="text-red-500">*</span>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Company / Organization Name <span className="text-red-500">*</span>
           </label>
           <input
             type="text"
             id="companyName"
             name="companyName"
-            className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="Enter company/organization name"
-            required
+            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none text-sm"
+            placeholder="Enter company or organization"
             value={experience.companyName}
-            onChange={(e) => {
+            onChange={(e) =>
               setExperience((prev) => ({
                 ...prev,
                 companyName: e.target.value,
-              }));
-            }}
+              }))
+            }
+            required
           />
         </div>
 
-        {/* Starting and Ending Dates */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        {/* Start and End Dates */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {/* Start Date */}
           <div>
-            <label
-              className="block text-sm font-medium mb-2"
-              htmlFor="startDate"
-            >
+            <label className="block text-sm font-medium text-gray-700 mb-1">
               Starting from <span className="text-red-500">*</span>
             </label>
             <div className="relative">
@@ -195,37 +179,25 @@ const AddMentorComponent = () => {
                 type="date"
                 id="startDate"
                 name="startDate"
-                className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                required
+                className="w-full px-4 py-2 pr-10 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none text-sm"
                 value={experience.startDate}
-                onChange={(e) => {
+                onChange={(e) =>
                   setExperience((prev) => ({
                     ...prev,
                     startDate: e.target.value,
-                  }));
-                }}
+                  }))
+                }
+                required
               />
-              <span className="absolute right-3 top-1/2 transform -translate-y-1/2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="2"
-                  stroke="currentColor"
-                  className="w-5 h-5 text-gray-400"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M8 7h8M7 12h10m-9 5h8m-4 0h-1m-5 0H6v-4h12v4h-1m-9 0v-4H5v-4h14v4h-1m-5 0H9v-4H8v4h1m-1-4V9h6v3H8v-3h1m-1 3V9m0 9v-5m-1 1v5m-2 0v-5m2 0h8v5H8v-5m2 0h4v5h-4v-5z"
-                  />
-                </svg>
+              <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400">
+                📅
               </span>
             </div>
           </div>
 
+          {/* End Date */}
           <div>
-            <label className="block text-sm font-medium mb-2" htmlFor="endDate">
+            <label className="block text-sm font-medium text-gray-700 mb-1">
               Ending in <span className="text-red-500">*</span>
             </label>
             <div className="relative">
@@ -233,31 +205,18 @@ const AddMentorComponent = () => {
                 type="date"
                 id="endDate"
                 name="endDate"
-                className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                required
+                className="w-full px-4 py-2 pr-10 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none text-sm"
                 value={experience.endDate}
-                onChange={(e) => {
+                onChange={(e) =>
                   setExperience((prev) => ({
                     ...prev,
                     endDate: e.target.value,
-                  }));
-                }}
+                  }))
+                }
+                required
               />
-              <span className="absolute right-3 top-1/2 transform -translate-y-1/2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="2"
-                  stroke="currentColor"
-                  className="w-5 h-5 text-gray-400"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M8 7h8M7 12h10m-9 5h8m-4 0h-1m-5 0H6v-4h12v4h-1m-9 0v-4H5v-4h14v4h-1m-5 0H9v-4H8v4h1m-1-4V9h6v3H8v-3h1m-1 3V9m0 9v-5m-1 1v5m-2 0v-5m2 0h8v5H8v-5m2 0h4v5h-4v-5z"
-                  />
-                </svg>
+              <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400">
+                📅
               </span>
             </div>
           </div>
@@ -265,34 +224,32 @@ const AddMentorComponent = () => {
 
         {/* Description */}
         <div>
-          <label
-            className="block text-sm font-medium mb-2"
-            htmlFor="description"
-          >
+          <label className="block text-sm font-medium text-gray-700 mb-1">
             Description <span className="text-red-500">*</span>
           </label>
           <textarea
             id="description"
             name="description"
-            className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="Enter description"
+            className="w-full px-4 py-2 h-28 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none text-sm resize-none"
+            placeholder="Briefly describe your experience..."
+            value={experience.description}
+            onChange={(e) =>
+              setExperience((prev) => ({
+                ...prev,
+                description: e.target.value,
+              }))
+            }
             required
           />
         </div>
 
         {/* Buttons */}
-        <div className="flex justify-end space-x-4">
-          <button
-            type="button"
-            className="px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200"
-          >
-            Cancel
-          </button>
+        <div className="flex justify-end gap-3 pt-4">
           <button
             type="submit"
-            className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+            className="px-4 py-2 text-sm bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
           >
-            Submit form
+            Submit Form
           </button>
         </div>
       </form>
@@ -305,25 +262,6 @@ const AddMentorComponent = () => {
 
   const AddCertificateModalContent = () => (
     <div className="w-4/5 mx-auto bg-white p-6 rounded-lg shadow-lg">
-      <div className="flex justify-between items-center border-b pb-4 mb-4">
-        <h3 className="text-xl font-bold">Add Certificate</h3>
-        <button className="text-gray-500 hover:text-gray-800">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth="2"
-            stroke="currentColor"
-            className="w-6 h-6"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M6 18L18 6M6 6l12 12"
-            />
-          </svg>
-        </button>
-      </div>
       <form className="space-y-6" onSubmit={handleCertificateSubmit}>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           {/* Name */}
@@ -398,22 +336,6 @@ const AddMentorComponent = () => {
                   }))
                 }
               />
-              <span className="absolute right-3 top-1/2 transform -translate-y-1/2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="2"
-                  stroke="currentColor"
-                  className="w-5 h-5 text-gray-400"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M8 7h8M7 12h10m-9 5h8m-4 0h-1m-5 0H6v-4h12v4h-1m-9 0v-4H5v-4h14v4h-1m-5 0H9v-4H8v4h1m-1-4V9h6v3H8v-3h1m-1 3V9m0 9v-5m-1 1v5m-2 0v-5m2 0h8v5H8v-5m2 0h4v5h-4v-5z"
-                  />
-                </svg>
-              </span>
             </div>
           </div>
 
@@ -440,22 +362,6 @@ const AddMentorComponent = () => {
                   }))
                 }
               />
-              <span className="absolute right-3 top-1/2 transform -translate-y-1/2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="2"
-                  stroke="currentColor"
-                  className="w-5 h-5 text-gray-400"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M8 7h8M7 12h10m-9 5h8m-4 0h-1m-5 0H6v-4h12v4h-1m-9 0v-4H5v-4h14v4h-1m-5 0H9v-4H8v4h1m-1-4V9h6v3H8v-3h1m-1 3V9m0 9v-5m-1 1v5m-2 0v-5m2 0h8v5H8v-5m2 0h4v5h-4v-5z"
-                  />
-                </svg>
-              </span>
             </div>
           </div>
         </div>
@@ -470,7 +376,7 @@ const AddMentorComponent = () => {
               Credential ID <span className="text-red-500">*</span>
             </label>
             <input
-              type="text"
+              type="number"
               id="credentialId"
               name="credentialId"
               className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -666,6 +572,15 @@ const getContent = (
   const handleFileClick = () => {
     fileInputRef.current.click();
   };
+
+  const ImageUploader = (file) => {
+    console.log("Image uploaded:", file);
+    setFormData({
+      ...formData,
+      image: file,
+    });
+  };
+
   const optionsExperience = [
     { value: "1", label: "1 year" },
     { value: "2", label: "2 years" },
@@ -678,46 +593,7 @@ const getContent = (
     case "option1":
       return (
         <div>
-          <div className="info-parent-container">
-            <div className="info-title">Profile picture</div>
-            <hr className="hr" />
-            <div className="info-container">
-              <div className="avatar">
-                <img
-                  src={profilePictureCircle}
-                  alt="proflie image"
-                  className="avatar-icon"
-                />
-              </div>
-              <div>
-                <div>
-                  <button
-                    type="button"
-                    onClick={handleFileClick}
-                    className="px-4 ms-3 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-                  >
-                    Upload Image
-                  </button>
-
-                  <input
-                    type="file"
-                    accept="image/*"
-                    ref={fileInputRef}
-                    onChange={(e) =>
-                      setFormData((prev) => ({
-                        ...prev,
-                        image: e.target.files[0],
-                      }))
-                    }
-                    className="hidden"
-                    name="image"
-                  />
-                </div>
-              </div>
-            </div>
-            <div></div>
-          </div>
-
+          <ProfilePicture src={formData.image} onImageChange={ImageUploader} />
           <div className="info-parent-container-spacing">
             <h2>Basic info</h2>
             <hr className="hr" />
@@ -784,13 +660,21 @@ const getContent = (
                   </select>
                 </div>
                 <div className="form-group">
-                  <label>Date of birth</label>
-                  <input
-                    type="date"
-                    name="dateOfBirth"
-                    value={formData.dateOfBirth}
-                    onChange={handleChange}
-                  />
+                  <label className="block mb-2 text-sm font-medium text-gray-700">
+                    Date of birth
+                  </label>
+                  <div className="relative w-full">
+                    <DatePicker
+                      // selected={formData.dateOfBirth}
+                      // onChange={() => {}}
+                      className="w-full px-4 py-2 pr-12 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      placeholderText="Select a date"
+                      dateFormat="dd/MM/yyyy"
+                    />
+                    <div className="absolute inset-y-0 right-3 flex items-center pointer-events-none text-gray-400">
+                      <FontAwesomeIcon icon={faCalendar} />
+                    </div>
+                  </div>
                 </div>
                 <div className="form-group">
                   <label>Gender</label>
@@ -843,7 +727,7 @@ const getContent = (
                         setShowPassword((prev) => !prev);
                       }}
                     >
-                      {showPassword ? "🙈" : "👁️"}
+                      <img src={password} className="w-5" />
                     </button>
                   </div>
                 </div>
@@ -903,7 +787,7 @@ const getContent = (
                     <div className="form-group">
                       <label>Postal code</label>
                       <input
-                        type="text"
+                        type="number"
                         placeholder="Enter postal code"
                         onChange={handleChange}
                         name="address.postalCode"
