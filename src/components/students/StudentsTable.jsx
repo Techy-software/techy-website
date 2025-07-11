@@ -7,6 +7,7 @@ import {
   FaTh,
   FaList,
   FaEdit,
+  FaSearch,
 } from "react-icons/fa";
 import ReactPaginate from "react-paginate";
 import { useNavigate } from "react-router-dom";
@@ -222,13 +223,18 @@ const StudentsTable = () => {
       </div>
 
       <div className="flex justify-between items-center mb-4">
-        <input
-          type="text"
-          placeholder="Search..."
-          value={searchQuery}
-          onChange={handleSearchChange}
-          className="px-4 py-2 border rounded w-1/2"
-        />
+        <div className="relative w-1/2">
+          <input
+            type="text"
+            placeholder="Search..."
+            value={searchQuery}
+            onChange={handleSearchChange}
+            className="px-4 py-2 pr-10 border rounded w-full"
+          />
+          <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+            <FaSearch className="w-4 h-4 text-gray-400" />
+          </div>
+        </div>
         <div className="flex space-x-2">
           <button
             onClick={handleViewToggle}
@@ -311,7 +317,9 @@ const StudentsTable = () => {
                 <button
                   className="mt-4 px-4 py-2 bg-white text-blue-500 border border-gray-200 rounded hover:bg-gray-100"
                   onClick={() =>
-                    alert(`Viewing profile of ${row.original.name}`)
+                    navigator("/StudentDashBoard", {
+                      state: { student: row.original },
+                    })
                   } // Handle profile view action
                 >
                   View Profile
