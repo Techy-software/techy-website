@@ -13,13 +13,14 @@ const DummyLayout = ({ children }) => {
 export default DummyLayout;
 
 export function chekcAuthLoader() {
-  const currentDate = new Date().getTime();
+  const token = secureLocalStorage.getItem("securityToken");
   const tokenDate = secureLocalStorage.getItem("tokenDate");
-  if (
-    !secureLocalStorage.getItem("securityToken") // 30 minutes in milliseconds
-  ) {
-    // Redirect to login if token is invalid or expired (30 minutes)
+  const currentTime = new Date().getTime();
+
+  // Token validity: 30 minutes (1800000 ms)
+  if (!token || !tokenDate || currentTime - tokenDate > 1800000) {
     return redirect("/login");
   }
+
   return null;
 }

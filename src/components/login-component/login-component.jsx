@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./login-component.css";
 import techyBoy from "../../assets/techyBoy.svg";
 import userImage from "../../assets/userImage.svg";
@@ -17,22 +17,22 @@ import { cross } from "react-icons-kit/icomoon/cross";
 const ENCRYPTION_KEY = "mySecret1234!";
 
 const LoginComponent = () => {
-  const navigator = useNavigate();
+  const navigate = useNavigate();
 
-  const [credentials, setCredentials] = React.useState({
+  const [credentials, setCredentials] = useState({
     username: "",
     password: "",
   });
-  const [showPassword, setShowPassword] = React.useState(false);
-  const [showForgotPasswordModal, setShowForgotPasswordModal] =
-    React.useState(false);
-  const [forgotMobile, setForgotMobile] = React.useState("");
-  const [otpModalVisible, setOtpModalVisible] = React.useState(false);
-  const [otpCode, setOtpCode] = React.useState("");
-  const [lastUser, setLastUser] = React.useState("");
-  const [encryptedPassword, setEncryptedPassword] = React.useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [showForgotPasswordModal, setShowForgotPasswordModal] = useState(false);
+  const [forgotMobile, setForgotMobile] = useState("");
+  const [otpModalVisible, setOtpModalVisible] = useState(false);
+  const [otpCode, setOtpCode] = useState("");
+  const [lastUser, setLastUser] = useState("");
+  const [encryptedPassword, setEncryptedPassword] = useState("");
 
-  React.useEffect(() => {
+  // Load last user
+  useEffect(() => {
     const saved = Cookies.get("lastUser");
     if (saved) {
       const parsed = JSON.parse(saved);
@@ -41,21 +41,24 @@ const LoginComponent = () => {
     }
   }, []);
 
-  const handleLogin = async () => {
+  // handleLogin now accepts the form event
+  const handleLogin = async (e) => {
+    e?.preventDefault();
     if (!credentials.username || !credentials.password) {
       alert("Please enter both username and password.");
       return;
     }
-
     try {
       const token = await post("/auth/login/", {
         usernameOrPhoneNumber: credentials.username,
         password: credentials.password,
       });
 
+      // Store token
       secureLocalStorage.setItem("securityToken", token.accessToken);
+      secureLocalStorage.setItem("tokenDate", new Date().getTime());
 
-      // Encrypt and store in cookie
+      // Encrypt & remember
       const encrypted = CryptoJS.AES.encrypt(
         credentials.password,
         ENCRYPTION_KEY
@@ -66,10 +69,11 @@ const LoginComponent = () => {
         { expires: 7 }
       );
 
-      navigator("/", { replace: true });
-    } catch (err) {
+      navigate("/home", { replace: true });
+      setLastUser(credentials.username);
+      setEncryptedPassword(encrypted);
+    } catch {
       alert("Login failed. Please check your credentials.");
-      console.error(err);
     }
   };
 
@@ -86,28 +90,20 @@ const LoginComponent = () => {
       });
 
       secureLocalStorage.setItem("securityToken", token.accessToken);
-      navigator("/", { replace: true });
-    } catch (err) {
+      secureLocalStorage.setItem("tokenDate", new Date().getTime());
+      navigate("/home", { replace: true });
+    } catch {
       alert("Auto-login failed. Try manual login.");
-      console.error(err);
     }
   };
 
-  const handleForgotPasswordSubmit = async () => {
+  const handleForgotPasswordSubmit = () => {
     if (!forgotMobile.trim()) {
       alert("Please enter your mobile number.");
       return;
     }
-
-    try {
-      // await post("/otp/send/", { phoneNumber: forgotMobile });
-      console.log("Simulated sending OTP to", forgotMobile);
-      setShowForgotPasswordModal(false);
-      setOtpModalVisible(true);
-    } catch (err) {
-      alert("Failed to send OTP.");
-      console.error(err);
-    }
+    setShowForgotPasswordModal(false);
+    setOtpModalVisible(true);
   };
 
   const handleOtpSubmit = () => {
@@ -115,7 +111,6 @@ const LoginComponent = () => {
       alert("Please enter a 6-digit OTP.");
       return;
     }
-
     alert(`Entered OTP: ${otpCode}`);
     setOtpCode("");
     setOtpModalVisible(false);
@@ -143,7 +138,7 @@ const LoginComponent = () => {
       {/* Main Login */}
       <div className="container">
         <img src={techyBoy} alt="techy boy" className="center-image" />
-        <div className="login-container">
+        <form className="login-container" onSubmit={handleLogin}>
           <div className="login-top-row">
             <h1 className="login-container-text">Login</h1>
             <img src={switchIcon} alt="Switch" className="switch-icon" />
@@ -200,79 +195,22 @@ const LoginComponent = () => {
           </div>
 
           <div className="login-button-container">
-            <button className="login-button" onClick={handleLogin}>
+            <button type="submit" className="login-button">
               Login
             </button>
           </div>
-        </div>
+        </form>
       </div>
 
       {/* Last User Login */}
-      {/* {lastUser && (
-        <div className="relative">
-          <h2 className="login-text">Login as</h2>
-          <div
-            className="user-container cursor-pointer"
-            onClick={handleLastUserLogin}
-          >
-            <img src={userImage} alt="User" />
-            <h3 className="user-name-text">{lastUser}</h3>
-            <h4 className="activity-caption">Last logged in</h4>
-          </div>
-          <span
-            className="absolute top-0 right-2 text-gray-500 hover:text-red-500 cursor-pointer"
-            onClick={() => {
-              Cookies.remove("lastUser");
-              setLastUser("");
-              setEncryptedPassword("");
-            }}
-            title="Remove last user"
-          >
-            <Icon icon={cross} size={18} />
-          </span>
-        </div>
-      )} */}
-
-      {/* <div className="relative">
-        <h2 className="login-text">Login as</h2>
-        <div
-          className={`user-container ${
-            lastUser ? "cursor-pointer" : "opacity-50 cursor-default"
-          }`}
-          onClick={() => lastUser && handleLastUserLogin()}
-        >
-          <img src={userImage} alt="User" />
-          <h3 className="user-name-text">{lastUser || "No saved user"}</h3>
-          <h4 className="activity-caption">
-            {lastUser ? "Last logged in" : "No recent login saved"}
-          </h4>
-        </div>
-
-        <span
-          className="absolute top-0 right-2 text-gray-500 hover:text-red-500 cursor-pointer"
-          onClick={() => {
-            Cookies.remove("lastUser");
-            setLastUser("");
-            setEncryptedPassword("");
-          }}
-          title="Remove last user"
-        >
-          <Icon icon={cross} size={18} />
-        </span>
-      </div> */}
-
       {lastUser && (
         <div className="mt-8 ml-8">
           <h2 className="text-xl font-semibold mb-4 text-gray-800">Login as</h2>
-
           <div className="relative bg-white shadow-md rounded-xl p-4 flex flex-col items-center w-64">
-            {/* Close (X) icon */}
             <span
               className="absolute top-2 right-2 text-gray-400 hover:text-red-500 cursor-pointer"
               onClick={() => {
                 Cookies.remove("lastUser");
-                localStorage.removeItem("lastUser");
-                secureLocalStorage.removeItem("securityToken");
                 setLastUser("");
                 setEncryptedPassword("");
               }}

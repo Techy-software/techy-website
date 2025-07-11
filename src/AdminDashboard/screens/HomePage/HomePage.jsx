@@ -9,8 +9,6 @@ import TechLeaders from "./TechLeaders";
 const HomePage = () => {
   return (
     <div className="min-h-screen bg-white font-sans text-gray-800 antialiased">
-      <NavBar />
-
       <main className="relative max-w-7xl mx-auto px-6 py-16 md:py-24">
         <div className="absolute top-10 right-6 md:top-20 md:right-10 text-pink-500 opacity-60">
           <svg
